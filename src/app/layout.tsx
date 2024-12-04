@@ -1,22 +1,41 @@
 import { siteConfig } from "@/config/site-config";
 import { AppProviders } from "@/providers/app-providers";
+import { Cairo } from "next/font/google";
 import "@/styles/globals.css";
 
-import { GeistSans } from "geist/font/sans";
-import { type Metadata } from "next";
+import type { Viewport, Metadata } from "next";
+import { auth } from "@/server/auth";
+import { SessionProvider } from "next-auth/react";
+import { cn } from "@/lib/utils";
+import Siteheader from "@/components/auth/mail/layout/siteheader";
 
 export const metadata: Metadata = {
   ...siteConfig,
 };
 
-export default function RootLayout({
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
+
+const cairo = Cairo({ subsets: ["latin", "arabic"], weight: ["400", "700"] });
+
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const session = await auth();
   return (
-    <html lang="en" className={`${GeistSans.variable} dark`}>
-      <body>
-        <AppProviders>{children}</AppProviders>
-      </body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="ar" className={cn("min-h-screen", cairo.className)} dir="rtl">
+        <body>
+          <AppProviders>
+            <Siteheader />
+            {children}
+          </AppProviders>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
