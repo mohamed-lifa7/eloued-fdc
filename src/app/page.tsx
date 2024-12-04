@@ -1,8 +1,12 @@
+"use client";
 import Link from "next/link";
-
+import { Button } from "@nextui-org/button";
+import { useTheme } from "next-themes";
 export default function HomePage() {
+  const theme = useTheme();
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
+      <Button onClick={()=> {theme.setTheme(theme.theme == "dark"? "light": "dark")}}>Toggle theme</Button>
       <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
         <h1 className="text-5xl font-extrabold tracking-tight text-white sm:text-[5rem]">
           Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
