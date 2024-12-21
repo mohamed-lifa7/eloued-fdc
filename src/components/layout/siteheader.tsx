@@ -18,11 +18,21 @@ import {
 import { Icon } from "@iconify/react";
 import { cn } from "@nextui-org/react";
 import { Icons } from "@/components/icons";
+import ModeToggle from "../theme/mode-toggle";
 
 const menuItems = [
-  "الرئيسية",
-  "المدونة",
-  "اتصل بنا",
+  {
+    title: "الرئيسية",
+    href: "/",
+  },
+  {
+    title: "المدونة",
+    href: "/blogs",
+  },
+  {
+    title: "اتصل بنا",
+    href: "/contact",
+  },
 ];
 
 export default function Siteheader(props: NavbarProps) {
@@ -31,6 +41,7 @@ export default function Siteheader(props: NavbarProps) {
   return (
     <Navbar
       {...props}
+      isBlurred
       classNames={{
         base: cn("border-default-100", {
           "bg-default-200/50 dark:bg-default-100/50": isMenuOpen,
@@ -43,21 +54,20 @@ export default function Siteheader(props: NavbarProps) {
       onMenuOpenChange={setIsMenuOpen}
     >
       <NavbarBrand>
-        <div className="rounded-full bg-foreground text-background">
-          <Icons.logo />
-        </div>
-        <span className="ml-2 text-small font-medium">FDC</span>
+        <Link href="/">
+          <Icons.logo className="w-h-14 h-14" />
+        </Link>
       </NavbarBrand>
 
       <NavbarContent justify="center">
-        {menuItems.map((item, index) => (
-          <NavbarItem key={index}>
+        {menuItems.map((item) => (
+          <NavbarItem key={item.href}>
             <Link
               className="text-default-500 hover:text-foreground"
-              href={`/${item}`}
+              href={`/${item.href}`}
               size="sm"
             >
-              {item}
+              {item.title}
             </Link>
           </NavbarItem>
         ))}
@@ -65,47 +75,53 @@ export default function Siteheader(props: NavbarProps) {
 
       <NavbarContent className="hidden md:flex" justify="end">
         <NavbarItem className="ml-2 flex gap-2">
-          <Button className="text-default-500" radius="full" variant="light">
+          <Button variant="light">
             تسجيل الدخول
           </Button>
           <Button
-            className="bg-foreground font-medium text-background"
+            className="font-medium text-white"
             color="secondary"
             endContent={<Icon icon="solar:alt-arrow-left-linear" />}
-            radius="full"
-            variant="flat"
+            variant="solid"
           >
             ابدأ الآن
           </Button>
         </NavbarItem>
+        <NavbarMenuItem>
+          <ModeToggle />
+        </NavbarMenuItem>
       </NavbarContent>
 
       <NavbarMenuToggle className="text-default-400 md:hidden" />
 
       <NavbarMenu className="top-[calc(var(--navbar-height)_-_1px)] bg-default-200/50 pb-6 pt-6 shadow-medium backdrop-blur-md dark:bg-default-100/50">
         <NavbarMenuItem>
-          <Button fullWidth as={Link} href="/login" variant="faded">
+          <Button
+            fullWidth
+            as={Link}
+            href="/login"
+            variant="faded"
+            color="secondary"
+          >
             تسجيل الدخول
           </Button>
         </NavbarMenuItem>
         <NavbarMenuItem className="mb-4">
-          <Button
-            fullWidth
-            as={Link}
-            className="bg-foreground text-background"
-            href="/start"
-          >
+          <Button fullWidth as={Link} color="primary" href="/start">
             ابدأ الآن
           </Button>
         </NavbarMenuItem>
+        <NavbarMenuItem>
+          <ModeToggle />
+        </NavbarMenuItem>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={index}>
+          <NavbarMenuItem key={item.href}>
             <Link
               className="mb-2 w-full text-default-500 hover:text-foreground"
-              href={`/${item}`}
+              href={`/${item.href}`}
               size="md"
             >
-              {item}
+              {item.title}
             </Link>
             {index < menuItems.length - 1 && <Divider className="opacity-50" />}
           </NavbarMenuItem>

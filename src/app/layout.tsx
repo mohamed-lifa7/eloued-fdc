@@ -7,7 +7,7 @@ import type { Viewport, Metadata } from "next";
 import { auth } from "@/server/auth";
 import { SessionProvider } from "next-auth/react";
 import { cn } from "@/lib/utils";
-import Siteheader from "@/components/auth/mail/layout/siteheader";
+import Siteheader from "@/components/layout/siteheader";
 
 export const metadata: Metadata = {
   ...siteConfig,
