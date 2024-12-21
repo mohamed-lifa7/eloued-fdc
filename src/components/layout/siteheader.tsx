@@ -43,8 +43,8 @@ export default function Siteheader(props: NavbarProps) {
       {...props}
       isBlurred
       classNames={{
-        base: cn("border-default-100", {
-          "bg-default-200/50 dark:bg-default-100/50": isMenuOpen,
+        base: cn("shadow-sm dark:border dark:border-white/90", {
+          "bg-default-200/50 dark:bg-default-100/50 ": isMenuOpen,
         }),
         wrapper: "w-full justify-center",
         item: "hidden md:flex",

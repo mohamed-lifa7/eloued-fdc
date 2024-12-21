@@ -1,3 +1,5 @@
+@import url("@/styles/rtl-space-x.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

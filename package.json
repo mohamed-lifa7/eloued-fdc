@@ -10,7 +10,7 @@
     "db:migrate": "prisma migrate deploy",
     "db:push": "prisma db push",
     "db:studio": "prisma studio",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "postinstall": "prisma generate",
     "lint": "next lint",
     "lint:fix": "next lint --fix",

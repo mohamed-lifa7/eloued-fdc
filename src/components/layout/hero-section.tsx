@@ -27,7 +27,7 @@ export default function Hero() {
           className="mx-auto flex max-w-4xl flex-col items-center justify-center space-y-5 text-center"
         >
           <Chip
-            className="cursor-pointer border-1 border-secondary/20 bg-primary/50 hover:bg-primary/80"
+            className="border-1 border-secondary/20"
             classNames={{
               content:
                 "font-semibold text-primary-500 dark:text-primary-600 text-xs space-x-2 rtl:space-x-reverse",

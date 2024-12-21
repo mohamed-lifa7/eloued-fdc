@@ -8,6 +8,7 @@ import { auth } from "@/server/auth";
 import { SessionProvider } from "next-auth/react";
 import { cn } from "@/lib/utils";
 import Siteheader from "@/components/layout/siteheader";
+import SiteFooter from "@/components/layout/site-footer";
 
 export const metadata: Metadata = {
   ...siteConfig,
@@ -33,6 +34,7 @@ export default async function RootLayout({
           <AppProviders>
             <Siteheader />
             {children}
+            <SiteFooter />
           </AppProviders>
         </body>
       </html>
