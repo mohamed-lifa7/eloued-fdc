@@ -11,7 +11,6 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   NavbarMenuToggle,
-  Link,
   Button,
   Divider,
 } from "@nextui-org/react";
@@ -19,6 +18,9 @@ import { Icon } from "@iconify/react";
 import { cn } from "@nextui-org/react";
 import { Icons } from "@/components/icons";
 import ModeToggle from "../theme/mode-toggle";
+import UserMenu from "./user-menu";
+import { useCurrentUser } from "@/hooks/use-current-user";
+import Link from "next/link";
 
 const menuItems = [
   {
@@ -36,6 +38,7 @@ const menuItems = [
 ];
 
 export default function Siteheader(props: NavbarProps) {
+  const user = useCurrentUser();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   return (
@@ -43,7 +46,7 @@ export default function Siteheader(props: NavbarProps) {
       {...props}
       isBlurred
       classNames={{
-        base: cn("shadow-sm dark:border dark:border-white/90", {
+        base: cn("shadow-sm dark:shadow-foreground-50", {
           "bg-default-200/50 dark:bg-default-100/50 ": isMenuOpen,
         }),
         wrapper: "w-full justify-center",
@@ -64,8 +67,7 @@ export default function Siteheader(props: NavbarProps) {
           <NavbarItem key={item.href}>
             <Link
               className="text-default-500 hover:text-foreground"
-              href={`/${item.href}`}
-              size="sm"
+              href={`${item.href}`}
             >
               {item.title}
             </Link>
@@ -74,18 +76,19 @@ export default function Siteheader(props: NavbarProps) {
       </NavbarContent>
 
       <NavbarContent className="hidden md:flex" justify="end">
-        <NavbarItem className="ml-2 flex gap-2">
-          <Button variant="light">
-            تسجيل الدخول
-          </Button>
-          <Button
-            className="font-medium text-white"
-            color="secondary"
-            endContent={<Icon icon="solar:alt-arrow-left-linear" />}
-            variant="solid"
-          >
-            ابدأ الآن
-          </Button>
+        <NavbarItem className="ml-2 flex items-center gap-2">
+          {user ? (
+            <UserMenu user={user} />
+          ) : (
+            <Button
+              variant="light"
+              as={Link}
+              href="/auth/login"
+              endContent={<Icon icon="solar:alt-arrow-left-linear" />}
+            >
+              تسجيل الدخول
+            </Button>
+          )}
         </NavbarItem>
         <NavbarMenuItem>
           <ModeToggle />
@@ -95,31 +98,30 @@ export default function Siteheader(props: NavbarProps) {
       <NavbarMenuToggle className="text-default-400 md:hidden" />
 
       <NavbarMenu className="top-[calc(var(--navbar-height)_-_1px)] bg-default-200/50 pb-6 pt-6 shadow-medium backdrop-blur-md dark:bg-default-100/50">
-        <NavbarMenuItem>
-          <Button
-            fullWidth
-            as={Link}
-            href="/login"
-            variant="faded"
-            color="secondary"
-          >
-            تسجيل الدخول
-          </Button>
-        </NavbarMenuItem>
-        <NavbarMenuItem className="mb-4">
-          <Button fullWidth as={Link} color="primary" href="/start">
-            ابدأ الآن
-          </Button>
-        </NavbarMenuItem>
-        <NavbarMenuItem>
-          <ModeToggle />
-        </NavbarMenuItem>
+        <div className="mb-8 flex items-center space-x-4">
+          <NavbarMenuItem>
+            {user ? (
+              <UserMenu user={user} />
+            ) : (
+              <Button
+                variant="light"
+                as={Link}
+                href="/auth/login"
+                endContent={<Icon icon="solar:alt-arrow-left-linear" />}
+              >
+                تسجيل الدخول
+              </Button>
+            )}
+          </NavbarMenuItem>
+          <NavbarMenuItem>
+            <ModeToggle />
+          </NavbarMenuItem>
+        </div>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={item.href}>
             <Link
               className="mb-2 w-full text-default-500 hover:text-foreground"
-              href={`/${item.href}`}
-              size="md"
+              href={`${item.href}`}
             >
               {item.title}
             </Link>

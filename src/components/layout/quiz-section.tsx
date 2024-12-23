@@ -4,7 +4,7 @@ import type { QuizData } from "@/types/quiz";
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 
-export const Quiz: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
+export const QuizSection: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
   const [score, setScore] = useState<number>(0);
   const [showScore, setShowScore] = useState<boolean>(false);
@@ -33,17 +33,19 @@ export const Quiz: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
       <h2 className="text-pretty text-3xl font-bold md:text-4xl">
         اختبر قدراتك؟
       </h2>
-      <div>
-        <h3 className="text-xl font-bold"> اختبار {quizData.topic}</h3>
+      <p className="text-lg md:w-full">تحدى نفسك واكتشف مهاراتك في دقائق!</p>
+
+      <div className="grid place-content-center">
+        <h3 className="text-lg font-bold"> اختبار {quizData.topic}</h3>
         <h3 className="text-lg">المستوى: {quizData.level}</h3>
         {showScore ? (
           <div className="grid place-content-center space-y-6">
             <h4
               className={cn(
                 score == quizData.totalQuestions * quizData.perQuestionScore
-                  ? "text-success"
-                  : "text-warning",
-                "w-full p-10 shadow-md",
+                  ? "border-success text-success"
+                  : "border-warning text-warning",
+                "w-full border p-10",
               )}
             >
               نتيجتك: {score} /{" "}
@@ -54,9 +56,9 @@ export const Quiz: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col items-center">
+          <div className="shodow-md flex flex-col items-center md:p-10 p-4 shadow-lg dark:shadow-foreground-50/60">
             <h3>{quizData.questions[currentQuestion]?.question}</h3>
-            <ul className="mt-4 flex w-64 flex-col justify-between space-y-2">
+            <ul className="my-4 flex w-full flex-col justify-between space-y-2">
               {quizData.questions[currentQuestion]?.choices.map(
                 (choice, index) => (
                   <Button

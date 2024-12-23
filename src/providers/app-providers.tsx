@@ -8,7 +8,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <>
       <NextUIProvider>
-        <ThemeProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <EdgeStoreProvider>{children}</EdgeStoreProvider>
         </ThemeProvider>
       </NextUIProvider>
