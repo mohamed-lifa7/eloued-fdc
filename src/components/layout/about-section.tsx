@@ -35,7 +35,7 @@ const AboutSection = () => {
                 الفرص.&quot;
               </p>
               <footer className="mt-2 text-left text-gray-600">
-                - اسلام هالة، رئيسة نادي FDC
+                - محمد اسلام هالة، رئيس نادي FDC
               </footer>
             </blockquote>
             <Button as={Link}
