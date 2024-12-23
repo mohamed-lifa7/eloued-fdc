@@ -48,10 +48,10 @@ export const RegisterForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="مرحبًا بعودتك!"
-      descriptionLabel="مرحبًا بعودتك! قم بتسجيل الدخول إلى حسابك للمتابعة."
-      backButtonLabel="لا تملك حسابًا؟"
-      backButtonHref="/auth/register"
+      headerLabel="مرحبًا بك!"
+      descriptionLabel="مرحبًا بك! أنشئ حسابًا جديدًا للاستمرار."
+      backButtonLabel="لديك حساب بالفعل؟"
+      backButtonHref="/auth/login"
       showSocial
     >
       <Form {...form}>
