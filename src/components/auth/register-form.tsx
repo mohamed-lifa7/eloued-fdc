@@ -48,9 +48,9 @@ export const RegisterForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="مرحبًا بك!"
-      descriptionLabel="مرحبًا بك! أنشئ حسابًا جديدًا للاستمرار."
-      backButtonLabel="لديك حساب بالفعل؟"
+      headerLabel="Create an account"
+      descriptionLabel="Create an account to continue!"
+      backButtonLabel="Already have an account?"
       backButtonHref="/auth/login"
       showSocial
     >
@@ -62,7 +62,7 @@ export const RegisterForm = () => {
               name="name"
               render={({ field }) => (
                 <FormItem className="flex flex-col items-start">
-                  <FormLabel>الإسم الكامل</FormLabel>
+                  <FormLabel>Full Name</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -79,12 +79,12 @@ export const RegisterForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem className="flex flex-col items-start">
-                  <FormLabel>البريد الإلكتروني</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="john.doe@example.com"
+                      placeholder="blabla@gmail.com"
                       type="email"
                     />
                   </FormControl>
@@ -97,7 +97,7 @@ export const RegisterForm = () => {
               name="password"
               render={({ field }) => (
                 <FormItem className="flex flex-col items-start">
-                  <FormLabel>كلمة المرور</FormLabel>
+                  <FormLabel>Password</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -114,7 +114,7 @@ export const RegisterForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
-            أنشىء حساب
+            Create an account
           </Button>
         </form>
       </Form>

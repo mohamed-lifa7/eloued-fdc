@@ -1,8 +1,8 @@
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata = {
-  title: "تسجيل الدخول",
-  description: "قم بتسجيل الدخول إلى حسابك الآن.",
+  title: "Log in",
+  description: "Log in to your Account.",
 };
 
 const LoginPage = () => {

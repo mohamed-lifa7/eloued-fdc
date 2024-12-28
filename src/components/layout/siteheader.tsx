@@ -24,15 +24,15 @@ import Link from "next/link";
 
 const menuItems = [
   {
-    title: "الرئيسية",
+    title: "Home",
     href: "/",
   },
   {
-    title: "المدونة",
+    title: "Blogs",
     href: "/blogs",
   },
   {
-    title: "اتصل بنا",
+    title: "Contact Us",
     href: "/contact",
   },
 ];
@@ -84,9 +84,9 @@ export default function Siteheader(props: NavbarProps) {
               variant="light"
               as={Link}
               href="/auth/login"
-              endContent={<Icon icon="solar:alt-arrow-left-linear" />}
+              endContent={<Icon icon="solar:alt-arrow-right-linear" />}
             >
-              تسجيل الدخول
+              Log in
             </Button>
           )}
         </NavbarItem>
@@ -107,9 +107,9 @@ export default function Siteheader(props: NavbarProps) {
                 variant="light"
                 as={Link}
                 href="/auth/login"
-                endContent={<Icon icon="solar:alt-arrow-left-linear" />}
+                endContent={<Icon icon="solar:alt-arrow-right-linear" />}
               >
-                تسجيل الدخول
+                Log in{" "}
               </Button>
             )}
           </NavbarMenuItem>

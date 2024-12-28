@@ -9,10 +9,10 @@ import { UserRole } from "@prisma/client";
 import { redirect } from "next/navigation";
 
 const breadcrumbItems: BreadcrumbType[] = [
-  { title: "لوحة التحكم", href: "/admin", disabled: false, type: "link" },
-  { title: "المستخدمين", href: "/admin/users", disabled: false, type: "link" },
+  { title: "Dashboard", href: "/admin", disabled: false, type: "link" },
+  { title: "Users", href: "/admin/users", disabled: false, type: "link" },
   {
-    title: "تحديث",
+    title: "Update",
     disabled: false,
     type: "text",
   },
@@ -31,10 +31,7 @@ export default async function Page(props: {
     <ScrollShadow className="h-full">
       <div className="flex-1 space-y-4 p-5">
         <BreadcrumbMaker items={breadcrumbItems} />
-        <Heading
-          title="تحديث المستخدم"
-          description="تحديث معلومات المستخدم..."
-        />
+        <Heading title="Update User" description="Update user information..." />
         <UpdateUserForm user={user} />
       </div>
     </ScrollShadow>

@@ -1,38 +1,39 @@
 export const quiz = {
-  topic: "جافاسكريبت",
-  level: "مبتدئ",
+  topic: "JavaScript",
+  level: "Beginner",
   totalQuestions: 4,
   perQuestionScore: 5,
   questions: [
     {
       question:
-        "ما هي الدالة المستخدمة لتحويل كائن إلى سلسلة JSON في جافاسكريبت؟",
-      choices: ["stringify()", "parse()", "convert()", "لا شيء مما سبق"],
-      type: "اختيار من متعدد",
+        "What is the function used to convert an object to a JSON string in JavaScript?",
+      choices: ["stringify()", "parse()", "convert()", "None of the above"],
+      type: "Multiple Choice",
       correctAnswer: "stringify()",
     },
     {
-      question: "أي من الكلمات التالية تُستخدم لتعريف متغير في جافاسكريبت؟",
-      choices: ["var", "let", "var و let", "لا شيء مما سبق"],
-      type: "اختيار من متعدد",
-      correctAnswer: "var و let",
+      question:
+        "Which of the following keywords is used to define a variable in JavaScript?",
+      choices: ["var", "let", "var and let", "None of the above"],
+      type: "Multiple Choice",
+      correctAnswer: "var and let",
     },
     {
       question:
-        "أي من الطرق التالية يمكن استخدامها لعرض البيانات باستخدام جافاسكريبت؟",
+        "Which of the following methods can be used to display data using JavaScript?",
       choices: [
         "document.write()",
         "console.log()",
         "window.alert",
-        "جميع ما سبق",
+        "All of the above",
       ],
-      type: "اختيار من متعدد",
-      correctAnswer: "جميع ما سبق",
+      type: "Multiple Choice",
+      correctAnswer: "All of the above",
     },
     {
-      question: "كيف يمكن تعريف نوع بيانات ليكون ثابتًا؟",
+      question: "How can you define a data type to be constant?",
       choices: ["const", "var", "let", "constant"],
-      type: "اختيار من متعدد",
+      type: "Multiple Choice",
       correctAnswer: "const",
     },
   ],

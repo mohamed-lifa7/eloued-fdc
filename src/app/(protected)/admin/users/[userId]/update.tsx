@@ -28,7 +28,6 @@ import { Input } from "@/components/ui/input";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { type User, UserRole } from "@prisma/client";
-import { columnTranslations, userRoleTranslations } from "../columns";
 
 const UpdateUserForm = ({ user }: { user: User | null }) => {
   const [error, setError] = useState<string | undefined>();
@@ -70,7 +69,7 @@ const UpdateUserForm = ({ user }: { user: User | null }) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{columnTranslations[field.name]}</FormLabel>
+                <FormLabel>Full name</FormLabel>
                 <FormControl>
                   <Input
                     {...field}
@@ -87,7 +86,7 @@ const UpdateUserForm = ({ user }: { user: User | null }) => {
             name="role"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>{columnTranslations[field.name]}</FormLabel>
+                <FormLabel>Role</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -98,12 +97,8 @@ const UpdateUserForm = ({ user }: { user: User | null }) => {
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value={UserRole.ADMIN}>
-                      {userRoleTranslations.ADMIN}
-                    </SelectItem>
-                    <SelectItem value={UserRole.USER}>
-                      {userRoleTranslations.USER}
-                    </SelectItem>
+                    <SelectItem value={UserRole.ADMIN}>ADMIN</SelectItem>
+                    <SelectItem value={UserRole.USER}>USER</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

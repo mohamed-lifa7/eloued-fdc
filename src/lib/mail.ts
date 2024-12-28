@@ -29,7 +29,7 @@ const constructUrl = (path: string, token: string): string => {
 const sendEmail = async (
   to: string,
   subject: string,
-  content: React.ReactNode | string
+  content: React.ReactNode | string,
 ): Promise<void> => {
   try {
     await resend.emails.send({
@@ -51,13 +51,13 @@ const sendEmail = async (
  */
 export const sendTwoFactorTokenEmail = async (
   email: string,
-  token: string
+  token: string,
 ): Promise<void> => {
   if (!email || !token) {
     throw new Error("Email and token are required.");
   }
-  const html = `<p>رمز التحقق الثنائي: ${token}</p>`;
-  await sendEmail(email, "رمز التحقق الثنائي", html);
+  const html = `<p>Two-factor authentication token: ${token}</p>`;
+  await sendEmail(email, "Two-Factor Authentication Token", html);
 };
 
 /**
@@ -67,7 +67,7 @@ export const sendTwoFactorTokenEmail = async (
  */
 export const sendPasswordResetEmail = async (
   email: string,
-  token: string
+  token: string,
 ): Promise<void> => {
   if (!email || !token) {
     throw new Error("Email and token are required.");
@@ -75,7 +75,7 @@ export const sendPasswordResetEmail = async (
   const resetLink = constructUrl("/auth/new-password", token);
   console.log(`confirm link: ${resetLink}`);
   const emailContent = ResetPasswordMagicLinkEmail({ resetLink });
-  await sendEmail(email, "إعادة تعيين كلمة المرور", emailContent);
+  await sendEmail(email, "Reset Your Password", emailContent);
 };
 
 /**
@@ -86,13 +86,13 @@ export const sendPasswordResetEmail = async (
  */
 export const sendVerificationEmail = async (
   email: string,
-  token: string
+  token: string,
 ): Promise<{ success?: string; error?: string }> => {
   if (!email) {
-    return { error: "البريد الإلكتروني مطلوب." };
+    return { error: "Email is required." };
   }
   if (!token) {
-    return { error: "الرمز مطلوب." };
+    return { error: "Token is required." };
   }
 
   const confirmLink = constructUrl("/auth/new-verification", token);
@@ -100,10 +100,10 @@ export const sendVerificationEmail = async (
 
   try {
     const emailContent = VerifyMagicLinkEmail({ confirmLink });
-    await sendEmail(email, "تأكيد بريدك الإلكتروني", emailContent);
-    return { success: "تم إرسال رسالة التحقق!" };
+    await sendEmail(email, "Verify Your Email", emailContent);
+    return { success: "Verification email sent!" };
   } catch (error) {
-    console.error("خطأ أثناء إرسال رسالة التحقق:", error);
-    return { error: "فشل إرسال رسالة التحقق." };
+    console.error("Error while sending verification email:", error);
+    return { error: "Failed to send verification email." };
   }
 };

@@ -1,8 +1,8 @@
 import { siteConfig } from "@/config/site-config";
 import { AppProviders } from "@/providers/app-providers";
-import { Cairo } from "next/font/google";
 import "@/styles/globals.css";
-
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import type { Viewport, Metadata } from "next";
 import { auth } from "@/server/auth";
 import { SessionProvider } from "next-auth/react";
@@ -21,15 +21,15 @@ export const viewport: Viewport = {
   ],
 };
 
-const cairo = Cairo({ subsets: ["latin", "arabic"], weight: ["400", "700"] });
-
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await auth();
   return (
     <SessionProvider session={session}>
-      <html lang="ar" className={cn("min-h-screen", cairo.className)} dir="rtl">
+      <html
+        className={cn("min-h-screen", GeistSans.variable, GeistMono.variable)}
+      >
         <body>
           <AppProviders>
             <Siteheader />

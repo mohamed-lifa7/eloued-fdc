@@ -15,25 +15,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 
-export const columnTranslations = {
-  id: "معرف",
-  name: "الإسم",
-  email: "الإميل",
-  emailVerified: "تاريخ تأكيد البريد",
-  image: "الصورة",
-  password: "كلمة المرور",
-  role: "الدور",
-  accounts: "الحسابات",
-  isTwoFactorEnabled: "تفعيل التحقق الثنائي",
-  twoFactorConfirmation: "تأكيد التحقق الثنائي",
-};
-
-export const userRoleTranslations = {
-  OWNER: "المالك",
-  ADMIN: "مسؤول",
-  USER: "مستخدم",
-};
-
 export const columns: ColumnDef<User>[] = [
   {
     id: "select",
@@ -59,27 +40,35 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     accessorKey: "name",
-    header: columnTranslations.name,
+    header: "Name",
   },
   {
     accessorKey: "role",
-    header: columnTranslations.role,
+    header: "Role",
     cell: ({ row }) => {
       const role = row.original.role;
       return (
-        <Chip color={role == UserRole.ADMIN ? "primary" : role == UserRole.OWNER ? "success" : "secondary"}>
-          {userRoleTranslations[role]}
+        <Chip
+          color={
+            role == UserRole.ADMIN
+              ? "primary"
+              : role == UserRole.OWNER
+                ? "success"
+                : "secondary"
+          }
+        >
+          {role}
         </Chip>
       );
     },
   },
   {
     accessorKey: "email",
-    header: columnTranslations.email,
+    header: "Email",
   },
   {
     accessorKey: "emailVerified",
-    header: columnTranslations.emailVerified,
+    header: "Email verified at",
     cell: ({ row }) => {
       const timeAndDate = row.original.emailVerified?.toLocaleDateString();
       if (timeAndDate) {
@@ -89,7 +78,7 @@ export const columns: ColumnDef<User>[] = [
           </time>
         );
       } else {
-        return <span>لم يتم التفعيل</span>;
+        return <span>Not verified yet</span>;
       }
     },
   },
@@ -102,7 +91,7 @@ export const columns: ColumnDef<User>[] = [
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">فتح القائمة</span>
+              <span className="sr-only">Open Menu</span>
               <MoreHorizontal className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
@@ -111,13 +100,13 @@ export const columns: ColumnDef<User>[] = [
               key="copy"
               onClick={() => navigator.clipboard.writeText(user.id)}
             >
-              نسخ معرف المستخدم
+              Copy User Id
             </DropdownMenuItem>
             <DropdownMenuItem key="view">
-              <Link href={`/admin/users/${user.id}`}>عرض تفاصيل المستخدم</Link>
+              <Link href={`/admin/users/${user.id}`}>View User Details</Link>
             </DropdownMenuItem>
             <DropdownMenuItem key="delete" className="text-danger">
-              حذف المستخدم
+              Delete User
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

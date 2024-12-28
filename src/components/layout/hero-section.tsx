@@ -33,17 +33,17 @@ export default function Hero() {
           }}
           variant="flat"
         >
-          <span>نحن هنا</span>
+          <span>We Are Here</span>
           <span aria-label="emoji" role="img">
             🔥
           </span>
         </Chip>
         <h1 className="mx-auto text-pretty text-4xl font-medium tracking-tighter md:text-6xl">
-          مرحبًا بكم في نادي المطورين المستقبليين!
+          Welcome to the Future Developers Club!
         </h1>
         <p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground">
-          اكتشف وطور مهاراتك في البرمجة والتقنيات الحديثة مع نادي المطورين
-          المستقبليين.
+          Discover and develop your skills in programming and modern
+          technologies with the Future Developers Club.
         </p>
         <Button
           onPress={onOpen}
@@ -51,14 +51,14 @@ export default function Hero() {
           variant="shadow"
           className="bg-primary-2 shadow-primary-2/50"
         >
-          المزيد عن النادي
+          Learn More About the Club
         </Button>
         <Modal isOpen={isOpen} placement="center" onOpenChange={onOpenChange}>
           <ModalContent>
-            <ModalHeader>فريق نادي مطوري المستقبل</ModalHeader>
+            <ModalHeader>Future Developers Club Team</ModalHeader>
             <ModalBody>
-              اذا كنت تقرأ هذا فيسعدنا أن تخبرنا باقتراحاتك عن الموقع أو النادي
-              عموما
+              If you&apos;re reading this, we would love to hear your
+              suggestions about the website or the club in general.
             </ModalBody>
             <ModalFooter>
               <Button
@@ -68,7 +68,7 @@ export default function Hero() {
                 variant="solid"
                 size="sm"
               >
-                اتصل بنا عبر التلغرام{" "}
+                Contact Us on Telegram{" "}
               </Button>
             </ModalFooter>
           </ModalContent>

@@ -32,14 +32,14 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
           <DropdownItem>
             <Link href="/profile" className="flex items-center space-x-2">
               <User className="h-4 w-4" />
-              <span>الملف الشخصي</span>
+              <span>Profile</span>
             </Link>
           </DropdownItem>
           {user.role === UserRole.ADMIN || user.role === UserRole.OWNER ? (
             <DropdownItem>
               <Link href="/admin" className="flex items-center space-x-2">
                 <UserCog className="h-4 w-4" />
-                <span>لوحة تحكم المشرف</span>
+                <span>Admin Dashboard</span>
               </Link>
             </DropdownItem>
           ) : (
@@ -48,7 +48,7 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
           <DropdownItem>
             <Link href="/contact" className="flex items-center space-x-2">
               <LifeBuoy className="h-4 w-4" />
-              <span>اتصل بنا</span>
+              <span>Contact us</span>
             </Link>
           </DropdownItem>
           <DropdownItem
@@ -58,7 +58,7 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
           >
             <div className="flex items-center space-x-2">
               <LogOut className="h-4 w-4" />
-              <span>تسجيل الخروج</span>
+              <span>Log out</span>
             </div>
           </DropdownItem>
         </DropdownSection>

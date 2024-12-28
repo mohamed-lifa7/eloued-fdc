@@ -19,7 +19,7 @@ export const SettingsSchema = z
       return true;
     },
     {
-      message: "كلمة المرور الجديدة مطلوبة!",
+      message: "New password is required!",
       path: ["newPassword"],
     },
   )
@@ -32,42 +32,42 @@ export const SettingsSchema = z
       return true;
     },
     {
-      message: "كلمة المرور مطلوبة!",
+      message: "Password is required!",
       path: ["password"],
     },
   );
 
 export const NewPasswordSchema = z.object({
   password: z.string().min(6, {
-    message: "الحد الأدنى من الأحرف المطلوبة هو 6",
+    message: "The minimum required number of characters is 6",
   }),
 });
 
 export const ResetSchema = z.object({
   email: z.string().email({
-    message: "البريد الإلكتروني مطلوب",
+    message: "Email is required",
   }),
 });
 
 export const LoginSchema = z.object({
   email: z.string().email({
-    message: "البريد الإلكتروني مطلوب",
+    message: "Email is required",
   }),
   password: z.string().min(1, {
-    message: "كلمة المرور مطلوبة",
+    message: "Password is required",
   }),
   code: z.optional(z.string()),
 });
 
 export const RegisterSchema = z.object({
   email: z.string().email({
-    message: "البريد الإلكتروني مطلوب",
+    message: "Email is required",
   }),
   password: z.string().min(6, {
-    message: "الحد الأدنى من الأحرف المطلوبة هو 6",
+    message: "The minimum required number of characters is 6",
   }),
   name: z.string().min(1, {
-    message: "الاسم مطلوب",
+    message: "Name is required",
   }),
 });
 

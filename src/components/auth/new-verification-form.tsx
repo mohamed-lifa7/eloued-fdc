@@ -21,7 +21,7 @@ export const NewVerificationForm = () => {
     if (success ?? error) return;
 
     if (!token) {
-      setError("الرمز مفقود!");
+      setError("Missing token!");
       return;
     }
 
@@ -31,7 +31,7 @@ export const NewVerificationForm = () => {
         setError(data.error);
       })
       .catch(() => {
-        setError("حدث خطأ ما!");
+        setError("Something went wrong!");
       });
   }, [token, success, error]);
 
@@ -41,9 +41,9 @@ export const NewVerificationForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="تحقق من بريدك الإلكتروني"
-      descriptionLabel="قم بالتحقق من بريدك الإلكتروني للمتابعة!"
-      backButtonLabel="العودة إلى تسجيل الدخول"
+      headerLabel="Verify your email"
+      descriptionLabel="Verify your email to continue!"
+      backButtonLabel="Back to login"
       backButtonHref="/auth/login"
     >
       <div className="flex w-full items-center justify-center">

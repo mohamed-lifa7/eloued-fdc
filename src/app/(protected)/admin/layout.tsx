@@ -3,8 +3,8 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AdminSidebar } from "@/components/admin/sidebar";
 
 export const metadata: Metadata = {
-  title: "صفحة الأدمن",
-  description: "مرحبا بك في صفحة الأدمن الخاصة بالإدارة.",
+  title: "Admin Dashboard",
+  description: "Welcome to the admin dashboard page for management.",
 };
 
 export default function AdminLayout({
@@ -15,7 +15,7 @@ export default function AdminLayout({
   return (
     <SidebarProvider>
       <AdminSidebar />
-      <main className="w-full container">
+      <main className="container w-full">
         <SidebarTrigger />
         {children}
       </main>

@@ -5,8 +5,8 @@ import { BreadcrumbMaker, type BreadcrumbType } from "@/components/breadcrumb";
 import { Heading } from "@/components/ui/heading";
 
 const breadcrumbItems: BreadcrumbType[] = [
-  { title: "لوحة التحكم", href: "/admin", disabled: false, type: "link" },
-  { title: "المستخدمين", disabled: false, type: "text" },
+  { title: "Dashboard", href: "/admin", disabled: false, type: "link" },
+  { title: "Users", disabled: false, type: "text" },
 ];
 
 export default async function UsersPage() {
@@ -16,8 +16,8 @@ export default async function UsersPage() {
     <div className="flex-1 space-y-4 p-5">
       <BreadcrumbMaker items={breadcrumbItems} />
       <Heading
-        title="إدارة المستخدمين"
-        description="إدارة قائمة المستخدمين من خلال هذه الصفحة. إضافة، تعديل، وحذف المستخدمين."
+        title="User Management"
+        description="Manage the user list through this page. Add, edit, and delete users."
       />
       <DataTable columns={columns} data={data} />
     </div>

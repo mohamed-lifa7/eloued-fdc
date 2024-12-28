@@ -1,9 +1,4 @@
-import {
-  Calendar,
-  CheckCircle,
-  Clock,
-  Users,
-} from "lucide-react";
+import { Calendar, CheckCircle, Clock, Users } from "lucide-react";
 import { Button } from "@nextui-org/button";
 import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { ScrollShadow } from "@nextui-org/scroll-shadow";
@@ -16,17 +11,17 @@ export default async function AdminPage() {
       <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
-            مرحبًا، أهلاً بعودتك 👋
+            Welcome back! 👋{" "}
           </h2>
           <div className="hidden items-center space-x-2 md:flex">
-            <Button>تحميل</Button>
+            <Button>Download</Button>
           </div>
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="overview">نظرة عامة</TabsTrigger>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="analytics" disabled>
-              التحليلات
+              Analytics
             </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
@@ -34,13 +29,13 @@ export default async function AdminPage() {
               {/* Total Users */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h2 className="text-sm font-medium">جميع المستخدمين</h2>
+                  <h2 className="text-sm font-medium">Total Users</h2>
                   <Users />
                 </CardHeader>
                 <CardBody>
                   <div className="text-2xl font-bold">{data.allUsersCount}</div>
                   <p className="text-xs text-muted-foreground">
-                    +15.2% من الشهر الماضي
+                    +15.2% from last month
                   </p>
                 </CardBody>
               </Card>
@@ -48,7 +43,7 @@ export default async function AdminPage() {
               {/* Active Events */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h2 className="text-sm font-medium">الأحداث النشطة</h2>
+                  <h2 className="text-sm font-medium">Active Events</h2>
                   <Calendar />
                 </CardHeader>
                 <CardBody>
@@ -57,8 +52,8 @@ export default async function AdminPage() {
                   </div>
                   <p className="text-xs text-muted-foreground">
                     {data.activeEventsCount > 0
-                      ? "أحداث جارية"
-                      : "لا توجد أحداث نشطة"}
+                      ? "Ongoing events"
+                      : "No active events"}
                   </p>
                 </CardBody>
               </Card>
@@ -66,7 +61,7 @@ export default async function AdminPage() {
               {/* Completed Projects */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h2 className="text-sm font-medium">المشاريع المكتملة</h2>
+                  <h2 className="text-sm font-medium">Completed Projects</h2>
                   <CheckCircle />
                 </CardHeader>
                 <CardBody>
@@ -74,7 +69,7 @@ export default async function AdminPage() {
                     {data.completedProjectsCount}
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    +12% من الشهر الماضي
+                    +12% from last month
                   </p>
                 </CardBody>
               </Card>
@@ -82,12 +77,14 @@ export default async function AdminPage() {
               {/* Average Event Duration */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h2 className="text-sm font-medium">متوسط مدة الحدث</h2>
+                  <h2 className="text-sm font-medium">
+                    Average Event Duration
+                  </h2>
                   <Clock />
                 </CardHeader>
                 <CardBody>
                   <div className="text-2xl font-bold">
-                    {data.avgEventDuration} ساعة
+                    {data.avgEventDuration} hours
                   </div>
                 </CardBody>
               </Card>

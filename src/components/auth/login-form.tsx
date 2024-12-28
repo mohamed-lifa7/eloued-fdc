@@ -26,10 +26,9 @@ export const LoginForm = () => {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
   const urlError =
-  searchParams.get("error") === "OAuthAccountNotLinked"
-    ? "البريد الإلكتروني مستخدم بالفعل مع مزود مختلف!"
-    : "";
-
+    searchParams.get("error") === "OAuthAccountNotLinked"
+      ? "Email already in use with different provider!"
+      : "";
 
   const [showTwoFactor, setShowTwoFactor] = useState(false);
   const [error, setError] = useState<string | undefined>("");
@@ -71,22 +70,22 @@ export const LoginForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="مرحبًا بعودتك!"
-      descriptionLabel="مرحبًا بعودتك! قم بتسجيل الدخول إلى حسابك للمتابعة."
-      backButtonLabel="لا تملك حسابًا؟"
+      headerLabel="Welcome back!"
+      descriptionLabel="Welcome back! Login to your account to continue."
+      backButtonLabel="Don't have an account?"
       backButtonHref="/auth/register"
       showSocial
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="space-y-6">
+          <div className="space-y-4">
             {showTwoFactor && (
               <FormField
                 control={form.control}
                 name="code"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>رمز التحقق الثنائي</FormLabel>
+                    <FormLabel>Two Factor Code</FormLabel>
                     <FormControl>
                       <Input
                         {...field}
@@ -105,8 +104,8 @@ export const LoginForm = () => {
                   control={form.control}
                   name="email"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col items-start">
-                      <FormLabel>البريد الإلكتروني</FormLabel>
+                    <FormItem>
+                      <FormLabel>Email</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -123,8 +122,8 @@ export const LoginForm = () => {
                   control={form.control}
                   name="password"
                   render={({ field }) => (
-                    <FormItem className="flex flex-col items-start">
-                      <FormLabel>كلمة المرور</FormLabel>
+                    <FormItem>
+                      <FormLabel>Password</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -133,10 +132,9 @@ export const LoginForm = () => {
                           type="password"
                         />
                       </FormControl>
+
+                      <Link href="/auth/reset" className="text-sm py-4 hover:underline underline-offset-2">Forgot password?</Link>
                       <FormMessage />
-                      <Link href="/auth/reset" className="px-0 font-normal">
-                        هل نسيت كلمة المرور؟
-                      </Link>
                     </FormItem>
                   )}
                 />
@@ -146,7 +144,7 @@ export const LoginForm = () => {
           <FormError message={error ?? urlError} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
-            {showTwoFactor ? "تأكيد" : "تسجيل الدخول"}
+            {showTwoFactor ? "Confirm" : "Login"}
           </Button>
         </form>
       </Form>

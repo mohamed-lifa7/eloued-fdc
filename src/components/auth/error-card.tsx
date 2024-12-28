@@ -4,10 +4,10 @@ import { Alert } from "@nextui-org/alert";
 export const ErrorCard = () => {
   return (
     <CardWrapper
-      headerLabel="خطأ"
-      descriptionLabel="حدث خطأ. يرجى المحاولة مرة أخرى."
+      headerLabel="Error"
+      descriptionLabel="An error occurred. Please try again."
       backButtonHref="/auth/login"
-      backButtonLabel="الرجوع إلى تسجيل الدخول"
+      backButtonLabel="Back to login"
     >
       <div className="flex w-full items-center justify-center">
         <Alert color="danger" title="!" />

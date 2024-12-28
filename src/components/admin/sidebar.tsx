@@ -14,12 +14,12 @@ import Link from "next/link";
 // Menu items.
 const items = [
   {
-    title: "الرئيسية",
+    title: "Dashboard",
     url: "/admin",
     icon: Home,
   },
   {
-    title: "المستخدمين",
+    title: "Users",
     url: "/admin/users",
     icon: Users,
   },
@@ -27,7 +27,7 @@ const items = [
 
 export function AdminSidebar() {
   return (
-    <Sidebar className="bg-background" side="right">
+    <Sidebar className="bg-background" side="left">
       <SidebarContent className="mt-16">
         <SidebarGroup>
           <SidebarGroupContent>

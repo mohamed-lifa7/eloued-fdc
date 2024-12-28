@@ -14,19 +14,19 @@ const socialMediaLinks: {
     Icon: "telegram",
     title: "Telegram",
     link: "https://t.me/yourchannel",
-    cardBody: "انضم إلينا على تيليجرام للحصول على التحديثات والمناقشات!",
+    cardBody: "Join us on Telegram for updates and discussions!",
   },
   {
     Icon: "instagram",
     title: "Instagram",
     link: "https://www.instagram.com/yourprofile",
-    cardBody: "تابعنا على إنستجرام للحصول على الصور والقصص!",
+    cardBody: "Follow us on Instagram for photos and stories!",
   },
   {
     Icon: "github",
     title: "GitHub",
     link: "https://github.com/mohamed-lifa7/eloued-fdc",
-    cardBody: "يمكنك رؤية الكود الخاص بموقع النادي فهو مفتوح المصدر",
+    cardBody: "Check out the club's website code, it's open source.",
   },
 ];
 
@@ -35,10 +35,11 @@ export const Community = () => {
     <section className="container my-16 flex flex-col items-center lg:mt-44">
       <div className="flex max-w-4xl flex-col text-center">
         <div>
-          <h2 className="text-3xl font-bold">انضم إلى مجتمعنا</h2>
+          <h2 className="text-3xl font-bold">Join Our Community</h2>
           &nbsp;
           <p className="text-lg md:w-full">
-            تواصل مع المطورين الآخرين، شارك الأفكار، واستفد من الموارد القيمة.
+            Connect with other developers, share ideas, and benefit from
+            valuable resources.
           </p>
           <Spacer y={12} />
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -57,7 +58,7 @@ export const Community = () => {
                   <CardBody className="flex flex-col items-center space-y-4 text-center">
                     <p className="text-foreground">{social.cardBody}</p>
                     <Link href={social.link} isExternal showAnchorIcon>
-                      انضم الى {social.title}
+                      Join {social.title}
                     </Link>
                   </CardBody>
                 </Card>

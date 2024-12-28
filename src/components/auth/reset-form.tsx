@@ -47,9 +47,9 @@ export const ResetForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="إعادة تعيين كلمة المرور"
-      descriptionLabel="أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور!"
-      backButtonLabel="العودة إلى تسجيل الدخول"
+      headerLabel="Reset your password"
+      descriptionLabel="Enter your email to reset your password!"
+      backButtonLabel="Back to login"
       backButtonHref="/auth/login"
     >
       <Form {...form}>
@@ -60,12 +60,12 @@ export const ResetForm = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>البريد الإلكتروني</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="john.doe@example.com"
+                      placeholder="blabla@gmail.com"
                       type="email"
                     />
                   </FormControl>
@@ -77,7 +77,7 @@ export const ResetForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
-            إرسال رابط إعادة التعيين
+            Send reset email
           </Button>
         </form>
       </Form>

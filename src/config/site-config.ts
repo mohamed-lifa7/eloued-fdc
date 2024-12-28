@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
 
 export const siteConfig: Metadata = {
-  metadataBase: new URL("https://nexa-starter.vercel.app"),
+  metadataBase: new URL("https://eloued-fdc.vercel.app"),
   title: {
-    default: "نادي مطوري المستقبل",
-    template: "%s | نادي مطوري المستقبل",
+    default: "Future Developers Club",
+    template: "%s | Future Developers Club",
   },
 
   manifest: "/site.webmanifest",
 
   applicationName: "FDC",
 
-  creator: "محمد وعبد الرحمن",
+  creator: "Mohamed and Abdul Rahman",
 
   authors: [
     {
-      name: "محمد",
+      name: "Mohamed",
       url: "https://mohamed-lifa7.vercel.app",
     },
     {
-      name: "عبد الرحمن",
+      name: "Abdul Rahman",
       url: "https://abdul-rahman.vercel.app",
     },
   ],
@@ -27,16 +27,16 @@ export const siteConfig: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 
   description:
-    "نادي مطوري المستقبل هو مجتمع من المطورين المتحمسين الذين يجتمعون لمشاركة المشاريع والأفكار والفرص في مجال التكنولوجيا.",
+    "Future Developers Club is a community of passionate developers who come together to share projects, ideas, and opportunities in the field of technology.",
 
   openGraph: {
-    title: "نادي مطوري المستقبل",
+    title: "Future Developers Club",
     description:
-      "نادي مطوري المستقبل هو مجتمع من المطورين المتحمسين الذين يجتمعون لمشاركة المشاريع والأفكار والفرص في مجال التكنولوجيا.",
-    siteName: "نادي مطوري المستقبل",
-    locale: "ar_AR",
-    url: new URL("https://nexa-starter.vercel.app"),
-    images: ["https://nexa-starter.vercel.app/og-image.png"],
+      "Future Developers Club is a community of passionate developers who come together to share projects, ideas, and opportunities in the field of technology.",
+    siteName: "Future Developers Club",
+    locale: "en_US",
+    url: new URL("https://eloued-fdc.vercel.app"),
+    images: ["https://eloued-fdc.vercel.app/og-image.png"],
     type: "website",
   },
 
@@ -53,15 +53,15 @@ export const siteConfig: Metadata = {
   },
 
   twitter: {
-    title: "نادي مطوري المستقبل",
+    title: "Future Developers Club",
     creator: "@LifaSeddik",
     card: "summary_large_image",
-    images: ["https://nexa-starter.vercel.app/twitter-og-image.png"],
+    images: ["https://eloued-fdc.vercel.app/twitter-og-image.png"],
   },
 };
 
 export const links = {
-  github: "https://github.com/mohamed-lifa7/nexa-starter",
+  github: "https://github.com/mohamed-lifa7/eloued-fdc",
   twitter: "https://twitter.com/LifaSeddik",
   portfolio: "https://mohamed-lifa7.vercel.app",
 };

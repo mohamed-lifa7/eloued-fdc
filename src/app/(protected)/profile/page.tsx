@@ -63,7 +63,7 @@ const ProfilePage = () => {
             setSuccess(data.success);
           }
         })
-        .catch(() => setError("حدث خطأ!"));
+        .catch(() => setError("Something went wrong!"));
     });
   };
 
@@ -71,7 +71,7 @@ const ProfilePage = () => {
     <main className="grid w-full place-content-center lg:min-h-screen">
       <Card className="w-[600px]">
         <CardHeader>
-          <p className="text-center text-2xl font-semibold">الإعدادات</p>
+          <p className="text-center text-2xl font-semibold">Settings</p>
         </CardHeader>
         <CardBody>
           <Form {...form}>
@@ -82,11 +82,11 @@ const ProfilePage = () => {
                   name="name"
                   render={({ field }) => (
                     <FormItem className="flex flex-col items-start">
-                      <FormLabel>الاسم</FormLabel>
+                      <FormLabel>Full Name</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="جون دو"
+                          placeholder="Foo Bar"
                           disabled={isPending}
                         />
                       </FormControl>
@@ -101,11 +101,11 @@ const ProfilePage = () => {
                       name="email"
                       render={({ field }) => (
                         <FormItem className="flex flex-col items-start">
-                          <FormLabel>البريد الإلكتروني</FormLabel>
+                          <FormLabel>Email</FormLabel>
                           <FormControl>
                             <Input
                               {...field}
-                              placeholder="john.doe@example.com"
+                              placeholder="hacker@hahha.com"
                               type="email"
                               disabled
                             />
@@ -119,7 +119,7 @@ const ProfilePage = () => {
                       name="password"
                       render={({ field }) => (
                         <FormItem className="flex flex-col items-start">
-                          <FormLabel>كلمة المرور</FormLabel>
+                          <FormLabel>Password</FormLabel>
                           <FormControl>
                             <Input
                               {...field}
@@ -137,7 +137,7 @@ const ProfilePage = () => {
                       name="newPassword"
                       render={({ field }) => (
                         <FormItem className="flex flex-col items-start">
-                          <FormLabel>كلمة المرور الجديدة</FormLabel>
+                          <FormLabel>New Password</FormLabel>
                           <FormControl>
                             <Input
                               {...field}
@@ -157,7 +157,7 @@ const ProfilePage = () => {
                   name="role"
                   render={({ field }) => (
                     <FormItem className="flex flex-col items-start">
-                      <FormLabel>الدور</FormLabel>
+                      <FormLabel>Role</FormLabel>
                       <Select
                         disabled
                         onValueChange={field.onChange}
@@ -165,12 +165,12 @@ const ProfilePage = () => {
                       >
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="اختر دورًا" />
+                            <SelectValue placeholder="Select a role" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value={UserRole.ADMIN}>مدير</SelectItem>
-                          <SelectItem value={UserRole.USER}>مستخدم</SelectItem>
+                          <SelectItem value={UserRole.ADMIN}>Admin</SelectItem>
+                          <SelectItem value={UserRole.USER}>User</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -181,7 +181,7 @@ const ProfilePage = () => {
               <FormError message={error} />
               <FormSuccess message={success} />
               <Button disabled={isPending} type="submit" color="primary">
-                حفظ
+                Submit
               </Button>
             </form>
           </Form>

@@ -31,13 +31,15 @@ export const QuizSection: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
   return (
     <section className="container space-y-4 p-4 text-center">
       <h2 className="text-pretty text-3xl font-bold md:text-4xl">
-        اختبر قدراتك؟
+        Test Your Abilities?
       </h2>
-      <p className="text-lg md:w-full">تحدى نفسك واكتشف مهاراتك في دقائق!</p>
+      <p className="text-lg md:w-full">
+        Challenge yourself and discover your skills in minutes!
+      </p>
 
       <div className="grid place-content-center">
-        <h3 className="text-lg font-bold"> اختبار {quizData.topic}</h3>
-        <h3 className="text-lg">المستوى: {quizData.level}</h3>
+        <h3 className="text-lg font-bold"> Quiz: {quizData.topic}</h3>
+        <h3 className="text-lg">Level: {quizData.level}</h3>
         {showScore ? (
           <div className="grid place-content-center space-y-6">
             <h4
@@ -48,15 +50,15 @@ export const QuizSection: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
                 "w-full border p-10",
               )}
             >
-              نتيجتك: {score} /{" "}
+              Your Score: {score} /{" "}
               {quizData.totalQuestions * quizData.perQuestionScore}
             </h4>
             <Button onClick={restartQuiz} color="primary">
-              إعادة تشغيل الاختبار
+              Restart Quiz
             </Button>
           </div>
         ) : (
-          <div className="shodow-md flex flex-col items-center md:p-10 p-4 shadow-lg dark:shadow-foreground-50/60">
+          <div className="shodow-md flex flex-col items-center p-4 shadow-lg dark:shadow-foreground-50/60 md:p-10">
             <h3>{quizData.questions[currentQuestion]?.question}</h3>
             <ul className="my-4 flex w-full flex-col justify-between space-y-2">
               {quizData.questions[currentQuestion]?.choices.map(
@@ -72,7 +74,7 @@ export const QuizSection: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
               )}
             </ul>
             <p className="mt-2">
-              السؤال {currentQuestion + 1} من {quizData.totalQuestions}
+              Question {currentQuestion + 1} of {quizData.totalQuestions}
             </p>
           </div>
         )}
