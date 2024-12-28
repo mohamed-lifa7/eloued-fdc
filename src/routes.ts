@@ -23,6 +23,13 @@ export const authRoutes: string[] = [
 ];
 
 /**
+ * The prefix for Admin routes
+ * Routes that start with this prefix are used for admin page
+ * @type {string}
+ */
+export const adminPrefix = "/admin"
+
+/**
  * The prefix for API authentication routes
  * Routes that start with this prefix are used for API authentication purposes
  * @type {string}

@@ -68,8 +68,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <main className="grid min-h-screen place-content-center">
-      <Card className="mt-14 w-[600px]">
+    <main className="grid w-full place-content-center lg:min-h-screen">
+      <Card className="w-[600px]">
         <CardHeader>
           <p className="text-center text-2xl font-semibold">الإعدادات</p>
         </CardHeader>

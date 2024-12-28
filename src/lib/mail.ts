@@ -73,6 +73,7 @@ export const sendPasswordResetEmail = async (
     throw new Error("Email and token are required.");
   }
   const resetLink = constructUrl("/auth/new-password", token);
+  console.log(`confirm link: ${resetLink}`);
   const emailContent = ResetPasswordMagicLinkEmail({ resetLink });
   await sendEmail(email, "إعادة تعيين كلمة المرور", emailContent);
 };

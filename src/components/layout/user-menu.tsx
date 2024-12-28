@@ -35,7 +35,7 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
               <span>الملف الشخصي</span>
             </Link>
           </DropdownItem>
-          {user.role === UserRole.ADMIN ? (
+          {user.role === UserRole.ADMIN || user.role === UserRole.OWNER ? (
             <DropdownItem>
               <Link href="/admin" className="flex items-center space-x-2">
                 <UserCog className="h-4 w-4" />
