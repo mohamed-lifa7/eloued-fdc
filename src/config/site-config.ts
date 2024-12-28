@@ -56,7 +56,7 @@ export const siteConfig: Metadata = {
     title: "Future Developers Club",
     creator: "@LifaSeddik",
     card: "summary_large_image",
-    images: ["https://eloued-fdc.vercel.app/twitter-og-image.png"],
+    images: ["https://eloued-fdc.vercel.app/og-image.png"],
   },
 };
 
