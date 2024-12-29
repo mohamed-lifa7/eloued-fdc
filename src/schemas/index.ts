@@ -71,15 +71,13 @@ export const RegisterSchema = z.object({
   }),
 });
 
-export const updateUserSchema = z.object({
+export const UpdateUserSchema = z.object({
   name: z.optional(z.string()),
   role: z.enum([UserRole.ADMIN, UserRole.USER, UserRole.OWNER]),
 });
 
-export const taskSchema = z.object({
-  id: z.string(),
-  title: z.string(),
-  status: z.string(),
-  label: z.string(),
-  priority: z.string(),
+export const ContactFormSchema = z.object({
+  username: z.string().min(2).max(50),
+  email: z.string().email(),
+  message: z.string().min(2).max(500),
 });

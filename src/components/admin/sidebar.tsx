@@ -1,4 +1,4 @@
-import { Home, Users } from "lucide-react";
+import { Home, PhoneCall, Users } from "lucide-react";
 
 import {
   Sidebar,
@@ -22,6 +22,11 @@ const items = [
     title: "Users",
     url: "/admin/users",
     icon: Users,
+  },
+  {
+    title: "Contact Forms",
+    url: "/admin/contact",
+    icon: PhoneCall,
   },
 ];
 
