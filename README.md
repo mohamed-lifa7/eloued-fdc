@@ -1,15 +1,26 @@
-# Future Developer Club
+# Future Developers Club
 
-Welcome to the **Future Developer Club** project! This is a web application built for the Future Developer Club at Eloued University. The purpose of this project is to foster collaboration, share knowledge, and create a central platform for our developer community.
+Welcome to the **Future Developers Club** project! This is a web application built for the Future Developers Club at Eloued University. The purpose of this project is to foster collaboration, share knowledge, and create a central platform for our developer community.
 
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
-2. [Features](#features)
-3. [Getting Started](#getting-started)
-4. [Contributing](#contributing)
-5. [Code of Conduct](#code-of-conduct)
-6. [License](#license)
+2. [Todo](#todo)
+3. [Features](#features)
+4. [Getting Started](#getting-started)
+5. [Contributing](#contributing)
+6. [Code of Conduct](#code-of-conduct)
+7. [License](#license)
+
+## Todo
+- [x] contact us page.
+- [x] make the website in English.
+- [ ] projects page.
+- [ ] blogs page (hard coded).
+- [ ] leader-board page.
+- [ ] our community section (N of events, Members, N of projects).
+- [ ] past and upcoming events.
+- [ ] quizzes after each session.
 
 ## Project Overview
 
@@ -64,18 +75,22 @@ We welcome contributions from all club members! Please read our Contributing Gui
 ### Steps to Contribute:
 
 1. Fork the repository.
-2. Create a new branch for your feature or bugfix:
+2. Clone the repository.
+   ```bash
+   git clone https://github.com/mohamed-lifa7/eloued-fdc.git
+   ```
+3. Create a new branch for your feature or bugfix:
    ```bash
    git checkout -b feature-name
    ```
-3. Commit your changes and push your branch:
+4. Commit your changes and push your branch:
 
    ```bash
    git commit -m "Add new feature"
    git push origin feature-name
    ```
 
-4. Open a pull request in the main repository.
+5. Open a pull request in the main repository.
 
 ### Code of Conduct
 
