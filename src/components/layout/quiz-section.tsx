@@ -1,8 +1,8 @@
 "use client";
 import { cn } from "@/lib/utils";
 import type { QuizData } from "@/types/quiz";
-import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
+import { Button } from "../ui/button";
 
 export const QuizSection: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
   const [currentQuestion, setCurrentQuestion] = useState<number>(0);
@@ -53,9 +53,7 @@ export const QuizSection: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
               Your Score: {score} /{" "}
               {quizData.totalQuestions * quizData.perQuestionScore}
             </h4>
-            <Button onClick={restartQuiz} color="primary">
-              Restart Quiz
-            </Button>
+            <Button onClick={restartQuiz}>Restart Quiz</Button>
           </div>
         ) : (
           <div className="shodow-md flex flex-col items-center p-4 shadow-lg dark:shadow-foreground-50/60 md:p-10">

@@ -14,7 +14,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { SettingsSchema } from "@/schemas";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
 import { settings } from "@/actions/settings";
 import {
   Form,
@@ -28,7 +27,9 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { UserRole } from "@prisma/client";
-import { Button, Input } from "@nextui-org/react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const ProfilePage = () => {
   const user = useCurrentUser();
@@ -71,9 +72,10 @@ const ProfilePage = () => {
     <main className="grid w-full place-content-center lg:min-h-screen">
       <Card className="w-[600px]">
         <CardHeader>
-          <p className="text-center text-2xl font-semibold">Settings</p>
+          <CardTitle>Settings</CardTitle>
+          <CardDescription>Here you can view and manage your profile</CardDescription>
         </CardHeader>
-        <CardBody>
+        <CardContent>
           <Form {...form}>
             <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
               <div className="space-y-6">
@@ -180,12 +182,12 @@ const ProfilePage = () => {
               </div>
               <FormError message={error} />
               <FormSuccess message={success} />
-              <Button disabled={isPending} type="submit" color="primary">
+              <Button disabled={isPending} type="submit">
                 Submit
               </Button>
             </form>
           </Form>
-        </CardBody>
+        </CardContent>
       </Card>
     </main>
   );

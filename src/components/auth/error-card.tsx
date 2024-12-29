@@ -1,5 +1,6 @@
 import { CardWrapper } from "@/components/auth/card-wrapper";
-import { Alert } from "@nextui-org/alert";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 export const ErrorCard = () => {
   return (
@@ -9,9 +10,10 @@ export const ErrorCard = () => {
       backButtonHref="/auth/login"
       backButtonLabel="Back to login"
     >
-      <div className="flex w-full items-center justify-center">
-        <Alert color="danger" title="!" />
-      </div>
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>!</AlertTitle>
+      </Alert>
     </CardWrapper>
   );
 };

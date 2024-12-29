@@ -2,12 +2,12 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { Spinner } from "@nextui-org/spinner";
 
 import { newVerification } from "@/actions/new-verification";
 import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import Loader from "../loader";
 
 export const NewVerificationForm = () => {
   const [error, setError] = useState<string | undefined>();
@@ -47,7 +47,7 @@ export const NewVerificationForm = () => {
       backButtonHref="/auth/login"
     >
       <div className="flex w-full items-center justify-center">
-        {!success && !error && <Spinner />}
+        {!success && !error && <Loader />}
         <FormSuccess message={success} />
         {!success && <FormError message={error} />}
       </div>

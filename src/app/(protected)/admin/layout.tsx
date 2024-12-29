@@ -15,8 +15,8 @@ export default function AdminLayout({
   return (
     <SidebarProvider>
       <AdminSidebar />
-      <main className="container w-full">
-        <SidebarTrigger />
+      <main className="w-full">
+        <SidebarTrigger className="mt-16"/>
         {children}
       </main>
     </SidebarProvider>

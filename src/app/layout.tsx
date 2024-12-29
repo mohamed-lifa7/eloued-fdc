@@ -7,7 +7,7 @@ import type { Viewport, Metadata } from "next";
 import { auth } from "@/server/auth";
 import { SessionProvider } from "next-auth/react";
 import { cn } from "@/lib/utils";
-import Siteheader from "@/components/layout/siteheader";
+import SiteHeader from "@/components/layout/siteheader";
 import SiteFooter from "@/components/layout/site-footer";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -29,11 +29,11 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html
-        className={cn("min-h-screen", GeistSans.variable, GeistMono.variable)}
+        className={cn("min-h-screen font-sans", GeistSans.variable, GeistMono.variable)}
       >
         <body>
           <AppProviders>
-            <Siteheader />
+            <SiteHeader />
             {children}
             <SiteFooter />
             <Toaster />

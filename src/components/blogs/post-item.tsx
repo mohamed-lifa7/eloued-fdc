@@ -2,8 +2,14 @@ import { Calendar } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn, formatDate } from "@/lib/utils";
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import { Tag } from "./tag";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 
 interface PostItemProps {
   slug: string;
@@ -24,14 +30,16 @@ export function PostItem({
     <article>
       <Card>
         <CardHeader>
-          <h2 className="text-2xl font-bold leading-none tracking-tight">
-            <Link href={"/" + slug}>{title}</Link>
-          </h2>
-          <p className="space-x-2 text-small text-default-500">
+          <CardTitle>
+            <h2 className="text-2xl font-bold">
+              <Link href={"/" + slug}>{title}</Link>
+            </h2>
+          </CardTitle>
+          <CardDescription className="space-x-2">
             {tags?.map((tag) => <Tag tag={tag} key={tag} />)}
-          </p>
+          </CardDescription>
         </CardHeader>
-        <CardBody>
+        <CardContent>
           <div className="max-w-none text-muted-foreground">{description}</div>
           <div className="flex items-center justify-between">
             <dl>
@@ -48,7 +56,7 @@ export function PostItem({
               Read more →
             </Link>
           </div>
-        </CardBody>
+        </CardContent>
       </Card>
     </article>
   );

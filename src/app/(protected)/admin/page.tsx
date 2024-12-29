@@ -1,13 +1,13 @@
 import { Calendar, CheckCircle, Clock, Users } from "lucide-react";
-import { Button } from "@nextui-org/button";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
-import { ScrollShadow } from "@nextui-org/scroll-shadow";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 export default async function AdminPage() {
   const data = await getData();
   return (
-    <ScrollShadow className="h-full">
+    <ScrollArea className="h-full">
       <div className="flex-1 space-y-4 p-4 pt-6 md:p-8">
         <div className="flex items-center justify-between space-y-2">
           <h2 className="text-3xl font-bold tracking-tight">
@@ -32,12 +32,12 @@ export default async function AdminPage() {
                   <h2 className="text-sm font-medium">Total Users</h2>
                   <Users />
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                   <div className="text-2xl font-bold">{data.allUsersCount}</div>
                   <p className="text-xs text-muted-foreground">
                     +15.2% from last month
                   </p>
-                </CardBody>
+                </CardContent>
               </Card>
 
               {/* Active Events */}
@@ -46,7 +46,7 @@ export default async function AdminPage() {
                   <h2 className="text-sm font-medium">Active Events</h2>
                   <Calendar />
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                   <div className="text-2xl font-bold">
                     {data.activeEventsCount}
                   </div>
@@ -55,7 +55,7 @@ export default async function AdminPage() {
                       ? "Ongoing events"
                       : "No active events"}
                   </p>
-                </CardBody>
+                </CardContent>
               </Card>
 
               {/* Completed Projects */}
@@ -64,14 +64,14 @@ export default async function AdminPage() {
                   <h2 className="text-sm font-medium">Completed Projects</h2>
                   <CheckCircle />
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                   <div className="text-2xl font-bold">
                     {data.completedProjectsCount}
                   </div>
                   <p className="text-xs text-muted-foreground">
                     +12% from last month
                   </p>
-                </CardBody>
+                </CardContent>
               </Card>
 
               {/* Average Event Duration */}
@@ -82,17 +82,17 @@ export default async function AdminPage() {
                   </h2>
                   <Clock />
                 </CardHeader>
-                <CardBody>
+                <CardContent>
                   <div className="text-2xl font-bold">
                     {data.avgEventDuration} hours
                   </div>
-                </CardBody>
+                </CardContent>
               </Card>
             </div>
           </TabsContent>
         </Tabs>
       </div>
-    </ScrollShadow>
+    </ScrollArea>
   );
 }
 

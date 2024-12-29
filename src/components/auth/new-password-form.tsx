@@ -20,7 +20,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { newPassword } from "@/actions/new-password";
-import { Input } from "@nextui-org/react";
+import { Input } from "../ui/input";
 
 export const NewPasswordForm = () => {
   const searchParams = useSearchParams();

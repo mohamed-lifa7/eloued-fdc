@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { Button } from "../ui/button";
 
 const images = [
   "/events/placeholder2.jpg",
@@ -39,13 +39,8 @@ const AboutSection = () => {
                 - Mohamed Islam Hala, President of FDC
               </footer>
             </blockquote>
-            <Button
-              as={Link}
-              href="/about"
-              color="primary"
-              className="mb-4 lg:mb-0"
-            >
-              Learn More About Us
+            <Button asChild color="primary" className="mb-4 lg:mb-0">
+              <Link href="/about">Learn More About Us</Link>
             </Button>
           </div>
 

@@ -1,12 +1,12 @@
 import { getUserById } from "@/data/user";
 import React from "react";
-import { ScrollShadow } from "@nextui-org/react";
 import { Heading } from "@/components/ui/heading";
 import { BreadcrumbMaker, type BreadcrumbType } from "@/components/breadcrumb";
 import UpdateUserForm from "./update";
 import { currentRole } from "@/server/auth";
 import { UserRole } from "@prisma/client";
 import { redirect } from "next/navigation";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const breadcrumbItems: BreadcrumbType[] = [
   { title: "Dashboard", href: "/admin", disabled: false, type: "link" },
@@ -28,12 +28,12 @@ export default async function Page(props: {
     return redirect("/accessdenied");
   }
   return (
-    <ScrollShadow className="h-full">
+    <ScrollArea className="h-full">
       <div className="flex-1 space-y-4 p-5">
         <BreadcrumbMaker items={breadcrumbItems} />
         <Heading title="Update User" description="Update user information..." />
         <UpdateUserForm user={user} />
       </div>
-    </ScrollShadow>
+    </ScrollArea>
   );
 }

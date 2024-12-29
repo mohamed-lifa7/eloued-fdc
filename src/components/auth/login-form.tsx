@@ -20,7 +20,8 @@ import { CardWrapper } from "@/components/auth/card-wrapper";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
-import { Button, Input } from "@nextui-org/react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
@@ -133,7 +134,12 @@ export const LoginForm = () => {
                         />
                       </FormControl>
 
-                      <Link href="/auth/reset" className="text-sm py-4 hover:underline underline-offset-2">Forgot password?</Link>
+                      <Link
+                        href="/auth/reset"
+                        className="py-4 text-sm underline-offset-2 hover:underline"
+                      >
+                        Forgot password?
+                      </Link>
                       <FormMessage />
                     </FormItem>
                   )}

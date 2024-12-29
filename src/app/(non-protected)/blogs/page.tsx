@@ -2,9 +2,9 @@ import { posts } from ".velite";
 import { PostItem } from "@/components/blogs/post-item";
 import { QueryPagination } from "@/components/blogs/query-pagination";
 import { Tag } from "@/components/blogs/tag";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { getAllTags, sortPosts, sortTagsByCount } from "@/lib/utils";
-import { Card, CardBody, CardHeader } from "@nextui-org/react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -35,7 +35,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const sortedTags = sortTagsByCount(tags);
 
   return (
-    <div className="container max-w-4xl py-6 lg:py-10">
+    <main className="container max-w-4xl my-16">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
           <h1 className="inline-block text-4xl font-black lg:text-5xl">
@@ -78,15 +78,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
         </div>
         <Card className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
           <CardHeader>
-            <p className="text-md">Tags</p>
+            <CardTitle>Tags</CardTitle>
           </CardHeader>
-          <CardBody className="flex flex-wrap gap-2">
+          <CardContent className="flex flex-wrap gap-2">
             {sortedTags?.map((tag) => (
               <Tag tag={tag} key={tag} count={tags[tag]} />
             ))}
-          </CardBody>
+          </CardContent>
         </Card>
       </div>
-    </div>
+    </main>
   );
 }

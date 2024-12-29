@@ -99,7 +99,6 @@ const UpdateUserForm = ({ user }: { user: User | null }) => {
                   <SelectContent>
                     <SelectItem value={UserRole.ADMIN}>ADMIN</SelectItem>
                     <SelectItem value={UserRole.USER}>USER</SelectItem>
-                    <SelectItem value={UserRole.OWNER}>OWNER</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

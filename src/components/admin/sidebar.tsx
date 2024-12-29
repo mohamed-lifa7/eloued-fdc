@@ -32,7 +32,7 @@ const items = [
 
 export function AdminSidebar() {
   return (
-    <Sidebar className="bg-background" side="left">
+    <Sidebar className="mt-14" side="left">
       <SidebarContent className="mt-16">
         <SidebarGroup>
           <SidebarGroupContent>

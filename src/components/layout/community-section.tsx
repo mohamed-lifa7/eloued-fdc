@@ -1,8 +1,9 @@
 "use client";
 
-import { Spacer } from "@nextui-org/react";
+import Link from "next/link";
 import { Icons } from "../icons";
-import { Card, CardHeader, CardBody, Link } from "@nextui-org/react";
+import { Card, CardContent, CardHeader } from "../ui/card";
+import { Button } from "../ui/button";
 
 const socialMediaLinks: {
   Icon: keyof typeof Icons;
@@ -41,7 +42,6 @@ export const Community = () => {
             Connect with other developers, share ideas, and benefit from
             valuable resources.
           </p>
-          <Spacer y={12} />
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {socialMediaLinks.map((social, index) => {
               const IconComponent = Icons[social.Icon];
@@ -55,12 +55,12 @@ export const Community = () => {
                     </div>
                     <h3 className="text-xl font-semibold">{social.title}</h3>
                   </CardHeader>
-                  <CardBody className="flex flex-col items-center space-y-4 text-center">
+                  <CardContent className="flex flex-col items-center space-y-4 text-center">
                     <p className="text-foreground">{social.cardBody}</p>
-                    <Link href={social.link} isExternal showAnchorIcon>
-                      Join {social.title}
-                    </Link>
-                  </CardBody>
+                    <Button asChild variant="link">
+                      <Link href={social.link}>Join {social.title}</Link>
+                    </Button>
+                  </CardContent>
                 </Card>
               );
             })}

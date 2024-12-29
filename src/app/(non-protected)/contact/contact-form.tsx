@@ -13,10 +13,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Button, Input, Textarea } from "@nextui-org/react";
 import { toast } from "sonner";
 import { ContactFormSchema } from "@/schemas";
 import { sendContactForm } from "@/actions/contact";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 
 const ContactForm = () => {
   const form = useForm<z.infer<typeof ContactFormSchema>>({
@@ -93,7 +95,7 @@ const ContactForm = () => {
             </FormItem>
           )}
         />
-        <Button className="w-full gap-4" color="primary" type="submit">
+        <Button className="w-full gap-4" type="submit">
           Make contact <MoveRight className="h-4 w-4" />
         </Button>
       </form>

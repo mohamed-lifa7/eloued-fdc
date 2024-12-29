@@ -13,10 +13,12 @@ Welcome to the **Future Developers Club** project! This is a web application bui
 7. [License](#license)
 
 ## Todo
+
 - [x] contact us page.
 - [x] make the website in English.
+- [x] blogs page (hard coded).
+- [x] remove the nextui and do shadcn ui instead
 - [ ] projects page.
-- [ ] blogs page (hard coded).
 - [ ] leader-board page.
 - [ ] our community section (N of events, Members, N of projects).
 - [ ] past and upcoming events.

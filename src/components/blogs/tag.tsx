@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { slug } from "github-slugger";
-import { Chip } from "@nextui-org/react";
+import { Badge } from "../ui/badge";
 
 interface TagProps {
   tag: string;
@@ -11,9 +11,9 @@ interface TagProps {
 export function Tag({ tag, current, count }: TagProps) {
   return (
     <Link href={`/tags/${slug(tag)}`}>
-      <Chip color={current ? "primary" : "default"}>
+      <Badge variant={current ? "default" : "secondary"}>
         {tag} {count ? `(${count})` : null}
-      </Chip>
+      </Badge>
     </Link>
   );
 }

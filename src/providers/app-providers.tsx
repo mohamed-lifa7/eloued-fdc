@@ -1,17 +1,17 @@
 "use client";
 
-import { NextUIProvider } from "@nextui-org/react";
+import { Suspense } from "react";
 import { EdgeStoreProvider } from "./edgestore-provider";
 import { ThemeProvider } from "./theme-provider";
 
 export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <NextUIProvider>
-        <ThemeProvider attribute="class" defaultTheme="dark">
+      <Suspense>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <EdgeStoreProvider>{children}</EdgeStoreProvider>
         </ThemeProvider>
-      </NextUIProvider>
+      </Suspense>
     </>
   );
 }

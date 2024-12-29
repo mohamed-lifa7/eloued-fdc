@@ -1,25 +1,29 @@
 "use client";
-import { Button } from "@nextui-org/react";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { Moon, MoonIcon, SunIcon } from "lucide-react";
+import { Button } from "../ui/button";
 
 export default function ModeToggle() {
-  const [svg, setSvg] = useState(<Moon className="w-6 h-w-6"/>);
+  const [svg, setSvg] = useState(<Moon className="h-w-6 w-6" />);
   const { theme, setTheme } = useTheme();
 
   const handleClick = () => {
     if (theme === "light") {
       setTheme("dark");
-      setSvg(<MoonIcon className="w-6 h-w-6"/>);
+      setSvg(<MoonIcon className="h-10 w-10" />);
     } else {
       setTheme("light");
-      setSvg(<SunIcon className="w-6 h-w-6"/>);
+      setSvg(<SunIcon className="h-10 w-10" />);
     }
   };
 
   return (
-    <Button isIconOnly variant="flat" onClick={handleClick} size="md">
+    <Button
+      variant="secondary"
+      onClick={handleClick}
+      className="rounded-full h-10 w-10"
+    >
       {svg}
     </Button>
   );

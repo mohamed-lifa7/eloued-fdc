@@ -2,8 +2,9 @@
 
 import type { Table } from "@tanstack/react-table";
 import { DataTableViewOptions } from "@/components/ui/data-table-view-options";
-import { Button, Input } from "@nextui-org/react";
 import { X } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;

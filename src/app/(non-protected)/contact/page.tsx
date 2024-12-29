@@ -1,7 +1,7 @@
 import { Clock8, MapPin, PhoneCall } from "lucide-react";
 
 import ContactForm from "./contact-form";
-import { Chip } from "@nextui-org/react";
+import { Badge } from "@/components/ui/badge";
 
 const page = () => {
   return (
@@ -9,7 +9,7 @@ const page = () => {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="mb-4">
           <div className="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
-            <Chip>Contact</Chip>
+            <Badge>Contact</Badge>
             <h2 className="font-heading mb-4 text-3xl font-bold tracking-tight text-primary-2 sm:text-5xl">
               Get in Touch
             </h2>

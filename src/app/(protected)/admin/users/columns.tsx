@@ -6,7 +6,6 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { UserRole, type User } from "@prisma/client";
-import { Chip } from "@nextui-org/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -48,17 +48,17 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       const role = row.original.role;
       return (
-        <Chip
-          color={
+        <Badge
+          variant={
             role == UserRole.ADMIN
-              ? "primary"
+              ? "default"
               : role == UserRole.OWNER
-                ? "success"
+                ? "destructive"
                 : "secondary"
           }
         >
           {role}
-        </Chip>
+        </Badge>
       );
     },
   },

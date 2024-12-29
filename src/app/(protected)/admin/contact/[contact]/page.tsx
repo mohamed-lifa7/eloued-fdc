@@ -1,15 +1,17 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Divider,
-  ScrollShadow,
-} from "@nextui-org/react";
 import { Heading } from "@/components/ui/heading";
 import { BreadcrumbMaker, type BreadcrumbType } from "@/components/breadcrumb";
 import { getContactFormById } from "@/data/contact";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const breadcrumbItems: BreadcrumbType[] = [
   { title: "Dashboard", href: "/admin", disabled: false, type: "link" },
@@ -29,7 +31,7 @@ export default async function Page(props: {
   const contact = await getContactFormById(params.contact);
 
   return (
-    <ScrollShadow className="h-full">
+    <ScrollArea className="h-full">
       <div className="flex-1 space-y-6 p-6">
         {/* Breadcrumb Navigation */}
         <BreadcrumbMaker items={breadcrumbItems} />
@@ -41,21 +43,15 @@ export default async function Page(props: {
         />
 
         <Card className="max-w-lg">
-          <CardHeader className="flex gap-4">
-            <div className="flex flex-col">
-              <p className="text-xl font-semibold">{contact?.name}</p>
-              <p className="text-sm font-light">{contact?.email}</p>
-            </div>
+          <CardHeader>
+            <CardTitle>{contact?.name}</CardTitle>
+            <CardDescription>{contact?.email}</CardDescription>
           </CardHeader>
-
-          <Divider />
-
-          <CardBody>
+          <Separator />
+          <CardContent>
             <p>{contact?.message}</p>
-          </CardBody>
-
-          <Divider />
-
+          </CardContent>
+          <Separator />
           <CardFooter>
             <p className="text-sm text-foreground-400">
               <span className="font-medium">Submitted on:</span>{" "}
@@ -66,6 +62,6 @@ export default async function Page(props: {
           </CardFooter>
         </Card>
       </div>
-    </ScrollShadow>
+    </ScrollArea>
   );
 }
