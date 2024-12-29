@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Icons } from "../icons";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import { Button } from "../ui/button";
+import { links } from "@/config/site-config";
 
 const socialMediaLinks: {
   Icon: keyof typeof Icons;
@@ -14,19 +15,19 @@ const socialMediaLinks: {
   {
     Icon: "telegram",
     title: "Telegram",
-    link: "https://t.me/yourchannel",
+    link: links.telegram,
     cardBody: "Join us on Telegram for updates and discussions!",
   },
   {
     Icon: "instagram",
     title: "Instagram",
-    link: "https://www.instagram.com/yourprofile",
+    link: links.instagram,
     cardBody: "Follow us on Instagram for photos and stories!",
   },
   {
     Icon: "github",
     title: "GitHub",
-    link: "https://github.com/mohamed-lifa7/eloued-fdc",
+    link: links.github,
     cardBody: "Check out the club's website code, it's open source.",
   },
 ];

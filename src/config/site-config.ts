@@ -62,6 +62,7 @@ export const siteConfig: Metadata = {
 
 export const links = {
   github: "https://github.com/mohamed-lifa7/eloued-fdc",
-  twitter: "https://twitter.com/LifaSeddik",
   portfolio: "https://mohamed-lifa7.vercel.app",
+  instagram: "https://www.instagram.com/fdevclub",
+  telegram: "https://t.me/+e2kKkyiEqCw4ZTlk",
 };

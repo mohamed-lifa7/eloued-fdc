@@ -1,6 +1,7 @@
 import AboutSection from "@/components/layout/about-section";
 import { Community } from "@/components/layout/community-section";
 import Hero from "@/components/layout/hero-section";
+import Projects from "@/components/layout/projects-sections";
 import { QuizSection } from "@/components/layout/quiz-section";
 import { quiz } from "@/data/quizes";
 
@@ -10,6 +11,7 @@ export default function Home() {
       <Hero />
       <AboutSection />
       <QuizSection quizData={quiz} />
+      <Projects />
       <Community />
     </main>
   );
