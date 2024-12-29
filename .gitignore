@@ -47,4 +47,4 @@ yarn-error.log*
 .idea
 
 # velite
-.velite
+/.velite

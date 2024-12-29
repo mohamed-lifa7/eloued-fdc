@@ -6,14 +6,14 @@ import { siteConfig } from "@/config/site-config";
 import "@/styles/mdx.css";
 import { Tag } from "@/components/blogs/tag";
 import { MDXContent } from "@/components/blogs/mdx-component";
-interface PostPageProps {
-  params: {
-    slug: string[];
-  };
-}
+
+type PostPageProps = {
+    params: Promise<{ slug: string[] }>;
+};
+
 
 async function getPostFromParams(params: PostPageProps["params"]) {
-  const slug = params?.slug?.join("/");
+  const slug = (await params).slug?.join("/");
   const post = posts.find((post) => post.slugAsParams === slug);
 
   return post;
@@ -44,9 +44,7 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams(): Promise<
-  PostPageProps["params"][]
-> {
+export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slugAsParams.split("/") }));
 }
 
