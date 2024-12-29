@@ -13,8 +13,8 @@ export const admin = async () => {
   const role = await currentRole();
 
   if (role === UserRole.ADMIN) {
-    return { success: "تم السماح بإجراء الخادم!" };
+    return { success: "Allowed Server Action!" };
   }
 
-  return { error: "إجراء الخادم ممنوع!" };
+  return { error: "Forbidden Server Action!" }
 };

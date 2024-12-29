@@ -13,7 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { updateUserSchema } from "@/schemas";
+import { UpdateUserSchema } from "@/schemas";
 import { Button } from "@/components/ui/button";
 import { updateUser } from "@/actions/settings";
 import {
@@ -35,15 +35,15 @@ const UpdateUserForm = ({ user }: { user: User | null }) => {
   const { update } = useSession();
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof updateUserSchema>>({
-    resolver: zodResolver(updateUserSchema),
+  const form = useForm<z.infer<typeof UpdateUserSchema>>({
+    resolver: zodResolver(UpdateUserSchema),
     defaultValues: {
       name: user?.name ?? undefined,
       role: user?.role ?? undefined,
     },
   });
 
-  const onSubmit = (values: z.infer<typeof updateUserSchema>) => {
+  const onSubmit = (values: z.infer<typeof UpdateUserSchema>) => {
     startTransition(() => {
       updateUser(user?.id ?? "", values)
         .then((data) => {
@@ -99,6 +99,7 @@ const UpdateUserForm = ({ user }: { user: User | null }) => {
                   <SelectContent>
                     <SelectItem value={UserRole.ADMIN}>ADMIN</SelectItem>
                     <SelectItem value={UserRole.USER}>USER</SelectItem>
+                    <SelectItem value={UserRole.OWNER}>OWNER</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />

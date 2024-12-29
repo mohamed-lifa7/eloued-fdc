@@ -8,38 +8,34 @@ import { getVerificationTokenByToken } from "@/data/verificiation-token";
  * Verifies the email address associated with a given token.
  *
  * @param token - The verification token.
- * @returns An object indicating the result of the verification process.
- *          If successful, it returns { success: "تم تأكيد البريد الإلكتروني!" }.
- *          If the token does not exist, it returns { error: "الرمز غير موجود!" }.
- *          If the token has expired, it returns { error: "انتهت صلاحية الرمز!" }.
- *          If the email associated with the token does not exist, it returns { error: "البريد الإلكتروني غير موجود!" }.
+ * @returns An object with the result of the login operation.
  */
 export const newVerification = async (token: string) => {
   try {
     // Validate token input
     if (!token) {
-      return { error: "رمز غير صالح!" };
+      return { error: "Invalid token!" };
     }
 
     // Retrieve the token from the database
     const existingToken = await getVerificationTokenByToken(token);
 
     if (!existingToken) {
-      return { error: "الرمز غير موجود!" };
+      return { error: "Token does not exist!" };
     }
 
     // Check if the token has expired
     const hasExpired = new Date(existingToken.expires) < new Date();
 
     if (hasExpired) {
-      return { error: "انتهت صلاحية الرمز!" };
+      return { error: "Token has expired!" };
     }
 
     // Retrieve the user associated with the token email
     const existingUser = await getUserByEmail(existingToken.email);
 
     if (!existingUser) {
-      return { error: "البريد الإلكتروني غير موجود!" };
+      return { error: "Email does not exist!" };
     }
 
     // Update the user's email verification status
@@ -56,10 +52,10 @@ export const newVerification = async (token: string) => {
       where: { id: existingToken.id },
     });
 
-    return { success: "تم تأكيد البريد الإلكتروني!" };
+    return { success: "Email verified!" };
   } catch (error) {
     // Log the error for debugging purposes
     console.error("Error during email verification:", error);
-    return { error: "حدث خطأ أثناء تأكيد البريد الإلكتروني." };
+    return { error: "An error occurred during email verification." };
   }
 };

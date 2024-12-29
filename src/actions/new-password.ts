@@ -13,13 +13,7 @@ import { db } from "@/server/db";
  *
  * @param values - The new password data.
  * @param token - The password reset token.
- * @returns An object indicating the result of the password reset process.
- *          If successful, it returns { success: "تم تحديث كلمة المرور!" }.
- *          If the token is missing, it returns { error: "الرمز مفقود!" }.
- *          If the input fields are invalid, it returns { error: "حقول غير صالحة!" }.
- *          If the token is invalid or has expired, it returns { error: "رمز غير صالح!" } or { error: "الرمز منتهي الصلاحية!" }.
- *          If the email associated with the token does not exist, it returns { error: "البريد الإلكتروني غير موجود!" }.
- *          If an unknown error occurs, it returns { error: "حدث خطأ ما أثناء إعادة تعيين كلمة المرور!" }.
+ * @returns An object with the result of the login operation.
  */
 export const newPassword = async (
   values: z.infer<typeof NewPasswordSchema>,
@@ -28,14 +22,14 @@ export const newPassword = async (
   try {
     // Validate token input
     if (!token) {
-      return { error: "الرمز مفقود!" };
+      return { error: "Missing token!" };
     }
 
     // Validate input fields
     const validatedFields = NewPasswordSchema.safeParse(values);
 
     if (!validatedFields.success) {
-      return { error: "حقول غير صالحة!" };
+      return { error: "Invalid fields!" };
     }
 
     const { password } = validatedFields.data;
@@ -44,21 +38,21 @@ export const newPassword = async (
     const existingToken = await getPasswordResetTokenByToken(token);
 
     if (!existingToken) {
-      return { error: "رمز غير صالح!" };
+      return { error: "Invalid token!" };
     }
 
     // Check if the token has expired
     const hasExpired = new Date(existingToken.expires) < new Date();
 
     if (hasExpired) {
-      return { error: "الرمز منتهي الصلاحية!" };
+      return { error: "Token has expired!" };
     }
 
     // Retrieve the user associated with the token email
     const existingUser = await getUserByEmail(existingToken.email);
 
     if (!existingUser) {
-      return { error: "البريد الإلكتروني غير موجود!" };
+      return { error: "Email does not exist!" };
     }
 
     // Hash the new password
@@ -75,10 +69,10 @@ export const newPassword = async (
       where: { id: existingToken.id },
     });
 
-    return { success: "تم تحديث كلمة المرور!" };
+    return { success: "Password updated!" };
   } catch (error) {
     // Log the error for debugging purposes
     console.error("Error during password reset:", error);
-    return { error: "حدث خطأ ما أثناء إعادة تعيين كلمة المرور!" };
+    return { error: "An error occurred during password reset." };
   }
 };

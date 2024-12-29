@@ -22,14 +22,6 @@ import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation
  * @param values - The login credentials.
  * @param callbackUrl - The URL to redirect the user after successful login.
  * @returns An object with the result of the login operation.
- *          - If the login is successful, it returns `{ success: "تم إرسال رسالة التأكيد!" }` if the user's email is not verified,
- *            or `{ twoFactor: true }` if two-factor authentication is enabled.
- *          - If the login fails due to invalid fields, it returns `{ error: "حقول غير صالحة!" }`.
- *          - If the login fails due to an email that does not exist, it returns `{ error: "البريد الإلكتروني غير موجود!" }`.
- *          - If the login fails due to an invalid two-factor authentication code, it returns `{ error: "رمز غير صالح!" }`.
- *          - If the login fails due to an expired two-factor authentication code, it returns `{ error: "الرمز منتهي الصلاحية!" }`.
- *          - If the login fails due to invalid credentials, it returns `{ error: "بيانات الاعتماد غير صالحة!" }`.
- *          - If an unexpected error occurs during the login process, it returns `{ error: "حدث خطأ ما!" }`.
  */
 export const login = async (
   values: z.infer<typeof LoginSchema>,
@@ -38,7 +30,7 @@ export const login = async (
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {
-    return { error: "حقول غير صالحة!" };
+    return { error: "Invalid fields!" };
   }
 
   const { email, password, code } = validatedFields.data;
@@ -46,7 +38,7 @@ export const login = async (
   const existingUser = await getUserByEmail(email);
 
   if (!existingUser?.email && !existingUser?.password) {
-    return { error: "البريد الإلكتروني غير موجود!" };
+    return { error: "Email does not exist!" };
   }
 
   if (!existingUser.emailVerified) {
@@ -59,7 +51,7 @@ export const login = async (
       verificationToken.token,
     );
 
-    return { success: "تم إرسال رسالة التأكيد!" };
+    return { success: "Confirmation email sent!" };
   }
 
   if (existingUser.isTwoFactorEnabled && existingUser.email) {
@@ -67,17 +59,17 @@ export const login = async (
       const twoFactorToken = await getTwoFactorTokenByEmail(existingUser.email);
 
       if (!twoFactorToken) {
-        return { error: "رمز غير صالح!" };
+        return { error: "Invalid code!" };
       }
 
       if (twoFactorToken.token !== code) {
-        return { error: "رمز غير صالح!" };
+        return { error: "Invalid code!" };
       }
 
       const hasExpired = new Date(twoFactorToken.expires) < new Date();
 
       if (hasExpired) {
-        return { error: "الرمز منتهي الصلاحية!" };
+        return { error: "Code expired!" };
       }
 
       await db.twoFactorToken.delete({
@@ -117,9 +109,9 @@ export const login = async (
     if (error instanceof AuthError) {
       switch (error.type) {
         case "CredentialsSignin":
-          return { error: "بيانات الاعتماد غير صالحة!" };
+          return { error: "Invalid credentials!" };
         default:
-          return { error: "حدث خطأ ما!" };
+          return { error: "Something went wrong!" };
       }
     }
 

@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 
 import { unstable_update } from "@/server/auth";
 import { db } from "@/server/db";
-import { type SettingsSchema, updateUserSchema } from "@/schemas";
+import { type SettingsSchema, UpdateUserSchema } from "@/schemas";
 import { getUserByEmail, getUserById } from "@/data/user";
 import { currentUser } from "@/server/auth";
 import { generateVerificationToken } from "@/lib/tokens";
@@ -97,20 +97,15 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
  *
  * @param userId - The ID of the user to update.
  * @param values - The values to update the settings with.
- * @returns An object indicating the result of the settings update.
- *          - If the update is successful, it returns { success: "تم تحديث المستخدم!" }.
- *          - If the user is not found, it returns { error: "المستخدم غير موجود!" }.
- *          - If the email is already in use, it returns { error: "البريد الإلكتروني قيد الاستخدام!" }.
- *          - If the input data is invalid, it returns { error: "بيانات الإدخال غير صالحة" }.
- *          - If an error occurs while updating the user, it returns { error: "حدث خطأ أثناء تحديث المستخدم." }.
+ * @returns An object with either a success message or an error message.
  */
 export const updateUser = async (
   userId: string,
-  values: z.infer<typeof updateUserSchema>,
+  values: z.infer<typeof UpdateUserSchema>,
 ) => {
   try {
     // Validate userId and values
-    if (!userId || !updateUserSchema.safeParse(values).success) {
+    if (!userId || !UpdateUserSchema.safeParse(values).success) {
       return { error: "بيانات الإدخال غير صالحة" };
     }
 

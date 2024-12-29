@@ -6,7 +6,6 @@ import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { type ContactForm } from "@prisma/client";
-import { Chip } from "@nextui-org/react";
 import {
   DropdownMenu,
   DropdownMenuContent,

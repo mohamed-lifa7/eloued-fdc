@@ -14,20 +14,20 @@ export const deleteUser = async (userId: string) => {
     const crntUser = await currentUser();
 
     if (!crntUser) {
-      return { error: "لم يتم العثور على مستخدم حالي." };
+      return { error: "No current user found." };
     }
 
-    if (crntUser.role !== UserRole.ADMIN) {
-      return { error: "ليس لديك صلاحية لحذف المستخدم!" };
+    if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
+      return { error: "You do not have permission to delete user!" };
     }
 
     await db.user.delete({
       where: { id: userId },
     });
 
-    return { success: "تم حذف المستخدم!" };
+    return { success: "User has been deleted!" };
   } catch (error) {
-    console.error("خطأ أثناء حذف المستخدم:", error);
-    return { error: "حدث خطأ أثناء حذف المستخدم." };
+    console.error("Error deleting user:", error);
+    return { error: "An error occurred while deleting the user." };
   }
 };
