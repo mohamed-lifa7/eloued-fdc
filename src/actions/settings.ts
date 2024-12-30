@@ -15,24 +15,19 @@ import { sendVerificationEmail } from "@/lib/mail";
  * Updates the user settings based on the provided values.
  *
  * @param values - The values to update the settings with.
- * @returns An object indicating the result of the settings update.
- *          - If the update is successful, it returns { success: "تم تحديث الإعدادات!" }.
- *          - If the user is unauthorized, it returns { error: "غير مصرح" }.
- *          - If the email is already in use, it returns { error: "البريد الإلكتروني قيد الاستخدام!" }.
- *          - If the password is incorrect, it returns { error: "كلمة المرور غير صحيحة!" }.
- *          - If a verification email is sent, it returns { success: "تم إرسال بريد التحقق!" }.
+ * @returns An object with either an error message or a success message.
  */
 export const settings = async (values: z.infer<typeof SettingsSchema>) => {
   const user = await currentUser();
 
   if (!user) {
-    return { error: "غير مصرح" };
+    return { error: "Unauthorized" };
   }
 
   const dbUser = await getUserById(user.id!);
 
   if (!dbUser) {
-    return { error: "غير مصرح" };
+    return { error: "Unauthorized" };
   }
 
   if (user.isOAuth) {
@@ -46,7 +41,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     const existingUser = await getUserByEmail(values.email);
 
     if (existingUser && existingUser.id !== user.id) {
-      return { error: "البريد الإلكتروني قيد الاستخدام!" };
+      return { error: "Email already in use!" };
     }
 
     const verificationToken = await generateVerificationToken(values.email);
@@ -55,7 +50,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
       verificationToken.token,
     );
 
-    return { success: "تم إرسال بريد التحقق!" };
+    return { success: "Verification email sent!" };
   }
 
   if (values.password && values.newPassword && dbUser.password) {
@@ -65,7 +60,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     );
 
     if (!passwordsMatch) {
-      return { error: "كلمة المرور غير صحيحة!" };
+      return { error: "Incorrect password!" };
     }
 
     const hashedPassword = await bcrypt.hash(values.newPassword, 10);
@@ -89,7 +84,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     },
   });
 
-  return { success: "تم تحديث الإعدادات!" };
+  return { success: "Settings Updated!" };
 };
 
 /**
@@ -106,13 +101,13 @@ export const updateUser = async (
   try {
     // Validate userId and values
     if (!userId || !UpdateUserSchema.safeParse(values).success) {
-      return { error: "بيانات الإدخال غير صالحة" };
+      return { error: "Invalid input data" };
     }
 
     const user = await getUserById(userId);
 
     if (!user) {
-      return { error: "المستخدم غير موجود!" };
+      return { error: "User not found!" };
     }
 
     await db.user.update({
@@ -120,10 +115,10 @@ export const updateUser = async (
       data: { ...values },
     });
 
-    return { success: "تم تحديث المستخدم!" };
+    return { success: "User Updated!" };
   } catch (error) {
     // Log error
-    console.error("خطأ أثناء تحديث المستخدم:", error);
-    return { error: "حدث خطأ أثناء تحديث المستخدم." };
+    console.error("Error updating user:", error);
+    return { error: "An error occurred while updating the user." };
   }
 };

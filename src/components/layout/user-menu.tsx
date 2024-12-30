@@ -13,21 +13,18 @@ import { LifeBuoy, LogOut, User, UserCog } from "lucide-react";
 import { logout } from "@/actions/logout";
 import type { ExtendedUser } from "@/next-auth";
 import { UserRole } from "@prisma/client";
-import { Button } from "../ui/button";
 
 const UserMenu = ({ user }: { user: ExtendedUser }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="cursor-pointer">
-        <Button asChild variant="secondary" className="rounded-full h-10 w-10">
-          <Avatar>
-            <AvatarImage
-              src={user.image ?? ""}
-              alt={user?.name?.[0]?.toUpperCase()}
-            />
-            <AvatarFallback>{user?.name?.[0]?.toUpperCase()}</AvatarFallback>
-          </Avatar>
-        </Button>
+        <Avatar className="h-10 w-10 ring-2">
+          <AvatarImage
+            src={user.image ?? ""}
+            alt={user?.name?.[0]?.toUpperCase()}
+          />
+          <AvatarFallback>{user?.name?.[0]?.toUpperCase()}</AvatarFallback>
+        </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
@@ -58,6 +55,7 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
           onClick={() => {
             void logout();
           }}
+          className="cursor-pointer"
         >
           <div className="flex items-center space-x-2">
             <LogOut className="h-4 w-4" />

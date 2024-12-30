@@ -70,7 +70,7 @@ const ProfilePage = () => {
 
   return (
     <main className="grid w-full place-content-center lg:min-h-screen">
-      <Card className="w-[600px]">
+      <Card className="lg:w-[600px] my-16">
         <CardHeader>
           <CardTitle>Settings</CardTitle>
           <CardDescription>Here you can view and manage your profile</CardDescription>
