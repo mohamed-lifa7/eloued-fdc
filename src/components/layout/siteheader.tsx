@@ -11,6 +11,7 @@ import { Icons } from "../icons";
 const menu = [
   { title: "Home", href: "/" },
   { title: "Blogs", href: "/blogs" },
+  { title: "Events", href: "/events" },
   { title: "About us", href: "/about" },
   { title: "Contact us", href: "/contact" },
 ];

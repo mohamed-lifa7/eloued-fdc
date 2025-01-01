@@ -51,7 +51,7 @@ export const Community = () => {
                   <CardHeader className="flex flex-col items-center">
                     <div className="mb-4">
                       {IconComponent && (
-                        <IconComponent className="h-12 w-12 text-blue-500" />
+                        <IconComponent className="h-12 w-12" />
                       )}
                     </div>
                     <h3 className="text-xl font-semibold">{social.title}</h3>

@@ -3,6 +3,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { getUsersCount } from "@/data/user";
+import { getContactFormsCount } from "@/data/contact";
 
 export default async function AdminPage() {
   const data = await getData();
@@ -40,21 +42,16 @@ export default async function AdminPage() {
                 </CardContent>
               </Card>
 
-              {/* Active Events */}
+              {/* total contact form count */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h2 className="text-sm font-medium">Active Events</h2>
+                  <h2 className="text-sm font-medium">Total Contact Forms</h2>
                   <Calendar />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    {data.activeEventsCount}
+                    {data.ContactFormsCount}
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    {data.activeEventsCount > 0
-                      ? "Ongoing events"
-                      : "No active events"}
-                  </p>
                 </CardContent>
               </Card>
 
@@ -97,10 +94,14 @@ export default async function AdminPage() {
 }
 
 async function getData() {
+  const allUsersCount = await getUsersCount();
+  const completedProjectsCount = 600;
+  const ContactFormsCount = await getContactFormsCount();
+  const avgEventDuration = 15.2;
   return {
-    allUsersCount: 400,
-    completedProjectsCount: 6000,
-    avgEventDuration: 15.2,
-    activeEventsCount: 40000,
+    allUsersCount,
+    completedProjectsCount,
+    avgEventDuration,
+    ContactFormsCount,
   };
 }

@@ -95,3 +95,16 @@ model ContactForm {
     message   String
     createdAt DateTime @default(now())
 }
+
+model Event {
+    id          String   @id @default(cuid())
+    title       String
+    description String
+    imageUrl    String
+    status      String
+    location    String
+    startDate   DateTime @default(now())
+    endDate     DateTime @default(now())
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @default(now())
+}

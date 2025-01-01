@@ -5,14 +5,13 @@ import { slug } from "github-slugger";
 
 /**
  * Combines multiple class names into a single string.
- * 
+ *
  * @param inputs - The class names to be combined.
  * @returns The combined class names as a string.
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
 
 /**
  * Formats a date into a string representation.
@@ -59,7 +58,7 @@ export function getAllTags(posts: Array<Post>) {
 
 /**
  * Sorts tags by their count in descending order.
- * 
+ *
  * @param tags - An object containing tags as keys and their corresponding counts as values.
  * @returns An array of tags sorted by their count in descending order.
  */
@@ -97,15 +96,14 @@ export function generateRandomColor(): string {
   return randomColor;
 }
 
-
 /**
  * Downloads a file with the given content, filename, and type.
- * 
+ *
  * @param content - The content of the file to be downloaded.
  * @param filename - The name of the file to be downloaded.
  * @param type - The MIME type of the file.
  */
-export const downloadFile = (content: string, filename: string, type: string) => {
+export function downloadFile(content: string, filename: string, type: string) {
   const blob = new Blob([content], { type });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
@@ -113,4 +111,30 @@ export const downloadFile = (content: string, filename: string, type: string) =>
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-};
+}
+
+/**
+ * Converts a given string into a URL-friendly format (slugify).
+ *
+ * The function performs the following steps:
+ * 1. Converts the string to lowercase.
+ * 2. Removes special characters, leaving only alphanumeric characters, spaces, and hyphens.
+ * 3. Trims leading and trailing spaces.
+ * 4. Replaces spaces with hyphens to create a URL-friendly string.
+ *
+ * @param input - The string to be formatted.
+ * @returns A URL-friendly version of the input string.
+ *
+ * @example
+ * ```typescript
+ * const result = formatToURL("Hello World! This is a test.");
+ * console.log(result); // Outputs: "hello-world-this-is-a-test"
+ * ```
+ */
+export function formatToURL(input: string): string {
+  return input
+    .toLowerCase() // Convert to lowercase
+    .trim() // Remove leading and trailing spaces
+    .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
+    .replace(/\s+/g, "-"); // Replace spaces with hyphens
+}
