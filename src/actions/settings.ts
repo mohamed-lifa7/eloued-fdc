@@ -122,3 +122,38 @@ export const updateUser = async (
     return { error: "An error occurred while updating the user." };
   }
 };
+
+/**
+ * Updates the user's profile image.
+ *
+ * @param imageUrl - The new image URL to update.
+ * @returns An object with either a success message or an error message.
+ */
+export const updateProfileImage = async (imageUrl: string) => {
+  try {
+    // Check if the user is authenticated
+    const user = await currentUser();
+
+    if (!user) {
+      return { error: "Unauthorized" };
+    }
+
+    // Fetch the user from the database
+    const dbUser = await getUserById(user.id!);
+
+    if (!dbUser) {
+      return { error: "User not found!" };
+    }
+
+    // Update only the image URL in the database
+    await db.user.update({
+      where: { id: dbUser.id },
+      data: { image: imageUrl },
+    });
+
+    return { success: "Profile image updated successfully!" };
+  } catch (error) {
+    console.error("Error updating profile image:", error);
+    return { error: "An error occurred while updating the profile image." };
+  }
+};

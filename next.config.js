@@ -13,6 +13,17 @@ if (!process.env.VELITE_STARTED && (isDev || isBuild)) {
 }
 
 /** @type {import('next').NextConfig} */
-const config = {};
+const config = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'files.edgestore.dev',
+        port: '',
+        pathname: '/5iwpojmnomxbon5i/publicFiles/_public/**',
+      },
+    ],
+  },
+};
 
 export default config;

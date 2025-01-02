@@ -1,10 +1,6 @@
-import { getUserById } from "@/data/user";
 import React from "react";
 import { Heading } from "@/components/ui/heading";
 import { BreadcrumbMaker, type BreadcrumbType } from "@/components/breadcrumb";
-import { currentRole } from "@/server/auth";
-import { UserRole } from "@prisma/client";
-import { redirect } from "next/navigation";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import UpdateEventForm from "./update";
 import { getEventById } from "@/data/events";

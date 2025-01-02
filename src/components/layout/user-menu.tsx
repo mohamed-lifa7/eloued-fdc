@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
-import { LifeBuoy, LogOut, User, UserCog } from "lucide-react";
+import { LifeBuoy, ListTodo, LogOut, User, UserCog } from "lucide-react";
 import { logout } from "@/actions/logout";
 import type { ExtendedUser } from "@/next-auth";
 import { UserRole } from "@prisma/client";
@@ -33,6 +33,12 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
           <Link href="/profile" className="flex items-center space-x-2">
             <User className="h-4 w-4" />
             <span>Profile</span>
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <Link href="/assignments" className="flex items-center space-x-2">
+            <ListTodo className="h-4 w-4" />
+            <span>Assignments</span>
           </Link>
         </DropdownMenuItem>
         {user.role === UserRole.ADMIN || user.role === UserRole.OWNER ? (

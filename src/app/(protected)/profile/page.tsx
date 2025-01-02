@@ -4,12 +4,19 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { UpdateImage } from "./update-image";
+import { Separator } from "@/components/ui/separator";
+import { redirect } from "next/navigation";
 
 const ProfilePage = async () => {
   const user = await currentUser();
+  if (!user) {
+    return redirect("/");
+  }
 
   return (
     <main className="grid w-full place-content-center lg:min-h-screen">
@@ -21,8 +28,12 @@ const ProfilePage = async () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <SettingsForm user={user!} />
+          <SettingsForm user={user} />
         </CardContent>
+        <Separator className="my-6" />
+        <CardFooter>
+          <UpdateImage currentImageUrl={user.image!} />
+        </CardFooter>
       </Card>
     </main>
   );
