@@ -72,14 +72,6 @@ export const updateEvent = async (
     const updatedEvent = await db.event.update({
       where: { id: eventId },
       data: eventData,
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        location: true,
-        startDate: true,
-        endDate: true,
-      },
     });
 
     return { success: "Event updated successfully!", event: updatedEvent };

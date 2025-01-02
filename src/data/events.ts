@@ -9,15 +9,6 @@ export const getEventById = async (id: string) => {
   try {
     const event = await db.event.findUnique({
       where: { id },
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        imageUrl: true,
-        location: true,
-        startDate: true,
-        endDate: true,
-      },
     });
 
     return event;
@@ -60,16 +51,7 @@ export const getEventsByStatus = async (status: string) => {
  */
 export const getAllEvents = async () => {
   try {
-    const events = await db.event.findMany({
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        location: true,
-        startDate: true,
-        endDate: true,
-      },
-    });
+    const events = await db.event.findMany();
     return events;
   } catch {
     return [];

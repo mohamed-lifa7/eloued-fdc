@@ -4,12 +4,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { Button } from "./button";
 
 type Leaders = {
   id: string;
   name: string;
   year: string;
-  role: string;
+  role?: string;
   bio: string;
   src: string;
 };
@@ -92,7 +93,7 @@ export const LeardersSection = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between py-4">
+        <div className="flex flex-col-reverse justify-between py-4 md:flex-col space-y-4">
           <motion.div
             key={active}
             initial={{
@@ -115,11 +116,11 @@ export const LeardersSection = ({
             <h3 className="text-2xl font-bold text-black dark:text-white">
               {leaders[active]?.name}
             </h3>
-            <p className="text-sm text-gray-500 dark:text-neutral-500">
+            <p className="text-sm text-muted-foreground">
               {leaders[active]?.year}{" "}
               {leaders[active]?.role && `| ${leaders[active]?.role}`}
             </p>
-            <motion.p className="mt-8 text-lg text-gray-500 dark:text-neutral-300">
+            <motion.p className="mt-8 text-lg text-muted-foreground">
               {leaders[active]?.bio.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -146,18 +147,22 @@ export const LeardersSection = ({
             </motion.p>
           </motion.div>
           <div className="flex gap-4 pt-12 md:pt-0">
-            <button
+            <Button
               onClick={handlePrev}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="group/button flex items-center justify-center rounded-full"
+              variant="secondary"
+              size="icon"
             >
-              <ArrowLeft className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:rotate-12 dark:text-neutral-400" />
-            </button>
-            <button
+              <ArrowLeft className="h-5 w-5 transition-transform duration-300 group-hover/button:rotate-12" />
+            </Button>
+            <Button
               onClick={handleNext}
-              className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="group/button flex items-center justify-center rounded-full"
+              variant="secondary"
+              size="icon"
             >
-              <ArrowRight className="h-5 w-5 text-black transition-transform duration-300 group-hover/button:-rotate-12 dark:text-neutral-400" />
-            </button>
+              <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/button:-rotate-12" />
+            </Button>
           </div>
         </div>
       </div>

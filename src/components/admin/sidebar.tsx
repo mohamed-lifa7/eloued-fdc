@@ -1,4 +1,4 @@
-import { Home, PhoneCall, Users } from "lucide-react";
+import { CalendarClock, Home, PhoneCall, Users } from "lucide-react";
 
 import {
   Sidebar,
@@ -27,6 +27,11 @@ const items = [
     title: "Contact Forms",
     url: "/admin/contact",
     icon: PhoneCall,
+  },
+  {
+    title: "Events",
+    url: "/admin/events",
+    icon: CalendarClock,
   },
 ];
 
