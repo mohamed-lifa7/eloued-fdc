@@ -1,13 +1,14 @@
-"use client";
 import { GooeyText } from "@/components/ui/gooey-text-morphing";
 import { MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "../ui/badge";
 import Link from "next/link";
-import { LoginButton } from "../auth/login-button";
 import { links } from "@/config/site-config";
+import { currentUser } from "@/server/auth";
+import { LoginButton } from "../auth/login-button";
 
-export default function Hero() {
+export default async function Hero() {
+  const user = await currentUser();
   return (
     <div className="w-full">
       <div className="container mx-auto">
@@ -52,11 +53,13 @@ export default function Hero() {
                 Join us
               </Link>
             </Button>
-            <LoginButton asChild>
-              <Button className="gap-4" variant="primary2">
-                Sign up here <MoveRight className="h-4 w-4" />
-              </Button>
-            </LoginButton>
+            {!user && (
+              <LoginButton asChild>
+                <Button className="gap-4" variant="primary2">
+                  Sign up here <MoveRight className="h-4 w-4" />
+                </Button>
+              </LoginButton>
+            )}
           </div>
         </div>
       </div>

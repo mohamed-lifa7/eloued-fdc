@@ -14,6 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { EventSchema } from "@/schemas";
+import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -29,6 +30,14 @@ import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { type Event } from "@prisma/client";
 import { updateEvent } from "@/actions/events";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { CalendarIcon } from "lucide-react";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
 
 const UpdateEventForm = ({ event }: { event: Event | null }) => {
   const [error, setError] = useState<string | undefined>();
@@ -143,19 +152,44 @@ const UpdateEventForm = ({ event }: { event: Event | null }) => {
             control={form.control}
             name="startDate"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>Start Date</FormLabel>
                 <FormControl>
-                  <Input
-                    type="datetime-local"
-                    {...field}
-                    value={field.value.toLocaleString()}
-                    disabled={isPending}
-                  />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        captionLayout="dropdown"
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date("2025-07-29") ||
+                          date < new Date("2024-08-01")
+                        }
+                        showOutsideDays
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </FormControl>
-                <FormDescription>
-                  {field.value.toLocaleString()}
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -165,19 +199,44 @@ const UpdateEventForm = ({ event }: { event: Event | null }) => {
             control={form.control}
             name="endDate"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>End Date</FormLabel>
                 <FormControl>
-                  <Input
-                    type="datetime-local"
-                    {...field}
-                    value={field.value.toLocaleString()}
-                    disabled={isPending}
-                  />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant={"outline"}
+                          className={cn(
+                            "w-[240px] pl-3 text-left font-normal",
+                            !field.value && "text-muted-foreground",
+                          )}
+                        >
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
+                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        captionLayout="dropdown"
+                        mode="single"
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        disabled={(date) =>
+                          date > new Date("2025-07-29") ||
+                          date < new Date("2024-08-01")
+                        }
+                        showOutsideDays
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </FormControl>
-                <FormDescription>
-                  {field.value.toLocaleString()}
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
