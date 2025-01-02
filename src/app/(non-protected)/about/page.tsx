@@ -10,9 +10,17 @@ export const metadata: Metadata = {
 
 const leaders = [
   {
+    id: "a7ffsjkafusjfa98f7v323daddf98d",
+    name: "MOUSSAOUI Aboubaker",
+    year: "3rd Year Bachelor's Degree",
+    role: "Founder of the FDC",
+    bio: "Passionate about computer science and technology, dedicated to fostering innovation and collaboration in the club.",
+    src: "/leaders/boubakr.jpg",
+  },
+  {
     id: "a7ffs0us7f9sa98f7v323daddf98d",
     name: "HALA Mohammed Islam",
-    year: "3rd Year License",
+    year: "3rd Year Bachelor's Degree",
     role: "Leader",
     bio: "Backend developer specializing in Node.js and Express.js. Passionate about problem-solving and continuously exploring new technologies. Some experience in electricity.",
     src: "/leaders/leader.png",
@@ -28,7 +36,7 @@ const leaders = [
   {
     id: "a7ffs0us7f9sa98f7v323dadfajda",
     name: "AYA MAOUCH",
-    year: "1st Year License",
+    year: "1st Year Bachelor's Degree",
     role: "Leader Logistics",
     bio: "Managing logistics and coordination for FDC. Focused on streamlining operations, ensuring clear communication, and helping the club achieve its goals.",
     src: "/leaders/leader.png",
@@ -36,7 +44,7 @@ const leaders = [
   {
     id: "a7ffs0us7f9sa98f7v323dadfajdb",
     name: "KHIR Imadeddin",
-    year: "3rd Year License",
+    year: "3rd Year Bachelor's Degree",
     role: "Manager",
     bio: "Project manager with a focus on team coordination and process optimization. Ensures timely project completion and effective collaboration within the team.",
     src: "/leaders/leader.png",
@@ -44,7 +52,7 @@ const leaders = [
   {
     id: "a7ffs0us7f9sa98f7v323dadfajdc",
     name: "KAHLA CHIRAZ",
-    year: "1st Year Master",
+    year: "1st Year Master's Degree",
     role: "AI and Data Analytics",
     bio: "Focused on using data to solve problems and improve decision-making. Constantly striving to innovate in the tech field through AI and data analytics.",
     src: "/leaders/leader.png",
@@ -53,7 +61,7 @@ const leaders = [
   {
     id: "a7f98vds7f9sa98f7vddddddf98d",
     name: "BEN AICHA Abderrahman",
-    year: "3rd Year License",
+    year: "3rd Year Bachelor's Degree",
     role: "Co-Leader",
     bio: "Web developer specializing in Next.js, always exploring new technologies and passionate about open source.",
     src: "/leaders/ben_aicha.jpg",
@@ -61,7 +69,7 @@ const leaders = [
   {
     id: "a7f98vds7f9f1m8f7vddddddf98d",
     name: "DRICI Mohammed Hachem",
-    year: "1st Year License",
+    year: "1st Year Bachelor's Degree",
     role: "Event Organizer",
     bio: "A C++ enthusiast who enjoys solving complex problems and organizing engaging events.",
     src: "/leaders/drici.jpg",
@@ -69,7 +77,7 @@ const leaders = [
   {
     id: "a7f98vds7f9sa98f7vdkkkkdf98d",
     name: "KHALEF Oussama",
-    year: "3rd Year License",
+    year: "3rd Year Bachelor's Degree",
     role: "Backend Developer",
     bio: "Backend web developer experienced with Express.js and building scalable APIs.",
     src: "/leaders/khalef.jpg",
@@ -77,7 +85,7 @@ const leaders = [
   {
     id: "12298vds7f9sa98f7vddddddf98d",
     name: "NECIB Amara",
-    year: "1st Year Master",
+    year: "1st Year Master's Degree",
     role: "Backend Developer",
     bio: "Proficient in Go, React, and their ecosystems, with a passion for efficient and clean coding practices.",
     src: "/leaders/necib.jpg",
@@ -85,9 +93,9 @@ const leaders = [
   {
     id: "a7ffs0us7f9sa98f7vddddddf98d",
     name: "LIFA Mohammed Seddik",
-    year: "1st Year Master",
+    year: "1st Year Master's Degree",
     role: "Just a tech",
-    bio: "CS student trying to learn something.",
+    bio: "CS student trying to learn new things.",
     src: "/leaders/lifa.jpg",
   },
 ];
