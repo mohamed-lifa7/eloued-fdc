@@ -42,6 +42,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         name,
         email,
         studentId,
+        userName: email.split("@")[0],
         password: hashedPassword,
       },
     });
