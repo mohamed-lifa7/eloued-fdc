@@ -14,7 +14,7 @@ const leaders = [
     name: "MOUSSAOUI Aboubaker",
     year: "3rd Year Bachelor's Degree",
     role: "Founder of the FDC",
-    bio: "Passionate about computer science and technology, dedicated to fostering innovation and collaboration in the club.",
+    bio: "Passionate about technology and innovation, dedicated to creating a collaborative environment where ideas and skills flourish in the field of computer science and engineering. Committed to continuous learning and striving to leave a meaningful impact and legacy behind.",
     src: "/leaders/boubakr.jpg",
   },
   {
