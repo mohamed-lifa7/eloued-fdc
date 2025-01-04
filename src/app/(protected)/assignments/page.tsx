@@ -1,4 +1,3 @@
-import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,42 +13,14 @@ import { Calendar, Clock } from "lucide-react";
 import Link from "next/link";
 import { BreadcrumbMaker, type BreadcrumbType } from "@/components/breadcrumb";
 import { Heading } from "@/components/ui/heading";
+import { assignments } from "@/data/assignments";
 
 const breadcrumbItems: BreadcrumbType[] = [
   { title: "Home", href: "/", disabled: false, type: "link" },
   { title: "Assignments", disabled: false, type: "text" },
 ];
-export const assignments = [
-  {
-    id: 1,
-    title: "Introduction to React Hooks",
-    description:
-      "Learn the basics of React Hooks and how to use them in your projects.",
-    topic: "React",
-    session: "Frontend Development Workshop",
-    deadline: "2023-06-15",
-    status: "Not Started",
-  },
-  {
-    id: 2,
-    title: "Building RESTful APIs with Node.js",
-    description: "Create a simple RESTful API using Node.js and Express.",
-    topic: "Node.js",
-    session: "Backend Development Workshop",
-    deadline: "2023-06-20",
-    status: "In Progress",
-  },
-  {
-    id: 3,
-    title: "CSS Grid Layout Challenge",
-    description: "Design a responsive layout using CSS Grid.",
-    topic: "CSS",
-    session: "Web Design Fundamentals",
-    deadline: "2023-06-18",
-    status: "Completed",
-  },
-];
-const page = () => {
+
+export default function Page() {
   return (
     <div className="space-y-4">
       <BreadcrumbMaker items={breadcrumbItems} />
@@ -99,6 +70,4 @@ const page = () => {
       </div>
     </div>
   );
-};
-
-export default page;
+}
