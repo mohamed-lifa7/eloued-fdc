@@ -23,7 +23,7 @@ const leaders = [
     year: "3rd Year Bachelor's Degree",
     role: "Leader",
     bio: "Backend developer specializing in Node.js and Express.js. Passionate about problem-solving and continuously exploring new technologies. Some experience in electricity.",
-    src: "/leaders/leader.png",
+    src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
   },
   {
     id: "a7f98vds7f9sa98f7vddddddf98d",
@@ -39,7 +39,7 @@ const leaders = [
     year: "Graduated",
     role: "IT Manager",
     bio: "Full-stack developer with a focus on AI and machine learning. Always working on building innovative and practical solutions to improve systems.",
-    src: "/leaders/leader.png",
+    src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
   },
   {
     id: "a7f98vds7f9f1m8f7vddddddf98d",
@@ -55,7 +55,7 @@ const leaders = [
     year: "1st Year Master's Degree",
     role: "AI and Data Analytics",
     bio: "Focused on using data to solve problems and improve decision-making. Constantly striving to innovate in the tech field through AI and data analytics.",
-    src: "/leaders/leader.png",
+    src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
   },
   {
     id: "a7f98vds7f9sa98f7vdkkkkdf98d",
@@ -71,7 +71,7 @@ const leaders = [
     year: "3rd Year Bachelor's Degree",
     role: "Manager",
     bio: "Project manager with a focus on team coordination and process optimization. Ensures timely project completion and effective collaboration within the team.",
-    src: "/leaders/leader.png",
+    src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
   },
   {
     id: "12298vds7f9sa98f7vddddddf98d",
@@ -87,7 +87,7 @@ const leaders = [
     year: "1st Year Bachelor's Degree",
     role: "Leader Logistics",
     bio: "Managing logistics and coordination for FDC. Focused on streamlining operations, ensuring clear communication, and helping the club achieve its goals.",
-    src: "/leaders/leader.png",
+    src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
   },
   {
     id: "a7ffs0us7f9sa98f7vddddddf98d",

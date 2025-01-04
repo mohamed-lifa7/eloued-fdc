@@ -4,8 +4,18 @@ import { UserRole } from "@prisma/client";
 export const SettingsSchema = z
   .object({
     name: z.optional(z.string()),
+    bio: z.optional(z.string().max(300)),
+    studentId: z
+      .string({
+        required_error: "Your student ID is required",
+      })
+      .regex(
+        /^[2][0-9]{3}[0-9]{8}$/,
+        "Invalid student ID format. It should be like '212439078211' (no spaces).",
+      ),
+    faculty: z.optional(z.string()),
+    birthday: z.optional(z.string()),
     isTwoFactorEnabled: z.optional(z.boolean()),
-    role: z.enum([UserRole.ADMIN, UserRole.USER, UserRole.OWNER]),
     email: z.optional(z.string().email()),
     password: z.optional(z.string().min(6)),
     newPassword: z.optional(z.string().min(6)),
@@ -63,6 +73,14 @@ export const RegisterSchema = z.object({
   email: z.string().email({
     message: "Email is required",
   }),
+  studentId: z
+    .string({
+      required_error: "Your student ID is required",
+    })
+    .regex(
+      /^[2][0-9]{3}[0-9]{8}$/,
+      "Invalid student ID format. It should be like '212439078211' (no spaces).",
+    ),
   password: z.string().min(6, {
     message: "The minimum required number of characters is 6",
   }),

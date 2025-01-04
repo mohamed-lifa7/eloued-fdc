@@ -17,10 +17,14 @@ const config = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'files.edgestore.dev',
-        port: '',
-        pathname: '/5iwpojmnomxbon5i/publicFiles/_public/**',
+        protocol: "https",
+        hostname: "files.edgestore.dev",
+        port: "",
+        pathname: "/5iwpojmnomxbon5i/publicFiles/_public/**",
+      },
+      {
+        protocol: "https",
+        hostname: "avatars.githubusercontent.com",
       },
     ],
   },

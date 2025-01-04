@@ -10,13 +10,10 @@ import {
 } from "@/components/ui/card";
 import { UpdateImage } from "./update-image";
 import { Separator } from "@/components/ui/separator";
-import { redirect } from "next/navigation";
+import CopyIdComponent from "@/components/ui/copy-id";
 
 const ProfilePage = async () => {
   const user = await currentUser();
-  if (!user) {
-    return redirect("/");
-  }
 
   return (
     <main className="grid w-full place-content-center lg:min-h-screen">
@@ -27,12 +24,22 @@ const ProfilePage = async () => {
             Here you can view and manage your profile
           </CardDescription>
         </CardHeader>
+        <Separator className="my-6" />
+
         <CardContent>
-          <SettingsForm user={user} />
+          <CardTitle>Share your profile</CardTitle>
+          <div className="my-4 flex items-center space-x-6">
+            <p className="">Click here to copy your profile link:</p>
+            <CopyIdComponent
+              id={`https://eloued-fdc.vercel.app/profile/${user?.id}`}
+            />
+          </div>
+          <Separator className="my-6" />
+          <SettingsForm user={user!} />
         </CardContent>
         <Separator className="my-6" />
         <CardFooter>
-          <UpdateImage currentImageUrl={user.image!} />
+          <UpdateImage />
         </CardFooter>
       </Card>
     </main>

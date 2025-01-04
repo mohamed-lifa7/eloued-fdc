@@ -103,6 +103,10 @@ export const authConfig = {
 
       if (session.user) {
         session.user.name = token.name;
+        session.user.bio = token.bio as string;
+        session.user.studentId = token.studentId as string;
+        session.user.faculty = token.faculty as string;
+        session.user.birthday = token.birthday as Date;
         session.user.email = token.email!;
         session.user.isOAuth = token.isOAuth as boolean;
       }
@@ -121,6 +125,10 @@ export const authConfig = {
 
       token.isOAuth = !!existingAccount;
       token.name = existingUser.name;
+      token.bio = existingUser.bio;
+      token.studentId = existingUser.studentId;
+      token.faculty = existingUser.faculty;
+      token.birthday = existingUser.birthday;
       token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;

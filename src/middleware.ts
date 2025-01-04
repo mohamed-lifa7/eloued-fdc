@@ -18,7 +18,7 @@ export default auth((req): void | Response | Promise<void | Response> => {
   const isAdmin = isLoggedIn && (req.auth?.user.role == UserRole.ADMIN || req.auth?.user.role == UserRole.OWNER);
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.some((route) => nextUrl.pathname.startsWith(route));
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith("/blogs") || nextUrl.pathname.startsWith("/profile") 
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix);
 

@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import { startTransition, useState } from "react";
 import { toast } from "sonner";
 
-export function UpdateImage({ currentImageUrl }: { currentImageUrl: string }) {
+export function UpdateImage() {
   const [file, setFile] = useState<File>();
   const [progress, setProgress] = useState(0);
   const { edgestore } = useEdgeStore();

@@ -30,7 +30,7 @@ const UserMenu = ({ user }: { user: ExtendedUser }) => {
         <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Link href="/profile" className="flex items-center space-x-2">
+          <Link href="/account" className="flex items-center space-x-2">
             <User className="h-4 w-4" />
             <span>Profile</span>
           </Link>

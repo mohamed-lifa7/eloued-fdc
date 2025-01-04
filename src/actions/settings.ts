@@ -68,6 +68,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     values.newPassword = undefined;
   }
 
+  values.birthday = new Date(values.birthday!).toISOString()
   const updatedUser = await db.user.update({
     where: { id: dbUser.id },
     data: {
