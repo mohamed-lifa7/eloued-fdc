@@ -11,8 +11,8 @@ const breadcrumbItems = (slug: string): BreadcrumbType[] => [
 export default async function Page(props: {
   params: Promise<{ assignment: string }>;
 }) {
+  // always with promise
   const { assignment } = await props.params;
-
   return (
     <ScrollArea className="h-full">
       <div className="flex-1 space-y-4">
