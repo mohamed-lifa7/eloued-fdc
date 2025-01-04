@@ -8,8 +8,10 @@ const breadcrumbItems = (slug: string): BreadcrumbType[] => [
   { title: slug.replace(/-/g, " "), disabled: true, type: "text" },
 ];
 
-export default async function Page(props: { params: { assignment: string } }) {
-  const { assignment } = props.params;
+export default async function Page(props: {
+  params: Promise<{ assignment: string }>;
+}) {
+  const { assignment } = await props.params;
 
   return (
     <ScrollArea className="h-full">
