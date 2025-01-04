@@ -41,6 +41,7 @@ model User {
     twoFactorConfirmation TwoFactorConfirmation?
 
     studentId  String   @unique
+    userName   String   @unique @default("")
     bio        String?   @default("")
     birthday   DateTime?
     reputation Int       @default(0)
