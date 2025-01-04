@@ -10,9 +10,10 @@ export const SettingsSchema = z
         required_error: "Your student ID is required",
       })
       .regex(
-        /^[2][0-9]{3}[0-9]{8}$/,
-        "Invalid student ID format. It should be like '212439078211' (no spaces).",
+        /^([1-2][0-9])\1[0-9]{8}$/,
+        "Invalid student ID format. It should be like '212139078211' (no spaces).",
       ),
+    userName: z.optional(z.string()),
     faculty: z.optional(z.string()),
     birthday: z.optional(z.string()),
     isTwoFactorEnabled: z.optional(z.boolean()),
@@ -78,8 +79,8 @@ export const RegisterSchema = z.object({
       required_error: "Your student ID is required",
     })
     .regex(
-      /^[2][0-9]{3}[0-9]{8}$/,
-      "Invalid student ID format. It should be like '212439078211' (no spaces).",
+      /^([1-2][0-9])\1[0-9]{8}$/,
+      "Invalid student ID format. It should be like '212139078211' (no spaces).",
     ),
   password: z.string().min(6, {
     message: "The minimum required number of characters is 6",
