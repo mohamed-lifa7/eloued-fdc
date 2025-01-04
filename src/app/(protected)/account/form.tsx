@@ -138,13 +138,13 @@ const SettingsForm = ({ user }: { user: ExtendedUser }) => {
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="212439078211"
+                    placeholder="212139078211"
                     disabled={isPending}
                   />
                 </FormControl>
                 <FormDescription>
-                  Your student ID should look like &quot;212439078211&quot;. The
-                  first part is your bac year (e.g., 2024 becomes 2124), and the
+                  Your student ID should look like &quot;212139078211&quot;. The
+                  first part is your bac year (e.g., 2021 becomes 2121), and the
                   second part is your bac ID.
                 </FormDescription>
 
