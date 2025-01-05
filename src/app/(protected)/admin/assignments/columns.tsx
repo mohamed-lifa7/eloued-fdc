@@ -5,7 +5,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
-import { type Event } from "@prisma/client";
+import { type Assignment } from "@prisma/client";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,9 +13,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
-export const columns: ColumnDef<Event>[] = [
+export const columns: ColumnDef<Assignment>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -43,43 +42,13 @@ export const columns: ColumnDef<Event>[] = [
     header: "Title",
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => {
-      const status = row.original.status;
-      return (
-        <Badge
-          variant={
-            status == "past"
-              ? "default"
-              : status == "upcoming"
-                ? "success"
-                : "secondary"
-          }
-        >
-          {status}
-        </Badge>
-      );
-    },
-  },
-  {
-    accessorKey: "location",
-    header: "Location",
-  },
-  {
-    accessorKey: "startDate",
+    accessorKey: "createdAt",
     header: "Start Date",
     cell: ({ row }) => {
-      const timeAndDate = row.original.startDate?.toLocaleDateString();
-      if (timeAndDate) {
-        return (
-          <time dateTime={row.original.startDate?.toString()}>
-            {timeAndDate}
-          </time>
-        );
-      } else {
-        return <span>Not verified yet</span>;
-      }
+      const timeAndDate = row.original.createdAt?.toLocaleDateString();
+      return (
+        <time dateTime={row.original.createdAt?.toString()}>{timeAndDate}</time>
+      );
     },
   },
   {
@@ -100,13 +69,15 @@ export const columns: ColumnDef<Event>[] = [
               key="copy"
               onClick={() => navigator.clipboard.writeText(user.id)}
             >
-              Copy Event Id
+              Copy Assignment Id
             </DropdownMenuItem>
             <DropdownMenuItem key="view">
-              <Link href={`/admin/events/${user.id}`}>View Event Details</Link>
+              <Link href={`/admin/assignments/${user.id}`}>
+                View Assignment Details
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem key="delete" className="text-danger">
-              Delete Event
+              Delete Assignment
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

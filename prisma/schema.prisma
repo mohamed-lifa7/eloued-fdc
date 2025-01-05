@@ -39,14 +39,15 @@ model User {
     accounts              Account[]
     isTwoFactorEnabled    Boolean                @default(false)
     twoFactorConfirmation TwoFactorConfirmation?
+    bio                   String?                @default("")
+    birthday              DateTime?
+    reputation            Int                    @default(0)
+    rank                  UserRank               @default(BEGINNER)
+    createdAt             DateTime               @default(now())
+    faculty               String?                @default("SE")
+    isMember              Boolean                @default(false)
 
-    studentId  String   @unique
-    bio        String?   @default("")
-    birthday   DateTime?
-    reputation Int       @default(0)
-    rank       UserRank  @default(BEGINNER)
-    createdAt  DateTime  @default(now())
-    faculty    String?   @default("SE")
+    Answer Answer[]
 }
 
 model Account {
@@ -123,4 +124,52 @@ model Event {
     endDate     DateTime @default(now())
     createdAt   DateTime @default(now())
     updatedAt   DateTime @default(now())
+
+    Assignment Assignment[]
+}
+
+model Assignment {
+    id            String         @id @default(cuid())
+    title         String
+    description   String
+    event         Event?         @relation(fields: [eventId], references: [id])
+    eventId       String?
+    questions     Question[]
+    codeQuestions CodeQuestion[]
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @default(now())
+}
+
+
+model Question {
+    id            String     @id @default(cuid())
+    content       String
+    options       String[]
+    correctOption Int
+    assignment    Assignment @relation(fields: [assignmentId], references: [id])
+    assignmentId  String
+    Answer        Answer[]
+}
+
+model CodeQuestion {
+    id            String     @id @default(cuid())
+    description   String
+    exampleInput  String
+    exampleOutput String
+    constraints   String?
+    assignment    Assignment @relation(fields: [assignmentId], references: [id])
+    assignmentId  String
+    createdAt     DateTime   @default(now())
+    updatedAt     DateTime   @default(now())
+}
+
+model Answer {
+    id           String    @id @default(cuid())
+    user         User      @relation(fields: [userId], references: [id])
+    userId       String
+    question     Question? @relation(fields: [questionId], references: [id])
+    questionId   String?
+    codeSolution String?
+    isCorrect    Boolean?
+    createdAt    DateTime  @default(now())
 }

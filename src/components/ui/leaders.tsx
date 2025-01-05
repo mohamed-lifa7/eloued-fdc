@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "./button";
 
 type Leaders = {
@@ -23,28 +23,25 @@ export const LeardersSection = ({
 }) => {
   const [active, setActive] = useState(0);
 
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % leaders.length);
-  };
+  }, [leaders.length]);
 
-  const handlePrev = () => {
+  const handlePrev = useCallback(() => {
     setActive((prev) => (prev - 1 + leaders.length) % leaders.length);
-  };
-
-  const isActive = (index: number) => {
-    return index === active;
-  };
+  }, [leaders.length]);
 
   useEffect(() => {
     if (autoplay) {
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, handleNext]);
 
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
-  };
+  const isActive = (index: number) => index === active;
+
+  const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
+
   return (
     <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
       <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
@@ -93,7 +90,7 @@ export const LeardersSection = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col-reverse justify-between py-4 md:flex-col space-y-4">
+        <div className="flex flex-col-reverse justify-between space-y-4 py-4 md:flex-col">
           <motion.div
             key={active}
             initial={{

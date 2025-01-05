@@ -36,7 +36,7 @@ export default async function RootLayout({
             <SiteHeader />
             {children}
             <SiteFooter />
-            <Toaster />
+            <Toaster richColors/>
           </AppProviders>
         </body>
       </html>

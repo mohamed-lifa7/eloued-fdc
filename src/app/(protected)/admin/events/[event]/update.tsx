@@ -4,7 +4,6 @@ import type * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTransition, useState } from "react";
-import { useSession } from "next-auth/react";
 
 import {
   Select,
@@ -37,11 +36,11 @@ import {
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "@/components/ui/calendar";
 import { cn } from "@/lib/utils";
+import { toast } from "sonner";
 
 const UpdateEventForm = ({ event }: { event: Event | null }) => {
   const [error, setError] = useState<string | undefined>();
   const [success, setSuccess] = useState<string | undefined>();
-  const { update } = useSession();
   const [isPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof EventSchema>>({
@@ -63,11 +62,12 @@ const UpdateEventForm = ({ event }: { event: Event | null }) => {
         .then((data) => {
           if (data.error) {
             setError(data.error);
+            toast.error(data.error);
           }
 
           if (data.success) {
-            void update();
             setSuccess(data.success);
+            toast.success(data.success);
           }
         })
         .catch(() => setError("Something went wrong!"));

@@ -9,7 +9,6 @@ import { RegisterSchema } from "@/schemas";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -33,7 +32,6 @@ export const RegisterForm = () => {
       email: "",
       password: "",
       name: "",
-      studentId: "",
     },
   });
 
@@ -73,24 +71,6 @@ export const RegisterForm = () => {
                       placeholder="John Doe"
                     />
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="studentId"
-              render={({ field }) => (
-                <FormItem className="flex flex-col items-start">
-                  <FormLabel>Your Student ID</FormLabel>
-                  <FormControl>
-                    <Input {...field} disabled={isPending} placeholder="" />
-                  </FormControl>
-                  <FormDescription>
-                    Your student ID should look like &quot;212439078211&quot;.
-                    The first part is your bac year (e.g., 2024 becomes 2124),
-                    and the second part is your bac ID.
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}

@@ -82,7 +82,6 @@ const SettingsForm = ({ user }: { user: ExtendedUser }) => {
       name: user?.name ?? undefined,
       email: user?.email ?? undefined,
       bio: user.bio ?? undefined,
-      studentId: user.studentId ?? undefined,
       faculty: user.faculty ?? undefined,
       birthday: user?.birthday?.toString() ?? undefined,
       isTwoFactorEnabled: user?.isTwoFactorEnabled ?? undefined,
@@ -125,29 +124,6 @@ const SettingsForm = ({ user }: { user: ExtendedUser }) => {
                     disabled={isPending}
                   />
                 </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="studentId"
-            render={({ field }) => (
-              <FormItem className="flex flex-col items-start">
-                <FormLabel>Your Student ID</FormLabel>
-                <FormControl>
-                  <Input
-                    {...field}
-                    placeholder="212439078211"
-                    disabled={isPending}
-                  />
-                </FormControl>
-                <FormDescription>
-                  Your student ID should look like &quot;212439078211&quot;. The
-                  first part is your bac year (e.g., 2024 becomes 2124), and the
-                  second part is your bac ID.
-                </FormDescription>
-
                 <FormMessage />
               </FormItem>
             )}
