@@ -82,13 +82,13 @@ export const getAllAnswersForUser = async (userId: string) => {
 };
 
 /**
- * Checks if a user has submitted an answer for a specific quiz.
+ * Retrieves an answer by its userId and quizId.
  * @param params - An object containing the following parameters:
  * @param params.quizId - The ID of the quiz to check submissions for.
  * @param params.userId - The ID of the user to check submissions for.
- * @returns A promise that resolves to `true` if the user has submitted an answer, `false` otherwise.
+ * @returns A promise that resolves to answer if the user has submitted an answer, null otherwise.
  */
-export const isSubmitted = async ({
+export const getSubmittedAnswer = async ({
   quizId,
   userId,
 }: {
@@ -102,21 +102,21 @@ export const isSubmitted = async ({
         quizId,
       },
     });
-    return !!answer;
+    return answer;
   } catch (error) {
     console.error("Error retrieving answer for user:", error);
-    return false;
+    return null;
   }
 };
 
 /**
- * Checks if a user has submitted an answer for a specific code question.
+ * Retrieves an answer by its userId and codeQuestionId.
  * @param params - An object containing the following parameters:
  * @param params.codeQuestionId - The ID of the quiz to check submissions for.
  * @param params.userId - The ID of the user to check submissions for.
- * @returns A promise that resolves to `true` if the user has submitted an answer, `false` otherwise.
+ * @returns A promise that resolves to answer if the user has submitted an answer, null otherwise.
  */
-export const isCodeQuestionSubmitted = async ({
+export const getSubmittedCodeQuestion = async ({
   codeQuestionId,
   userId,
 }: {
@@ -130,9 +130,9 @@ export const isCodeQuestionSubmitted = async ({
         userId,
       },
     });
-    return !!answer;
+    return answer;
   } catch (error) {
     console.error("Error retrieving answer for user:", error);
-    return false;
+    return null;
   }
 };

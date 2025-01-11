@@ -166,6 +166,7 @@ model CodeQuestion {
     description   String
     exampleInput  String
     exampleOutput String
+    maxScore      Int              @default(25)
     constraints   String?
     assignment    Assignment       @relation(fields: [assignmentId], references: [id])
     submissions   CodeSubmission[]

@@ -19,7 +19,7 @@ export const submitAnswer = async (values: z.infer<typeof AnswerSchema>) => {
       return { error: "Invalid answer data!" };
     }
 
-    const { userId, quizId, score } = validatedFields.data;
+    const { quizId, score } = validatedFields.data;
 
     const crntUser = await currentUser();
 
@@ -29,7 +29,7 @@ export const submitAnswer = async (values: z.infer<typeof AnswerSchema>) => {
 
     const existingAnswer = await db.answer.findFirst({
       where: {
-        userId,
+        userId: crntUser.id,
         quizId,
       },
     });
@@ -39,6 +39,7 @@ export const submitAnswer = async (values: z.infer<typeof AnswerSchema>) => {
         error: "You have already submitted an answer for this question.",
       };
     }
+    console.log(existingAnswer);
     // Use a transaction for creating the answer and updating reputation
     await db.$transaction(async (tx) => {
       // Create the answer
@@ -52,7 +53,7 @@ export const submitAnswer = async (values: z.infer<typeof AnswerSchema>) => {
 
       // Update user reputation
       await tx.user.update({
-        where: { id: userId },
+        where: { id: crntUser.id },
         data: {
           reputation: { increment: score },
         },
@@ -131,8 +132,7 @@ export const submitCodeQuestionAnswer = async (
       return { error: "Invalid answer data!" };
     }
 
-    const { code, codeQuestionId } =
-      validatedFields.data;
+    const { code, codeQuestionId } = validatedFields.data;
 
     const crntUser = await currentUser();
 
@@ -146,17 +146,17 @@ export const submitCodeQuestionAnswer = async (
         codeQuestionId,
       },
     });
-    console.log("existing ==========>", validatedFields.data)
+    console.log("existing ==========>", validatedFields.data);
 
     if (existingAnswer) {
       return {
         error: "You have already submitted an answer for this question.",
       };
     }
-    
+
     await db.codeSubmission.create({
       data: {
-        userId : crntUser.id!,
+        userId: crntUser.id!,
         codeQuestionId,
         code,
         result:

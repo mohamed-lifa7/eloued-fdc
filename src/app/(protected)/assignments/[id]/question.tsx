@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import {
   Card,
   CardHeader,
@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { submitAnswer } from "@/actions/answers";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface QuizCardProps {
   questionNumber: number;
@@ -21,7 +22,6 @@ interface QuizCardProps {
   options?: string[];
   correctAnswer?: string;
   quizId: string;
-  disabled: boolean;
   onNextQuestion: () => void;
 }
 
@@ -32,39 +32,45 @@ export function QuizCard({
   options,
   correctAnswer,
   quizId,
-  disabled,
   onNextQuestion,
 }: QuizCardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [isPending, startTransition] = useTransition();
+  const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    setIsLastQuestion(questionNumber === totalQuestions);
+  }, [questionNumber, totalQuestions]);
+
+  const handleAnswer = () => {
     if (selectedAnswer) {
       setIsAnswered(true);
-      if (selectedAnswer == correctAnswer) {
-        if (selectedAnswer === correctAnswer) {
-          setScore((prevScore) => {
-            const newScore = prevScore + 5;
-            return newScore;
-          });
-        }
+      if (selectedAnswer === correctAnswer) {
+        setScore((prevScore) => prevScore + 5);
       }
     }
   };
+
+  const handleSubmit = () => {
+    handleAnswer();
+  };
+
   const handleFinish = () => {
-    handleSubmit();
+    handleAnswer();
+    const finalScore = selectedAnswer === correctAnswer ? score + 5 : score;
+
     startTransition(() => {
-      submitAnswer({ score: score, quizId: quizId })
+      submitAnswer({ score: finalScore, quizId: quizId })
         .then((data) => {
           if (data.error) {
             toast.error(data.error);
           }
-
           if (data.success) {
             toast.success(data.success);
+            router.refresh();
           }
         })
         .catch(() => toast.error("Something went wrong!"));
@@ -78,7 +84,7 @@ export function QuizCard({
   };
 
   return (
-    <Card className="mx-auto w-full max-w-lg overflow-hidden" aria-disabled={disabled}>
+    <Card className="mx-auto w-full max-w-lg overflow-hidden">
       <CardHeader className="bg-primary text-primary-foreground">
         <CardTitle className="flex items-center justify-between">
           Question {questionNumber} of {totalQuestions}
@@ -100,12 +106,11 @@ export function QuizCard({
                 <RadioGroupItem
                   value={option}
                   id={`option-${index}`}
-                  disabled={isAnswered || disabled}
+                  disabled={isAnswered}
                 />
                 <Label
                   htmlFor={`option-${index}`}
                   className="flex-grow cursor-pointer"
-                  aria-disabled={disabled}
                 >
                   {option}
                 </Label>
@@ -118,7 +123,7 @@ export function QuizCard({
         {questionNumber < totalQuestions ? (
           <Button
             onClick={handleSubmit}
-            disabled={!selectedAnswer || isAnswered || isPending || disabled}
+            disabled={!selectedAnswer || isAnswered || isPending}
           >
             Submit Answer
           </Button>
@@ -126,7 +131,7 @@ export function QuizCard({
           <Button
             variant="primary2"
             onClick={handleFinish}
-            disabled={!selectedAnswer || isAnswered || isPending || disabled}
+            disabled={!selectedAnswer || isAnswered || isPending}
           >
             Finish
           </Button>
@@ -134,7 +139,7 @@ export function QuizCard({
         {questionNumber < totalQuestions && (
           <Button
             onClick={handleNext}
-            disabled={!isAnswered || isPending || disabled}
+            disabled={!isAnswered || isPending}
             variant="outline"
           >
             Next Question

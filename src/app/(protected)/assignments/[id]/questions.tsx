@@ -7,11 +7,9 @@ import type { Question } from "@prisma/client";
 export default function QuizPage({
   questions,
   quizId,
-  disabled,
 }: {
   questions: Question[];
   quizId: string;
-  disabled: boolean;
 }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
@@ -25,7 +23,6 @@ export default function QuizPage({
 
   return (
     <QuizCard
-      disabled={disabled}
       questionNumber={currentQuestionIndex + 1}
       totalQuestions={questions.length}
       question={questions[currentQuestionIndex]?.content}
