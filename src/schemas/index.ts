@@ -105,33 +105,34 @@ export const UpdateAssignmentSchema = z.object({
   description: z.string(),
 });
 
-
-// Answer schema
 export const AnswerSchema = z.object({
-  userId: z.string(),
-  questionId: z.optional(z.string()), // Optional question ID (for multi-choice)
-  codeSolution: z.optional(z.string()), // Optional code solution (for code questions)
-  selectedOption: z.optional(z.number().int()), // Optional selected option index (for multi-choice questions)
-  isCorrect: z.optional(z.boolean()), // Optional correct answer flag
+  userId: z.optional(z.string()),
+  quizId: z.optional(z.string()),
+  score: z.number().int(),
 });
 
-// Question schema
 export const QuestionSchema = z.object({
+  id: z.string(),
   content: z.string().min(1, "Question content is required"),
   options: z
     .array(z.string().min(1, "Option cannot be empty"))
     .min(2, "At least 2 options are required"),
-  correctOption: z.coerce
-    .number()
-    .gte(0, "Correct option must be a valid index"), // Index should be >= 0
+  correctOption: z.string(),
   assignmentId: z.string(),
 });
 
-// CodeQuestion schema
 export const CodeQuestionSchema = z.object({
   description: z.string(),
   exampleInput: z.string(),
   exampleOutput: z.string(),
   constraints: z.optional(z.string()), // Optional constraints
   assignmentId: z.string(),
+});
+
+export const CodeSubmissionSchema = z.object({
+  userId: z.string(),
+  codeQuestionId: z.string(),
+  code: z.string(),
+  result: z.string(),
+  score: z.number().int().nullable(),
 });

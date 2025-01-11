@@ -3,6 +3,8 @@
 import type { z } from "zod";
 import { db } from "@/server/db";
 import { AssignmentSchema, UpdateAssignmentSchema } from "@/schemas";
+import { currentUser } from "@/server/auth";
+import { UserRole } from "@prisma/client";
 
 /**
  * Create a new assignment.
@@ -19,6 +21,16 @@ export const createAssignment = async (
 
     if (!validatedFields.success) {
       return { error: "Invalid assignment data!" };
+    }
+
+    const crntUser = await currentUser();
+
+    if (!crntUser) {
+      return { error: "You are not signed in. Please sign in and try again" };
+    }
+
+    if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
+      return { error: "You do not have permission to update events!" };
     }
 
     const { title, description, eventId } = validatedFields.data;
@@ -56,6 +68,15 @@ export const updateAssignment = async (
     if (!validatedFields.success) {
       return { error: "Invalid assignment data!" };
     }
+    const crntUser = await currentUser();
+
+    if (!crntUser) {
+      return { error: "You are not signed in. Please sign in and try again" };
+    }
+
+    if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
+      return { error: "You do not have permission to update events!" };
+    }
 
     await db.assignment.update({
       where: { id },
@@ -80,6 +101,16 @@ export const updateAssignment = async (
  */
 export const deleteAssignment = async (id: string) => {
   try {
+    const crntUser = await currentUser();
+
+    if (!crntUser) {
+      return { error: "You are not signed in. Please sign in and try again" };
+    }
+
+    if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
+      return { error: "You do not have permission to update events!" };
+    }
+
     await db.assignment.delete({
       where: { id },
     });

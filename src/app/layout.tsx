@@ -30,6 +30,8 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html
         className={cn("min-h-screen font-sans", GeistSans.variable, GeistMono.variable)}
+        dir="ltr"
+        lang="en"
       >
         <body>
           <AppProviders>

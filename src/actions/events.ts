@@ -1,7 +1,9 @@
 "use server";
 import { currentUser } from "@/server/auth";
 import { db } from "@/server/db";
-import { type Event, UserRole } from "@prisma/client";
+import { UserRole } from "@prisma/client";
+import { type EventSchema } from "@/schemas";
+import type { z } from "zod";
 
 /**
  * Creates a new event in the database.
@@ -9,7 +11,7 @@ import { type Event, UserRole } from "@prisma/client";
  * @param eventData - The data for the new event.
  * @returns An object with either the created event or an error message.
  */
-export const createEvent = async (eventData: Event) => {
+export const createEvent = async (eventData: z.infer<typeof EventSchema>) => {
   try {
     const crntUser = await currentUser();
 
@@ -23,14 +25,6 @@ export const createEvent = async (eventData: Event) => {
 
     const newEvent = await db.event.create({
       data: eventData,
-      select: {
-        id: true,
-        title: true,
-        description: true,
-        location: true,
-        startDate: true,
-        endDate: true,
-      },
     });
 
     return { success: "Event created successfully!", event: newEvent };
@@ -62,7 +56,7 @@ export const updateEvent = async (
     const crntUser = await currentUser();
 
     if (!crntUser) {
-      return { error: "No current user found." };
+      return { error: "You are not signed in. Please sign in and try again" };
     }
 
     if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
@@ -92,7 +86,7 @@ export const deleteEvent = async (eventId: string) => {
     const crntUser = await currentUser();
 
     if (!crntUser) {
-      return { error: "No current user found." };
+      return { error: "You are not signed in. Please sign in and try again" };
     }
 
     if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {

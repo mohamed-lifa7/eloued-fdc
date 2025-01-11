@@ -10,8 +10,12 @@ export const getAssignmentById = async (id: string) => {
     const assignment = await db.assignment.findUnique({
       where: { id },
       include: {
-        questions: true,
         codeQuestions: true,
+        quizzes: {
+          include: {
+            questions: true,
+          },
+        },
       },
     });
 
@@ -31,7 +35,12 @@ export const getAssignments = async () => {
     const assignments = await db.assignment.findMany({
       include: {
         event: true,
-        questions: true,
+        codeQuestions: true,
+        quizzes: {
+          include: {
+            questions: true,
+          },
+        },
       },
     });
     return assignments;

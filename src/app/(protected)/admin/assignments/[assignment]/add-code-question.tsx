@@ -2,29 +2,22 @@
 
 import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { useMediaQuery } from "@/hooks/use-media-query";
-import { zodResolver } from "@hookform/resolvers/zod";
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { CodeQuestionSchema } from "@/schemas";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { type z } from "zod";
-
+import { createCodeQuestion } from "@/actions/quizzes";
+import { toast } from "sonner";
 import {
   Form,
   FormControl,
@@ -33,71 +26,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { CodeQuestionSchema } from "@/schemas";
-import { createCodeQuestion } from "@/actions/questions";
-import { toast } from "sonner";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { FormError } from "@/components/form-error";
+import { FormSuccess } from "@/components/form-success";
 
-export function AddCodeQuestion({ assignmentId }: { assignmentId: string }) {
-  const [open, setOpen] = useState(false);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-
-  const closeModal = () => setOpen(false);
-
-  if (isDesktop) {
-    return (
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button variant="primary2">Add Code Question</Button>
-        </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Add New Code Question</DialogTitle>
-            <DialogDescription>
-              Fill out the details below to create a new code question.
-            </DialogDescription>
-          </DialogHeader>
-          <AddQuestionForm
-            assignmentId={assignmentId}
-            closeModal={closeModal}
-          />
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
-  return (
-    <Drawer open={open} onOpenChange={setOpen}>
-      <DrawerTrigger asChild>
-        <Button variant="primary2">Add Code Question</Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="text-left">
-          <DrawerTitle>Add New Code Question</DrawerTitle>
-          <DrawerDescription>
-            Fill out the details below to create a new code question.
-          </DrawerDescription>
-        </DrawerHeader>
-        <AddQuestionForm assignmentId={assignmentId} closeModal={closeModal} />
-        <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
-        </DrawerFooter>
-      </DrawerContent>
-    </Drawer>
-  );
-}
-
-function AddQuestionForm({
+export default function CodeQuestionForm({
   assignmentId,
-  closeModal,
 }: {
   assignmentId: string;
-  closeModal: () => void;
 }) {
+  const [error, setError] = useState<string | undefined>();
+  const [success, setSuccess] = useState<string | undefined>();
   const [isPending, startTransition] = useTransition();
+
   const form = useForm<z.infer<typeof CodeQuestionSchema>>({
     resolver: zodResolver(CodeQuestionSchema),
     defaultValues: {
@@ -105,96 +45,120 @@ function AddQuestionForm({
     },
   });
 
-  const onSubmit = (data: z.infer<typeof CodeQuestionSchema>) => {
+  const onSubmit = (values: z.infer<typeof CodeQuestionSchema>) => {
     startTransition(() => {
-      createCodeQuestion(data)
-        .then((result) => {
-          if (result.error) {
-            toast.error(result.error);
-          }
-
-          if (result.success) {
-            toast.success(result.success);
-            closeModal(); // Close the modal on success
+      createCodeQuestion(values)
+        .then((data) => {
+          if (data.error) {
+            setError(data.error);
+            toast.error(data.error);
+        }
+        
+        if (data.success) {
+            setSuccess(data.success);
+            toast.success(data.success);
+            form.reset()
           }
         })
-        .catch(() => toast.error("Something went wrong!"));
+        .catch(() => setError("Something went wrong!"));
     });
   };
 
   return (
-    <ScrollArea className="h-5/6">
+    <Card>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="h-96 space-y-8 px-4"
-        >
-          <FormField
-            control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question Content</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Enter the question content"
-                    {...field}
-                    disabled={isPending}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="constraints"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Question Constraints</FormLabel>
-                <FormControl>
-                  <Input
-                    placeholder="Enter the question constraints"
-                    {...field}
-                    disabled={isPending}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+          <CardHeader>
+            <CardTitle>Submit Code Question</CardTitle>
+            <CardDescription>
+              Create a new coding challenge for assignments
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Description</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      placeholder="Write a detailed description of the coding challenge"
+                      className="min-h-[100px]"
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <FormField
-            control={form.control}
-            name="exampleInput"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Example Input</FormLabel>
-                <FormControl>
-                  <Input {...field} disabled={isPending} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="exampleOutput"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Example Output</FormLabel>
-                <FormControl>
-                  <Input {...field} disabled={isPending} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button type="submit" disabled={isPending}>
-            Submit
-          </Button>
+            <FormField
+              control={form.control}
+              name="exampleInput"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Example Input</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Provide an example input"
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="exampleOutput"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Example Output</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      placeholder="Provide the expected output for the example input"
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="constraints"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Constraints (Optional)</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      placeholder="Add any constraints or limitations for the challenge"
+                      className="min-h-[80px]"
+                      disabled={isPending}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" disabled={isPending} className="w-full">
+              {isPending ? "Submitting..." : "Submit Code Question"}
+            </Button>
+          </CardContent>
+
+          <CardFooter>
+            <FormError message={error} />
+            <FormSuccess message={success} />
+          </CardFooter>
         </form>
       </Form>
-    </ScrollArea>
+    </Card>
   );
 }

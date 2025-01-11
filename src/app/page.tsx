@@ -10,9 +10,9 @@ export default function Home() {
     <main>
       <Hero />
       <AboutSection />
-      <QuizSection quizData={quiz} />
+      {/* <QuizSection quizData={quiz} /> */}
       <Projects />
-      <Community />
+      {/* <Community /> */}
     </main>
   );
 }

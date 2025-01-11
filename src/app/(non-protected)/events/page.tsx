@@ -24,37 +24,43 @@ const page = async () => {
           community. Stay updated and explore the highlights of our journey!
         </p>
       </div>
-      <section>
-        <h2 className="inline-block text-2xl font-black lg:text-3xl">
-          Upcoming Events
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          {activeEvents.map((event) => (
-            <EventComponent key={event.id} event={event} />
-          ))}
-        </div>
-      </section>
+      {activeEvents.length > 0 && (
+        <section>
+          <h2 className="inline-block text-2xl font-black lg:text-3xl">
+            Active Events
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {activeEvents.map((event) => (
+              <EventComponent key={event.id} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
 
-      <section>
-        <h2 className="inline-block text-2xl font-black lg:text-3xl">
-          Upcoming Events
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          {upcomingEvents.map((event) => (
-            <EventComponent key={event.id} event={event} />
-          ))}
-        </div>
-      </section>
-      <section>
-        <h2 className="inline-block text-2xl font-black lg:text-3xl">
-          Past Events
-        </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2">
-          {pastEvents.map((event) => (
-            <EventComponent key={event.id} event={event} />
-          ))}
-        </div>
-      </section>
+      {upcomingEvents.length > 0 && (
+        <section>
+          <h2 className="inline-block text-2xl font-black lg:text-3xl">
+            Upcoming Events
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {upcomingEvents.map((event) => (
+              <EventComponent key={event.id} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
+      {pastEvents.length > 0 && (
+        <section>
+          <h2 className="inline-block text-2xl font-black lg:text-3xl">
+            Past Events
+          </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {pastEvents.map((event) => (
+              <EventComponent key={event.id} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
     </main>
   );
 };

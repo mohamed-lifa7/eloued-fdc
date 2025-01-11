@@ -22,10 +22,36 @@ export const getUserByEmail = async (email: string) => {
  */
 export const getUserById = async (id: string) => {
   try {
-    const user = await db.user.findUnique({ where: { id } });
+    const user = await db.user.findUnique({
+      where: { id },
+    });
 
     return user;
   } catch {
+    return null;
+  }
+};
+
+/**
+ * Retrieves total points of a user.
+ * @param id - The ID of the user to retrieve.
+ * @returns The user object with total points, or null if not found.
+ */
+export const getUserRepuation = async (id: string) => {
+  try {
+    // Calculate the total score from all answers
+    const totalPoints = await db.answer.aggregate({
+      where: { userId: id },
+      _sum: {
+        score: true,
+      },
+    });
+
+    return {
+      totalPoints: totalPoints
+    };
+  } catch (error) {
+    console.error("Error retrieving user with points:", error);
     return null;
   }
 };

@@ -1,15 +1,13 @@
 import { BreadcrumbMaker, type BreadcrumbType } from "@/components/breadcrumb";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Heading } from "@/components/ui/heading";
-import { Separator } from "@/components/ui/separator";
 import { getAssignmentById } from "@/data/assignments";
 import { notFound } from "next/navigation";
+import QuizPage from "./questions";
+import { isCodeQuestionSubmitted, isSubmitted } from "@/data/answers";
+import { currentUser } from "@/server/auth";
+import CodeQuestionPage from "./code-questions";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Code2 } from "lucide-react";
 
 const breadcrumbItems = (slug: string): BreadcrumbType[] => [
   { title: "Home", href: "/", disabled: false, type: "link" },
@@ -20,7 +18,9 @@ const breadcrumbItems = (slug: string): BreadcrumbType[] => [
 export default async function Page(props: { params: Promise<{ id: string }> }) {
   const { id } = await props.params;
   const assignment = await getAssignmentById(id);
-  if (!assignment) return notFound();
+  const crntUser = await currentUser();
+  if (!crntUser || !assignment) return notFound();
+
   return (
     <div className="space-y-8">
       <div className="flex-1 space-y-4">
@@ -31,63 +31,48 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
         />
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {assignment?.questions.map((q, index) => (
-          <Card key={q.id}>
-            <CardHeader>
-              <CardTitle>Question number {index + 1}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div>
-                <h4 className="text-lg font-bold">Question content:</h4>
-                <p>{q.content}</p>
-              </div>
-              <div>
-                <h4 className="text-lg font-bold">Correct answer:</h4>
-                <p>{q.correctOption}</p>
-              </div>
-            </CardContent>
-            <Separator />
-            <CardFooter className="flex-col items-start justify-between space-y-2 p-2">
-              <h4 className="text-lg font-bold">Options:</h4>
-              {q.options.map((option, index) => (
-                <p
-                  key={index}
-                  className="w-full rounded-md border border-input bg-background p-2 text-sm font-medium shadow-sm transition-colors"
-                >
-                  {option}
-                </p>
-              ))}
-            </CardFooter>
-          </Card>
-        ))}
+        {assignment.quizzes.map(async (q) => {
+          const submitted = await isSubmitted({
+            quizId: q.id,
+            userId: crntUser.id!,
+          });
+          return (
+            <QuizPage
+              questions={q.questions}
+              key={q.id}
+              quizId={q.id}
+              disabled={submitted}
+            />
+          );
+        })}
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {assignment?.codeQuestions.map((q, index) => (
-          <Card key={q.id}>
-            <CardHeader>
-              <CardTitle>Question number {index + 1}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div>
-                <h4 className="text-lg font-bold">Question content:</h4>
-                <p>{q.description}</p>
-              </div>
-              <div>
-                <h4 className="text-lg font-bold">Constraints:</h4>
-                <p>{q.constraints}</p>
-              </div>
-              <div>
-                <h4 className="text-lg font-bold">Example Input:</h4>
-                <p>{q.exampleOutput}</p>
-              </div>
-              <div>
-                <h4 className="text-lg font-bold">Example Output:</h4>
-                <p>{q.exampleOutput}</p>
-              </div>
-            </CardContent>
-            <Separator />
-          </Card>
-        ))}
+      <Card className="mt-8 w-full max-w-4xl mx-auto">
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <Code2 className="mr-2" />
+            Coding Tips
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>Read the problem statement carefully and understand all requirements.</li>
+            <li>Consider edge cases and handle them in your solution.</li>
+            <li>Optimize your code for better performance when possible.</li>
+            <li>Use meaningful variable names and add comments for clarity.</li>
+            <li>Test your code with various inputs, including the provided example.</li>
+          </ul>
+        </CardContent>
+      </Card>
+        {assignment.codeQuestions.map(async (q, index) => {
+          const submitted = await isCodeQuestionSubmitted({
+            codeQuestionId: q.id,
+            userId: crntUser.id!,
+          });
+          return (
+            <CodeQuestionPage disabled={submitted} key={q.id} question={q} index={index + 1}/>
+          );
+        })}
       </div>
     </div>
   );

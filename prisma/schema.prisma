@@ -48,6 +48,8 @@ model User {
     isMember              Boolean                @default(false)
 
     Answer Answer[]
+
+    CodeSubmission CodeSubmission[]
 }
 
 model Account {
@@ -134,42 +136,67 @@ model Assignment {
     description   String
     event         Event?         @relation(fields: [eventId], references: [id])
     eventId       String?
-    questions     Question[]
+    quizzes       Quiz[]
     codeQuestions CodeQuestion[]
     createdAt     DateTime       @default(now())
     updatedAt     DateTime       @default(now())
 }
 
+model Quiz {
+    id           String     @id @default(cuid())
+    assignment   Assignment @relation(fields: [assignmentId], references: [id])
+    assignmentId String
+    questions    Question[]
+    answers      Answer[]
+    createdAt    DateTime   @default(now())
+    updatedAt    DateTime   @default(now())
+}
 
 model Question {
-    id            String     @id @default(cuid())
+    id            String   @id @default(cuid())
     content       String
     options       String[]
-    correctOption Int
-    assignment    Assignment @relation(fields: [assignmentId], references: [id])
-    assignmentId  String
-    Answer        Answer[]
+    correctOption String
+    quiz          Quiz?    @relation(fields: [quizId], references: [id])
+    quizId        String?
 }
 
 model CodeQuestion {
-    id            String     @id @default(cuid())
+    id            String           @id @default(cuid())
     description   String
     exampleInput  String
     exampleOutput String
     constraints   String?
-    assignment    Assignment @relation(fields: [assignmentId], references: [id])
+    assignment    Assignment       @relation(fields: [assignmentId], references: [id])
+    submissions   CodeSubmission[]
     assignmentId  String
-    createdAt     DateTime   @default(now())
-    updatedAt     DateTime   @default(now())
+    createdAt     DateTime         @default(now())
+    updatedAt     DateTime         @default(now())
 }
 
 model Answer {
-    id           String    @id @default(cuid())
-    user         User      @relation(fields: [userId], references: [id])
-    userId       String
-    question     Question? @relation(fields: [questionId], references: [id])
-    questionId   String?
-    codeSolution String?
-    isCorrect    Boolean?
-    createdAt    DateTime  @default(now())
+    id     String @id @default(cuid())
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+    quiz   Quiz   @relation(fields: [quizId], references: [id])
+    quizId String
+
+    score     Int
+    createdAt DateTime @default(now())
+
+    @@unique([userId, quizId])
+}
+
+model CodeSubmission {
+    id             String       @id @default(cuid())
+    user           User         @relation(fields: [userId], references: [id])
+    userId         String
+    codeQuestion   CodeQuestion @relation(fields: [codeQuestionId], references: [id])
+    codeQuestionId String
+    code           String
+    result         String
+    score          Int?
+    submittedAt    DateTime     @default(now())
+
+    @@unique([userId, codeQuestionId])
 }
