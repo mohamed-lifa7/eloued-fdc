@@ -33,7 +33,7 @@ const sendEmail = async (
 ): Promise<void> => {
   try {
     await resend.emails.send({
-      from: "Future Developers Club <noreply@muswaddaty.live>",
+      from: "Future Developers Club <noreply@futuredev.club>",
       to,
       subject,
       ...(typeof content === "string" ? { html: content } : { react: content }),
