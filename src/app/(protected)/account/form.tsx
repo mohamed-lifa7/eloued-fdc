@@ -83,13 +83,13 @@ const SettingsForm = ({ user }: { user: ExtendedUser }) => {
       email: user?.email ?? undefined,
       bio: user.bio ?? undefined,
       faculty: user.faculty ?? undefined,
-      birthday: user?.birthday?.toString() ?? undefined,
+      birthday: user?.birthday?.toLocaleString() ?? undefined,
       isTwoFactorEnabled: user?.isTwoFactorEnabled ?? undefined,
     },
   });
 
   const onSubmit = (values: z.infer<typeof SettingsSchema>) => {
-    values.birthday = date.toString();
+    values.birthday = date.toLocaleString();
     startTransition(() => {
       settings(values)
         .then((data) => {
