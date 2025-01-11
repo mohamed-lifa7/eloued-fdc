@@ -26,6 +26,10 @@ const config = {
         protocol: "https",
         hostname: "avatars.githubusercontent.com",
       },
+      {
+        protocol: "https",
+        hostname: "https://lh3.googleusercontent.com",
+      },
     ],
   },
 };
