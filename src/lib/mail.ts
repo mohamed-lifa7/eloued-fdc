@@ -15,7 +15,7 @@ const resend = new Resend(env.RESEND_API_KEY);
 const constructUrl = (path: string, token: string): string => {
   const baseUrl =
     env.NODE_ENV === "production"
-      ? "https://eloued-fdc.vercel.app"
+      ? "https://www.futuredev.club"
       : "http://localhost:3000";
   return `${baseUrl}${path}?token=${token}`;
 };

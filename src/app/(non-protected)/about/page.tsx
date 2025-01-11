@@ -59,7 +59,7 @@ const leaders = [
   },
   {
     id: "a7f98vds7f9sa98f7vdkkkkdf98d",
-    name: "KHALEF Oussama",
+    name: "KHELEF Oussama",
     year: "3rd Year Bachelor's Degree",
     role: "Backend Developer",
     bio: "Backend web developer experienced with Express.js and building scalable APIs.",

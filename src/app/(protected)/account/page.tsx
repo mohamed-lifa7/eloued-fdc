@@ -31,7 +31,7 @@ const ProfilePage = async () => {
           <div className="my-4 flex items-center space-x-6">
             <p className="">Click here to copy your profile link:</p>
             <CopyIdComponent
-              id={`https://eloued-fdc.vercel.app/profile/${user?.id}`}
+              id={`https://futuredev.club/profile/${user?.id}`}
             />
           </div>
           <Separator className="my-6" />

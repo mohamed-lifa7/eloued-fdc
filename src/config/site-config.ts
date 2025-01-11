@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const siteConfig: Metadata = {
-  metadataBase: new URL("https://eloued-fdc.vercel.app"),
+  metadataBase: new URL("https://www.futuredev.club"),
   title: {
     default: "Future Developers Club",
     template: "%s | Future Developers Club",
@@ -35,8 +35,8 @@ export const siteConfig: Metadata = {
       "Future Developers Club is a community of passionate developers who come together to share projects, ideas, and opportunities in the field of technology.",
     siteName: "Future Developers Club",
     locale: "en_US",
-    url: new URL("https://eloued-fdc.vercel.app"),
-    images: ["https://eloued-fdc.vercel.app/og-image.png"],
+    url: new URL("https://www.futuredev.club"),
+    images: ["https://www.futuredev.club/og-image.png"],
     type: "website",
   },
 
@@ -56,7 +56,7 @@ export const siteConfig: Metadata = {
     title: "Future Developers Club",
     creator: "@LifaSeddik",
     card: "summary_large_image",
-    images: ["https://eloued-fdc.vercel.app/og-image.png"],
+    images: ["https://www.futuredev.club/og-image.png"],
   },
 };
 
