@@ -195,13 +195,15 @@ export default function EnhancedCodeQuestionPage({
             />
           </CardContent>
           <CardFooter className="flex flex-col space-y-6">
-            <Alert variant="warning" className="w-auto">
-              <AlertCircle className="h-4 w-4" />
-              <AlertTitle>Important</AlertTitle>
-              <AlertDescription>
-                Editing submissions later may not be possible.
-              </AlertDescription>
-            </Alert>
+            {!showSuccessMessage && (
+              <Alert variant="warning" className="w-auto">
+                <AlertCircle className="h-4 w-4" />
+                <AlertTitle>Important</AlertTitle>
+                <AlertDescription>
+                  Editing submissions later may not be possible.
+                </AlertDescription>
+              </Alert>
+            )}
             <Button
               type="submit"
               disabled={disabled || isPending}
@@ -209,19 +211,18 @@ export default function EnhancedCodeQuestionPage({
             >
               {isPending ? "Submitting..." : "Submit Solution"}
             </Button>
+            {showSuccessMessage && (
+              <Alert variant="success" className="mt-4">
+                <CheckCircle2 className="h-4 w-4" />
+                <AlertTitle>Success</AlertTitle>
+                <AlertDescription>
+                  Your solution has been submitted successfully!
+                </AlertDescription>
+              </Alert>
+            )}
           </CardFooter>
         </Card>
       </form>
-
-      {showSuccessMessage && (
-        <Alert variant="success" className="mt-4">
-          <CheckCircle2 className="h-4 w-4" />
-          <AlertTitle>Success</AlertTitle>
-          <AlertDescription>
-            Your solution has been submitted successfully!
-          </AlertDescription>
-        </Alert>
-      )}
     </Form>
   );
 }

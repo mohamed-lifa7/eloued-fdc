@@ -131,7 +131,7 @@ export const submitCodeQuestionAnswer = async (
       return { error: "Invalid answer data!" };
     }
 
-    const { userId, code, codeQuestionId } =
+    const { code, codeQuestionId } =
       validatedFields.data;
 
     const crntUser = await currentUser();
@@ -146,9 +146,9 @@ export const submitCodeQuestionAnswer = async (
         codeQuestionId,
       },
     });
-    console.log("existing ==========>", existingAnswer)
+    console.log("existing ==========>", validatedFields.data)
 
-    if (!!existingAnswer) {
+    if (existingAnswer) {
       return {
         error: "You have already submitted an answer for this question.",
       };
@@ -156,7 +156,7 @@ export const submitCodeQuestionAnswer = async (
     
     await db.codeSubmission.create({
       data: {
-        userId,
+        userId : crntUser.id!,
         codeQuestionId,
         code,
         result:
