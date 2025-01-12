@@ -38,7 +38,7 @@ export function QuizCard({
   const [isAnswered, setIsAnswered] = useState(false);
   const [score, setScore] = useState(0);
   const [isPending, startTransition] = useTransition();
-  const [isLastQuestion, setIsLastQuestion] = useState(false);
+  const [, setIsLastQuestion] = useState(false);
   const router = useRouter();
 
   useEffect(() => {

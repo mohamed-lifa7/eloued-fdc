@@ -1,9 +1,9 @@
 import AboutSection from "@/components/layout/about-section";
-import { Community } from "@/components/layout/community-section";
 import Hero from "@/components/layout/hero-section";
 import Projects from "@/components/layout/projects-sections";
-import { QuizSection } from "@/components/layout/quiz-section";
-import { quiz } from "@/data/quizes";
+// import { Community } from "@/components/layout/community-section";
+// import { QuizSection } from "@/components/layout/quiz-section";
+// import { quiz } from "@/data/quizes";
 
 export default function Home() {
   return (

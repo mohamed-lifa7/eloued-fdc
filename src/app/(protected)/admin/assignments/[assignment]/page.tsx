@@ -11,10 +11,13 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import CodeQuestionForm from "./add-code-question";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const breadcrumbItems: BreadcrumbType[] = [
   { title: "Dashboard", href: "/admin", disabled: false, type: "link" },
@@ -49,7 +52,7 @@ export default async function Page(props: {
           <UpdateAssignment assignment={assignment} />
         </div>
         <Separator />
-        {assignment.quizzes.map((q) => (
+        {/* {assignment.quizzes.map((q) => (
           <div key={q.id}>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               {q.questions.map((question) => (
@@ -72,10 +75,10 @@ export default async function Page(props: {
             </div>
             <Separator className="my-4" />
           </div>
-        ))}
+        ))} */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {assignment.codeQuestions.map((q) => (
-            <Card key={q.id}>
+            <Card key={q.id} className="flex flex-col justify-between">
               <CardHeader>
                 <CardTitle>{q.description}</CardTitle>
                 <CardDescription>Constraints : {q.constraints}</CardDescription>
@@ -84,13 +87,20 @@ export default async function Page(props: {
                 <p>Example Input : {q.exampleInput}</p>
                 <p>Example Ouput : {q.exampleOutput}</p>
               </CardContent>
+              <CardFooter>
+                <Button variant="primary2" asChild>
+                <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
+                view submitions
+                </Link>
+                </Button>
+              </CardFooter>
             </Card>
           ))}
         </div>
         {assignment.codeQuestions.length > 0 && <Separator className="my-4" />}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 h-full">
+        <div className="grid h-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           <CreateQuizForm assignmentId={params.assignment} />
-          <CodeQuestionForm assignmentId={params.assignment}/>
+          <CodeQuestionForm assignmentId={params.assignment} />
         </div>
       </div>
     </div>

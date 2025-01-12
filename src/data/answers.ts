@@ -63,6 +63,26 @@ export const getAllAnswersForQuestion = async (quizId: string) => {
 };
 
 /**
+ * Retrieves all answers for a specific code question from the database.
+ * @param codeQuestionId - The ID of the code question to retrieve answers for.
+ * @returns A promise that resolves to an array of answers, or an empty array if an error occurs.
+ */
+export const getCodeQuestionWithAnswers = async (codeQuestionId: string) => {
+  try {
+    const codeQuestion = await db.codeQuestion.findUnique({
+      where: { id: codeQuestionId },
+      include: {
+        submissions: true, // Include related submissions in the result
+      },
+    });
+    return codeQuestion;
+  } catch (error) {
+    console.error("Error retrieving code question with answers:", error);
+    return null;
+  }
+};
+
+/**
  * Retrieves all answers for a specific user from the database.
  * @param userId - The ID of the user to retrieve answers for.
  * @returns A promise that resolves to an array of answers, or an empty array if an error occurs.

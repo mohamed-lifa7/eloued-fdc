@@ -16,9 +16,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import Controlled from "@uiw/react-codemirror";
+import { cpp } from "@codemirror/lang-cpp";
 import { javascript, typescriptLanguage } from "@codemirror/lang-javascript";
 import { python } from "@codemirror/lang-python";
-import { cpp } from "@codemirror/lang-cpp";
 import {
   Card,
   CardContent,
@@ -57,7 +57,7 @@ export default function EnhancedCodeQuestionPage({
   const [isPending, startTransition] = useTransition();
   const [selectedLanguage, setSelectedLanguage] = useState("cpp");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof CodeSubmissionSchema>>({
     resolver: zodResolver(CodeSubmissionSchema),
@@ -81,7 +81,7 @@ export default function EnhancedCodeQuestionPage({
           if (data.success) {
             toast.success(data.success);
             setShowSuccessMessage(true);
-            router.refresh()
+            router.refresh();
           }
         })
         .catch(() => toast.error("Something went wrong!"));
@@ -147,10 +147,12 @@ export default function EnhancedCodeQuestionPage({
                         <TabsTrigger value="cpp" disabled={isPending}>
                           C++
                         </TabsTrigger>
-                        <TabsTrigger value="py" disabled={isPending}>
+                        {/* <TabsTrigger value="py" disabled={isPending}> */}
+                        <TabsTrigger value="py" disabled={true}>
                           Python
                         </TabsTrigger>
-                        <TabsTrigger value="js" disabled={isPending}>
+                        {/* <TabsTrigger value="js" disabled={isPending}> */}
+                        <TabsTrigger value="js" disabled={true}>
                           JavaScript
                         </TabsTrigger>
                       </TabsList>

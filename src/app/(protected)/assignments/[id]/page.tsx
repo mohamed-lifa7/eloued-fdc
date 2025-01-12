@@ -15,11 +15,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { CheckCircle2, Clock, Code2, Trophy } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Progress } from "@/components/ui/progress";
