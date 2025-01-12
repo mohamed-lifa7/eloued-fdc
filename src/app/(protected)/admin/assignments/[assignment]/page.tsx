@@ -52,30 +52,6 @@ export default async function Page(props: {
           <UpdateAssignment assignment={assignment} />
         </div>
         <Separator />
-        {/* {assignment.quizzes.map((q) => (
-          <div key={q.id}>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {q.questions.map((question) => (
-                <Card key={question.id}>
-                  <CardHeader>
-                    <CardTitle>{question.content}</CardTitle>
-                    <CardDescription>
-                      Correct Answer : {question.correctOption}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {question.options.map((o, index) => (
-                      <p key={index}>
-                        option {index + 1} : <span className="">{o}</span>
-                      </p>
-                    ))}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-            <Separator className="my-4" />
-          </div>
-        ))} */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {assignment.codeQuestions.map((q) => (
             <Card key={q.id} className="flex flex-col justify-between">
@@ -89,9 +65,9 @@ export default async function Page(props: {
               </CardContent>
               <CardFooter>
                 <Button variant="primary2" asChild>
-                <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
-                view submitions
-                </Link>
+                  <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
+                    view submitions
+                  </Link>
                 </Button>
               </CardFooter>
             </Card>
