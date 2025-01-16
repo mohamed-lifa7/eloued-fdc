@@ -1,7 +1,6 @@
 "use client";
 import { type EdgeStoreRouter } from "@/app/api/edgestore/[...edgestore]/route";
 import { createEdgeStoreProvider } from "@edgestore/react";
-
 /**
  * Creates and exports an EdgeStoreProvider component and a custom hook `useEdgeStore`.
  * This is used for providing access to the EdgeStore in a React context.

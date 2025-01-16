@@ -6,15 +6,19 @@ import { Progress } from "@/components/ui/progress";
 import { SingleImageDropzone } from "@/components/ui/single-image-uploader";
 import { cn } from "@/lib/utils";
 import { useEdgeStore } from "@/providers/edgestore-provider";
+import { Loader2, Upload } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { startTransition, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 import { toast } from "sonner";
 
 export function UpdateImage() {
   const [file, setFile] = useState<File>();
+  const router = useRouter();
   const [progress, setProgress] = useState(0);
   const { edgestore } = useEdgeStore();
   const { update } = useSession();
+  const [isPending, startTransition] = useTransition();
 
   const onSubmit = (imageUrl: string) => {
     startTransition(() => {
@@ -22,10 +26,16 @@ export function UpdateImage() {
         .then((data) => {
           if (data.error) {
             toast.error(data.error);
+            setFile(undefined);
+            setProgress(0);
+            router.refresh();
           }
 
           if (data.success) {
             toast.success(data.success);
+            setProgress(0);
+            setFile(undefined);
+            router.refresh();
           }
         })
         .catch(() => toast.error("Something went wrong!"));
@@ -36,12 +46,12 @@ export function UpdateImage() {
     <div className="w-full space-y-4">
       <SingleImageDropzone
         className={cn(
-          `${file ? "h-[128px] w-[128px]" : "h-0 w-0"}`,
+          "mx-auto",
+          file ? "h-[128px] w-[128px]" : "h-[128px] w-full max-w-[256px]",
         )}
         value={file}
-        onChange={(file) => {
-          setFile(file);
-        }}
+        onChange={setFile}
+        disabled={isPending}
       />
       <Button
         onClick={async () => {
@@ -58,10 +68,28 @@ export function UpdateImage() {
           }
         }}
         variant="primary2"
+        className="w-full"
+        disabled={!file || isPending}
       >
-        Update
+        {isPending ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Uploading...
+          </>
+        ) : (
+          <>
+            <Upload className="mr-2 h-4 w-4" />
+            Update Image
+          </>
+        )}
       </Button>
-      <Progress value={progress} className="w-full" />
+      {(progress > 0 || isPending) && (
+        <Progress
+          value={progress}
+          className="w-full"
+          aria-label="Upload progress"
+        />
+      )}
     </div>
   );
 }

@@ -36,9 +36,6 @@ export default async function AdminPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{data.allUsersCount}</div>
-                  <p className="text-xs text-muted-foreground">
-                    +15.2% from last month
-                  </p>
                 </CardContent>
               </Card>
 
@@ -65,9 +62,6 @@ export default async function AdminPage() {
                   <div className="text-2xl font-bold">
                     {data.completedProjectsCount}
                   </div>
-                  <p className="text-xs text-muted-foreground">
-                    +12% from last month
-                  </p>
                 </CardContent>
               </Card>
 
