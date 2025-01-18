@@ -33,25 +33,24 @@ import { CodeSubmissionSchema } from "@/schemas";
 import { useTransition } from "react";
 import { submitCodeQuestionAnswer } from "@/actions/answers";
 import { toast } from "sonner";
-import { AlertCircle, CheckCircle2 } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+  AlertCircle,
+  CalendarDays,
+  CheckCircle2,
+  Code2,
+  Trophy,
+} from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
+import { Badge } from "@/components/ui/badge";
 
 export default function EnhancedCodeQuestionPage({
   question,
   answer,
-  index,
 }: {
   question: CodeQuestion;
   answer: CodeSubmission | null;
-  index: number;
 }) {
   const { theme } = useTheme();
   const [isPending, startTransition] = useTransition();
@@ -94,45 +93,93 @@ export default function EnhancedCodeQuestionPage({
   };
 
   if (answer) {
-    return <div>lksjfkldsajfsa</div>;
+    // if there is answer we would display that you have already submitted an answer and show him his answer
+    return (
+      <Card className="mx-auto w-full max-w-4xl overflow-hidden">
+        <CardHeader>
+          <div className="flex items-start justify-between">
+            <div className="space-y-1">
+              <CardTitle className="text-2xl">Submission Status</CardTitle>
+              <CardDescription>
+                You have already submitted an answer for this challenge
+              </CardDescription>
+            </div>
+            <Badge variant={answer.score !== 0 ? "success" : "secondary"}>
+              {answer.score !== 0 ? "Reviewed" : "Pending Review"}
+            </Badge>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Stats Section */}
+          {answer.score !== 0 && (
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <Trophy className="h-4 w-4 text-muted-foreground" />
+                <p className="text-sm font-medium">Score</p>
+              </div>
+              <p className="text-2xl font-bold">{answer.score}</p>
+            </div>
+          )}
+
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <CalendarDays className="h-4 w-4 text-muted-foreground" />
+              <p className="text-sm font-medium">Submitted</p>
+            </div>
+            <p className="text-sm">
+              {answer.submittedAt.toLocaleDateString(undefined, {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+          </div>
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <Code2 className="h-4 w-4 text-muted-foreground" />
+              <p className="text-sm font-medium">Language</p>
+            </div>
+            <p className="text-sm">C++</p>
+          </div>
+          {/* Code Section */}
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-semibold">Your Solution</h3>
+              <Badge variant="outline">Read Only</Badge>
+            </div>
+            <Controlled
+              theme={theme === "dark" ? "dark" : "light"}
+              extensions={[cpp()]}
+              className="rounded-md border bg-muted/50"
+              height="300px"
+              value={answer.code}
+              readOnly
+            />
+          </div>
+
+          {/* Review Status */}
+          {answer.result && (
+            <>
+              <Separator />
+              <div className="space-y-2">
+                <h3 className="text-lg font-semibold">Review Comments</h3>
+                <p className="text-sm text-muted-foreground">
+                  {answer.result ||
+                    "Not reviewed yet. Please wait until the admin reviews your submission."}
+                </p>
+              </div>
+            </>
+          )}
+        </CardContent>
+      </Card>
+    );
   } else {
     return (
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <Card className="mx-auto w-full max-w-4xl overflow-hidden">
-            <CardHeader className="bg-primary-2 text-primary-foreground">
-              <CardTitle className="text-xl">Challenge N: {index}</CardTitle>
-            </CardHeader>
             <CardContent className="space-y-6">
-              <div className="my-4">
-                <CardDescription className="text-foreground">
-                  {question.description}
-                </CardDescription>
-                <CardDescription>{question.constraints}</CardDescription>
-              </div>
               <Separator />
-              <Accordion type="single" collapsible className="w-full">
-                <AccordionItem value="example">
-                  <AccordionTrigger>View Example</AccordionTrigger>
-                  <AccordionContent>
-                    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                      <div className="space-y-2">
-                        <h3 className="font-semibold">Example Input:</h3>
-                        <pre className="rounded-md bg-muted p-2">
-                          {question.exampleInput}
-                        </pre>
-                      </div>
-                      <div className="space-y-2">
-                        <h3 className="font-semibold">Example Output:</h3>
-                        <pre className="rounded-md bg-muted p-2">
-                          {question.exampleOutput}
-                        </pre>
-                      </div>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </Accordion>
-
               <FormField
                 control={form.control}
                 name="code"
@@ -204,7 +251,7 @@ export default function EnhancedCodeQuestionPage({
             </CardContent>
             <CardFooter className="flex flex-col space-y-6">
               {!showSuccessMessage && (
-                <Alert variant="warning" className="w-auto">
+                <Alert variant="warning" className="w-full">
                   <AlertCircle className="h-4 w-4" />
                   <AlertTitle>Important</AlertTitle>
                   <AlertDescription>

@@ -1,3 +1,4 @@
+import { currentUser } from "@/server/auth";
 import { db } from "@/server/db";
 
 /**
@@ -105,20 +106,17 @@ export const getAllAnswersForUser = async (userId: string) => {
  * Retrieves an answer by its userId and quizId.
  * @param params - An object containing the following parameters:
  * @param params.quizId - The ID of the quiz to check submissions for.
- * @param params.userId - The ID of the user to check submissions for.
  * @returns A promise that resolves to answer if the user has submitted an answer, null otherwise.
  */
-export const getSubmittedAnswer = async ({
-  quizId,
-  userId,
-}: {
-  quizId: string;
-  userId: string;
-}) => {
+export const getSubmittedAnswer = async ({ quizId }: { quizId: string }) => {
   try {
+    const crntUser = await currentUser();
+
+    if (!currentUser) return null;
+
     const answer = await db.answer.findFirst({
       where: {
-        userId,
+        userId: crntUser?.id,
         quizId,
       },
     });
@@ -133,21 +131,22 @@ export const getSubmittedAnswer = async ({
  * Retrieves an answer by its userId and codeQuestionId.
  * @param params - An object containing the following parameters:
  * @param params.codeQuestionId - The ID of the quiz to check submissions for.
- * @param params.userId - The ID of the user to check submissions for.
  * @returns A promise that resolves to answer if the user has submitted an answer, null otherwise.
  */
 export const getSubmittedCodeQuestion = async ({
   codeQuestionId,
-  userId,
 }: {
   codeQuestionId: string;
-  userId: string;
 }) => {
   try {
+    const crntUser = await currentUser();
+
+    if (!currentUser) return null;
+
     const answer = await db.codeSubmission.findFirst({
       where: {
         codeQuestionId,
-        userId,
+        userId: crntUser?.id,
       },
     });
     return answer;

@@ -49,6 +49,7 @@ export function ImageUploadDialog() {
         setOpen(false);
         router.refresh();
       } catch (error) {
+        if (error instanceof Error) console.log(error.message);
         toast.error("Upload failed", {
           description:
             "There was an error uploading your image. Please try again.",
@@ -85,12 +86,16 @@ export function ImageUploadDialog() {
               setFile(file);
               setProgress(0);
             }}
+            disabled={isPending}
           />
 
           {progress > 0 && <Progress value={progress} className="w-full" />}
         </div>
         <div className="flex justify-end">
-          <Button onClick={onUpload} disabled={!file || progress > 0}>
+          <Button
+            onClick={onUpload}
+            disabled={!file || progress > 0 || isPending}
+          >
             Upload
           </Button>
         </div>

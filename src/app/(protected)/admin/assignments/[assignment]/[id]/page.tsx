@@ -1,10 +1,4 @@
 import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,6 +13,7 @@ import { getCodeQuestionWithAnswers } from "@/data/answers";
 import ReviewSubmission from "./review-form";
 import { Code, Clock, Users, AlertTriangle } from "lucide-react";
 import Link from "next/link";
+import RenderDOMPurify from "@/components/render-dompurify";
 
 const EnhancedCodeQuestionPage = async (props: {
   params: Promise<{ id: string }>;
@@ -52,7 +47,7 @@ const EnhancedCodeQuestionPage = async (props: {
             <div>
               <CardTitle className="mb-2 flex items-center text-2xl font-bold">
                 <Code className="mr-2" />
-                Code Question
+                {codeQuestion.title}
               </CardTitle>
               <p className="text-muted-foreground">ID: {codeQuestion.id}</p>
             </div>
@@ -64,35 +59,9 @@ const EnhancedCodeQuestionPage = async (props: {
         <CardContent className="space-y-4">
           <div>
             <h3 className="mb-2 font-semibold">Description:</h3>
-            <p>{codeQuestion.description}</p>
+            {/* <div className="prose dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize() }} /> */}
+            <RenderDOMPurify content={codeQuestion.description} />
           </div>
-          {codeQuestion.constraints && (
-            <div>
-              <h3 className="mb-2 font-semibold">Constraints:</h3>
-              <p>{codeQuestion.constraints}</p>
-            </div>
-          )}
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="example">
-              <AccordionTrigger>View Example</AccordionTrigger>
-              <AccordionContent>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                  <div className="space-y-2">
-                    <h3 className="font-semibold">Example Input:</h3>
-                    <pre className="overflow-x-auto rounded-md bg-muted p-2">
-                      {codeQuestion.exampleInput}
-                    </pre>
-                  </div>
-                  <div className="space-y-2">
-                    <h3 className="font-semibold">Example Output:</h3>
-                    <pre className="overflow-x-auto rounded-md bg-muted p-2">
-                      {codeQuestion.exampleOutput}
-                    </pre>
-                  </div>
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
         </CardContent>
         <CardFooter className="flex items-center justify-between text-sm text-muted-foreground">
           <div className="flex items-center">

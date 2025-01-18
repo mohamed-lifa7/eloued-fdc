@@ -55,6 +55,12 @@ export async function createQuiz(formData: FormData) {
   }
 }
 
+/**
+ * create new code question.
+ *
+ * @param values - The new values for the code question.
+ * @returns An object with either a success message or an error message.
+ */
 export async function createCodeQuestion(
   values: z.infer<typeof CodeQuestionSchema>,
 ) {
@@ -67,10 +73,7 @@ export async function createCodeQuestion(
 
     const {
       description,
-      exampleInput,
       assignmentId,
-      exampleOutput,
-      constraints,
     } = validatedFields.data;
 
     const crntUser = await currentUser();
@@ -82,10 +85,7 @@ export async function createCodeQuestion(
     await db.codeQuestion.create({
       data: {
         description,
-        exampleInput,
-        exampleOutput,
         assignmentId,
-        constraints,
       },
     });
 

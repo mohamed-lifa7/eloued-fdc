@@ -50,6 +50,7 @@ export async function generateStaticParams() {
 
 export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostFromParams(params);
+  console.log(post?.body)
 
   if (!post || !post.published) {
     notFound();

@@ -28,6 +28,12 @@ enum UserRank {
     MASTER
 }
 
+enum Difficulties {
+    Easy
+    Medium
+    Hard
+}
+
 model User {
     id                    String                 @id @default(cuid())
     name                  String?
@@ -161,18 +167,23 @@ model Question {
     quizId        String?
 }
 
+enum Difficulty {
+    EASY
+    MEDIUM
+    HARD
+}
+
 model CodeQuestion {
-    id            String           @id @default(cuid())
-    description   String
-    exampleInput  String
-    exampleOutput String
-    maxScore      Int              @default(25)
-    constraints   String?
-    assignment    Assignment       @relation(fields: [assignmentId], references: [id])
-    submissions   CodeSubmission[]
-    assignmentId  String
-    createdAt     DateTime         @default(now())
-    updatedAt     DateTime         @default(now())
+    id           String           @id @default(cuid())
+    title        String           @default("Untitled Question")
+    difficulty   Difficulty       @default(EASY)
+    description  String
+    maxScore     Int              @default(25)
+    assignment   Assignment       @relation(fields: [assignmentId], references: [id])
+    submissions  CodeSubmission[]
+    assignmentId String
+    createdAt    DateTime         @default(now())
+    updatedAt    DateTime         @default(now())
 }
 
 model Answer {

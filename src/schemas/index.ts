@@ -123,9 +123,6 @@ export const QuestionSchema = z.object({
 
 export const CodeQuestionSchema = z.object({
   description: z.string(),
-  exampleInput: z.string(),
-  exampleOutput: z.string(),
-  constraints: z.optional(z.string()), // Optional constraints
   assignmentId: z.string(),
 });
 

@@ -2,8 +2,6 @@
 
 import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardHeader,
@@ -13,7 +11,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { CodeQuestionSchema } from "@/schemas";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type z } from "zod";
 import { createCodeQuestion } from "@/actions/quizzes";
@@ -28,6 +26,11 @@ import {
 } from "@/components/ui/form";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
+import hljs from 'highlight.js';
+import dynamic from "next/dynamic";
+import "react-quill-new/dist/quill.snow.css";
+
+const QuillEditor = dynamic(() => import("react-quill-new"), { ssr: false });
 
 export default function CodeQuestionForm({
   assignmentId,
@@ -42,6 +45,7 @@ export default function CodeQuestionForm({
     resolver: zodResolver(CodeQuestionSchema),
     defaultValues: {
       assignmentId,
+      description: "",
     },
   });
 
@@ -52,12 +56,12 @@ export default function CodeQuestionForm({
           if (data.error) {
             setError(data.error);
             toast.error(data.error);
-        }
+          }
         
-        if (data.success) {
+          if (data.success) {
             setSuccess(data.success);
             toast.success(data.success);
-            form.reset()
+            form.reset();
           }
         })
         .catch(() => setError("Something went wrong!"));
@@ -74,74 +78,35 @@ export default function CodeQuestionForm({
               Create a new coding challenge for assignments
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 flex flex-col justify-between">
             <FormField
               control={form.control}
               name="description"
-              render={({ field }) => (
+              render={({ }) => (
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Textarea
-                      {...field}
-                      placeholder="Write a detailed description of the coding challenge"
-                      className="min-h-[100px]"
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="exampleInput"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Example Input</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Provide an example input"
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="exampleOutput"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Example Output</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      placeholder="Provide the expected output for the example input"
-                      disabled={isPending}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="constraints"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Constraints (Optional)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      placeholder="Add any constraints or limitations for the challenge"
-                      className="min-h-[80px]"
-                      disabled={isPending}
+                    <Controller
+                      name="description"
+                      control={form.control}
+                      render={({ field }) => (
+                        <QuillEditor
+                          theme="snow"
+                          value={field.value}
+                          onChange={field.onChange}
+                          modules={{
+                            syntax: { hljs },
+                            toolbar: [
+                              [{ header: [1, 2, false] }],
+                              ["bold", "italic", "underline", "strike", "blockquote"],
+                              [{ list: "ordered" }, { list: "bullet" }],
+                              ["link", "code-block", "code"],
+                              ["clean"],
+                            ],
+                          }}
+                          className="min-h-[200px]"
+                        />
+                      )}
                     />
                   </FormControl>
                   <FormMessage />
@@ -162,3 +127,4 @@ export default function CodeQuestionForm({
     </Card>
   );
 }
+

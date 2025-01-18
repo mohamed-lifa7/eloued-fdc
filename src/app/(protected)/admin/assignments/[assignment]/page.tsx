@@ -18,6 +18,9 @@ import {
 import CodeQuestionForm from "./add-code-question";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
+import { Difficulty } from "@prisma/client";
+import { Calendar, Trophy } from "lucide-react";
 
 const breadcrumbItems: BreadcrumbType[] = [
   { title: "Dashboard", href: "/admin", disabled: false, type: "link" },
@@ -54,27 +57,59 @@ export default async function Page(props: {
         <Separator />
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {assignment.codeQuestions.map((q) => (
-            <Card key={q.id} className="flex flex-col justify-between">
+            <Card
+              className="w-full max-w-sm transition-all duration-300 hover:shadow-lg"
+              key={q.id}
+            >
               <CardHeader>
-                <CardTitle>{q.description}</CardTitle>
-                <CardDescription>Constraints : {q.constraints}</CardDescription>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-bold">{q.title}</CardTitle>
+                  <Badge
+                    variant={
+                      q.difficulty == Difficulty.EASY
+                        ? "success"
+                        : q.difficulty == Difficulty.HARD
+                          ? "outline"
+                          : "destructive"
+                    }
+                  >
+                    {q.difficulty}
+                  </Badge>
+                </div>
+                <CardDescription className="flex items-center space-x-2 text-sm text-gray-500">
+                  <Calendar className="h-4 w-4" />
+                  <span>
+                    {new Intl.DateTimeFormat("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }).format(q.createdAt)}
+                  </span>
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Example Input : {q.exampleInput}</p>
-                <p>Example Ouput : {q.exampleOutput}</p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-1">
+                      <Trophy className="h-5 w-5 text-yellow-500" />
+                      <span className="font-semibold">{q.maxScore}</span>
+                      <span className="text-sm text-gray-500">Max score</span>
+                    </div>
+                  </div>
               </CardContent>
               <CardFooter>
-                <Button variant="primary2" asChild>
-                  <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
-                    view submitions
-                  </Link>
-                </Button>
+              <Button variant="primary2" asChild>
+                   <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
+                     view submitions
+                   </Link>
+                 </Button>
               </CardFooter>
             </Card>
           ))}
         </div>
         {assignment.codeQuestions.length > 0 && <Separator className="my-4" />}
-        <div className="grid h-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-4">
           <CreateQuizForm assignmentId={params.assignment} />
           <CodeQuestionForm assignmentId={params.assignment} />
         </div>
