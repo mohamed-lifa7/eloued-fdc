@@ -12,6 +12,7 @@ const menu = [
   { title: "Home", href: "/" },
   { title: "Blogs", href: "/blogs" },
   { title: "Events", href: "/events" },
+  { title: "Leaderboard", href: "/leaderboard" },
   { title: "About us", href: "/about" },
   { title: "Contact us", href: "/contact" },
 ];
