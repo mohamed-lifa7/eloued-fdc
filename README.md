@@ -77,26 +77,63 @@ We welcome contributions from all club members! Please read our Contributing Gui
 ### Steps to Contribute:
 
 1. Fork the repository.
+   - Click the "Fork" button on the top-right of this repository to create your own copy.
 2. Clone the repository.
-   ```bash
-   git clone https://github.com/mohamed-lifa7/eloued-fdc.git
-   ```
-3. Create a new branch for your feature or bugfix:
-   ```bash
-   git checkout -b feature-name
-   ```
-4. Commit your changes and push your branch:
+   - Clone your forked repository to your local machine:
+      ```bash
+      git clone https://github.com/<your-username>/eloued-fdc.git
+      ```
+   - Replace `<your-username>` with your GitHub username.
 
+3. Set Upstream Remote (Optional but Recommended)
+   - To stay updated with changes from the main repository, configure the upstream remote:
    ```bash
-   git commit -m "Add new feature"
-   git push origin feature-name
+   git remote add upstream https://github.com/mohamed-lifa7/eloued-fdc.git
    ```
+4. Create a New Branch
+   - Always create a new branch for your feature or bug fix:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+   - Use a descriptive branch name, prefixed with `feature/` or `bugfix/`.
 
-5. Open a pull request in the main repository.
+5. Check for Lint and Type Check 
+   - Run this command to ensure your code adheres to our standards.
+   ```bash
+   pnpm check
+   ```
+   - Fix any linting or test issues before proceeding.
+   - Optionally, build the project locally to ensure it runs as expected before committing any changes.
+6. Write Clear and Descriptive Commits
+   - Make sure your commits are clear and follow good practices:
+   ```bash 
+   git commit -m "Add: Description of the feature or fix"
+   ```
+7. Push Your Branch
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+8. Open a Pull Request (PR)
+   - Go to the original repository: [mohamed-lifa7/eloued-fdc](https://github.com/mohamed-lifa7/eloued-fdc).
+   - Open a PR with the following details:
+      - **Title**: Use a clear and descriptive title for your PR.
+      - **Description**: Explain what changes you made and why.
+      - **Link Issues**: If applicable, link related issues (e.g., Closes #123).
+   - Ensure your PR follows the repository’s guidelines and passes all checks.
+9. Participate in the Review Process
+   - Respond promptly to any feedback from maintainers or reviewers.
+   - Make necessary changes and push updates to your branch.
 
 ### Code of Conduct
 
 Our project follows the T3 App's strict mode. For more details, visit the [T3 App documentation](https://create.t3.gg/).
+
+- Follow the code of conduct.
+- Write clean, well-documented code.
+- Include tests for new features or bug fixes.
+- Check that your code follows the project's style and conventions.
+- Keep your PR small and focused. Avoid bundling unrelated changes in a single PR.
+
 
 ## License
 
