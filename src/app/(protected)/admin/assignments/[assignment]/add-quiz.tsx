@@ -95,8 +95,11 @@ export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={cn(questions.length>0 ? "space-y-8":"", "h-full")}>
-      <div className="space-y-4 ">
+    <form
+      onSubmit={handleSubmit}
+      className={cn(questions.length > 0 ? "space-y-8" : "", "h-full")}
+    >
+      <div className="space-y-4">
         {questions.map((q, index) => (
           <Card key={q.id}>
             <CardHeader>

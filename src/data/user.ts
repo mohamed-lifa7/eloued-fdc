@@ -48,7 +48,7 @@ export const getUserRepuation = async (id: string) => {
     });
 
     return {
-      totalPoints: totalPoints
+      totalPoints: totalPoints,
     };
   } catch (error) {
     console.error("Error retrieving user with points:", error);

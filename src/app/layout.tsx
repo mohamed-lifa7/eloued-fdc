@@ -29,7 +29,11 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html
-        className={cn("min-h-screen font-sans", GeistSans.variable, GeistMono.variable)}
+        className={cn(
+          "min-h-screen font-sans",
+          GeistSans.variable,
+          GeistMono.variable,
+        )}
         dir="ltr"
         lang="en"
       >
@@ -38,7 +42,7 @@ export default async function RootLayout({
             <SiteHeader />
             {children}
             <SiteFooter />
-            <Toaster richColors/>
+            <Toaster richColors />
           </AppProviders>
         </body>
       </html>

@@ -51,7 +51,7 @@ export const HoverEffect = ({
               />
             )}
           </AnimatePresence>
-          <Card className="relative z-20 h-full w-full overflow-hidden flex flex-col">
+          <Card className="relative z-20 flex h-full w-full flex-col overflow-hidden">
             <CardHeader>
               <CardTitle>{item.title}</CardTitle>
             </CardHeader>

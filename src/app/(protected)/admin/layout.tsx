@@ -16,7 +16,7 @@ export default function AdminLayout({
     <SidebarProvider>
       <AdminSidebar />
       <main className="w-full">
-        <SidebarTrigger className="mt-16"/>
+        <SidebarTrigger className="mt-16" />
         {children}
       </main>
     </SidebarProvider>

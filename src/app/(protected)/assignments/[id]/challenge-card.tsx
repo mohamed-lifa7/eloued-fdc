@@ -8,12 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-  Calendar,
-  Trophy,
-  ChevronRight,
-  CheckCircle,
-} from "lucide-react";
+import { Calendar, Trophy, ChevronRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import { type CodeSubmission, Difficulty } from "@prisma/client";
 

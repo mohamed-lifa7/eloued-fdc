@@ -22,7 +22,7 @@ export default function ModeToggle() {
     <Button
       variant="secondary"
       onClick={handleClick}
-      className="rounded-full h-10 w-10"
+      className="h-10 w-10 rounded-full"
     >
       {svg}
     </Button>

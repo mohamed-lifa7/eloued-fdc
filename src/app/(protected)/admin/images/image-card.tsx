@@ -28,7 +28,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, index }) => {
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
   const { edgestore } = useEdgeStore();
-  const router = useRouter()
+  const router = useRouter();
 
   const copyToClipboard = async () => {
     try {
@@ -56,7 +56,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, index }) => {
       toast.success("Image Deleted", {
         description: "The image has been successfully deleted.",
       });
-      router.refresh()
+      router.refresh();
     } catch (err) {
       console.error("Failed to delete: ", err);
       toast.error("Deletion Failed", {
@@ -74,24 +74,24 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, index }) => {
         throw new Error(`Failed to fetch image: ${response.statusText}`);
       }
       const blob = await response.blob();
-  
+
       // Create a downloadable link
       const url = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-  
+
       // Use the image name or a default name for the file
       const fileName = imageUrl.split("/").pop() ?? `downloaded-image-${index}`;
       link.download = fileName;
-  
+
       // Trigger the download
       document.body.appendChild(link);
       link.click();
-  
+
       // Cleanup
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
-  
+
       toast.success("Download Successed", {
         description: "Your image is being downloaded.",
       });
@@ -102,7 +102,6 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, index }) => {
       });
     }
   };
-  
 
   return (
     <>
@@ -118,7 +117,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, index }) => {
             />
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between items-center p-2">
+        <CardFooter className="flex items-center justify-between p-2">
           <Button
             onClick={copyToClipboard}
             variant="outline"
@@ -139,11 +138,7 @@ export const ImageCard: React.FC<ImageCardProps> = ({ imageUrl, index }) => {
           >
             <Trash2 className="h-4 w-4" />
           </Button>
-          <Button
-            onClick={handleDownload}
-            variant="primary2"
-            className=""
-          >
+          <Button onClick={handleDownload} variant="primary2" className="">
             <Download className="h-4 w-4" />
           </Button>
         </CardFooter>

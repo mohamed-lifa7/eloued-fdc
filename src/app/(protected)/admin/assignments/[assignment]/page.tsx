@@ -90,20 +90,20 @@ export default async function Page(props: {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-1">
-                      <Trophy className="h-5 w-5 text-yellow-500" />
-                      <span className="font-semibold">{q.maxScore}</span>
-                      <span className="text-sm text-gray-500">Max score</span>
-                    </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-1">
+                    <Trophy className="h-5 w-5 text-yellow-500" />
+                    <span className="font-semibold">{q.maxScore}</span>
+                    <span className="text-sm text-gray-500">Max score</span>
                   </div>
+                </div>
               </CardContent>
               <CardFooter>
-              <Button variant="primary2" asChild>
-                   <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
-                     view submitions
-                   </Link>
-                 </Button>
+                <Button variant="primary2" asChild>
+                  <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
+                    view submitions
+                  </Link>
+                </Button>
               </CardFooter>
             </Card>
           ))}

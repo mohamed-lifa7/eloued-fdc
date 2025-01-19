@@ -71,10 +71,7 @@ export async function createCodeQuestion(
       return { error: "Invalid code question data!" };
     }
 
-    const {
-      description,
-      assignmentId,
-    } = validatedFields.data;
+    const { description, assignmentId } = validatedFields.data;
 
     const crntUser = await currentUser();
 

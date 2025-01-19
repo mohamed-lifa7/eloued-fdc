@@ -13,7 +13,7 @@ const page = () => {
             <h2 className="font-heading mb-4 text-3xl font-bold tracking-tight text-primary-2 sm:text-5xl">
               Get in Touch
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-xl text-foreground-500">
+            <p className="text-foreground-500 mx-auto mt-4 max-w-3xl text-xl">
               We&apos;re here to help you. Reach out to us for any queries or
               assistance.
             </p>
@@ -22,7 +22,7 @@ const page = () => {
         <div className="flex items-stretch justify-center">
           <div className="grid md:grid-cols-2">
             <div className="h-full pr-6">
-              <p className="mb-12 mt-3 text-lg text-foreground-500">
+              <p className="text-foreground-500 mb-12 mt-3 text-lg">
                 We value your feedback and inquiries. Feel free to contact us,
                 and we&apos;ll get back to you as soon as possible.
               </p>

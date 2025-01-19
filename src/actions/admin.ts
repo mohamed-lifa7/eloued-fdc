@@ -16,5 +16,5 @@ export const admin = async () => {
     return { success: "Allowed Server Action!" };
   }
 
-  return { error: "Forbidden Server Action!" }
+  return { error: "Forbidden Server Action!" };
 };

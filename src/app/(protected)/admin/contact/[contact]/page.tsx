@@ -53,7 +53,7 @@ export default async function Page(props: {
           </CardContent>
           <Separator />
           <CardFooter>
-            <p className="text-sm text-foreground-400">
+            <p className="text-foreground-400 text-sm">
               <span className="font-medium">Submitted on:</span>{" "}
               {new Date(
                 contact?.createdAt !== undefined ? contact?.createdAt : "00",

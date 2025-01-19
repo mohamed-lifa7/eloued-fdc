@@ -50,9 +50,7 @@ export const Community = () => {
                 <Card key={index} className="space-y-4 p-4">
                   <CardHeader className="flex flex-col items-center">
                     <div className="mb-4">
-                      {IconComponent && (
-                        <IconComponent className="h-12 w-12" />
-                      )}
+                      {IconComponent && <IconComponent className="h-12 w-12" />}
                     </div>
                     <h3 className="text-xl font-semibold">{social.title}</h3>
                   </CardHeader>

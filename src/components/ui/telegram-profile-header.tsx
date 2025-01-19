@@ -75,7 +75,8 @@ export function TelegramHeader({
             className={`flex gap-1 text-xs text-foreground ${expand ? "mb-0" : "mb-4"}`}
             animate={{ color: expand ? "#ffffff" : "#8C8C93" }}
           >
-            <p className="tracking-tight capitalize">{rank.toLowerCase()}</p> • <p>{exp} points</p>
+            <p className="capitalize tracking-tight">{rank.toLowerCase()}</p> •{" "}
+            <p>{exp} points</p>
           </motion.div>
         </motion.div>
 

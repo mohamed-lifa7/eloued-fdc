@@ -16,7 +16,7 @@ export default async function EventsPage() {
   return (
     <div className="flex-1 space-y-4 p-5">
       <BreadcrumbMaker items={breadcrumbItems} />
-      <div className="flex justify-between" >
+      <div className="flex justify-between">
         <Heading
           title="Event Management"
           description="Manage the events list through this page. Add, edit, and delete events."

@@ -25,12 +25,12 @@ export default async function Page(props: {
       <div className="flex-1 space-y-4 p-5">
         <BreadcrumbMaker items={breadcrumbItems} />
         {event && (
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <Heading
               title="Update Event"
               description="Update event information, such as name, date, location, and details."
             />
-            <AddAssignment eventId={event.id} /> 
+            <AddAssignment eventId={event.id} />
           </div>
         )}
         <UpdateEventForm event={event} />

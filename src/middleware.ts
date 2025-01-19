@@ -15,10 +15,16 @@ const { auth } = NextAuth(authConfig);
 export default auth((req): void | Response | Promise<void | Response> => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
-  const isAdmin = isLoggedIn && (req.auth?.user.role == UserRole.ADMIN || req.auth?.user.role == UserRole.OWNER);
+  const isAdmin =
+    isLoggedIn &&
+    (req.auth?.user.role == UserRole.ADMIN ||
+      req.auth?.user.role == UserRole.OWNER);
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname) || nextUrl.pathname.startsWith("/blogs") || nextUrl.pathname.startsWith("/profile") 
+  const isPublicRoute =
+    publicRoutes.includes(nextUrl.pathname) ||
+    nextUrl.pathname.startsWith("/blogs") ||
+    nextUrl.pathname.startsWith("/profile");
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix);
 
@@ -46,13 +52,12 @@ export default auth((req): void | Response | Promise<void | Response> => {
     );
   }
 
-  if(isAdminRoute){
-    if (isAdmin){
-      return void 0
+  if (isAdminRoute) {
+    if (isAdmin) {
+      return void 0;
     }
     return Response.redirect(new URL("/accessdenied", nextUrl));
   }
-
 
   return void 0;
 });

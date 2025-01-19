@@ -8,9 +8,8 @@ import { Tag } from "@/components/blogs/tag";
 import { MDXContent } from "@/components/blogs/mdx-component";
 
 type PostPageProps = {
-    params: Promise<{ slug: string[] }>;
+  params: Promise<{ slug: string[] }>;
 };
-
 
 async function getPostFromParams(params: PostPageProps["params"]) {
   const slug = (await params).slug?.join("/");
@@ -50,14 +49,14 @@ export async function generateStaticParams() {
 
 export default async function PostPage({ params }: PostPageProps) {
   const post = await getPostFromParams(params);
-  console.log(post?.body)
+  console.log(post?.body);
 
   if (!post || !post.published) {
     notFound();
   }
 
   return (
-    <article className="container prose dark:prose-invert mx-auto max-w-3xl py-16">
+    <article className="container prose mx-auto max-w-3xl py-16 dark:prose-invert">
       <h1 className="mb-2">{post.title}</h1>
       <div className="mb-2 flex gap-2">
         {post.tags?.map((tag) => <Tag tag={tag} key={tag} />)}

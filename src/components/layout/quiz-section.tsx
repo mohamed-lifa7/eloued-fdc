@@ -56,7 +56,7 @@ export const QuizSection: React.FC<{ quizData: QuizData }> = ({ quizData }) => {
             <Button onClick={restartQuiz}>Restart Quiz</Button>
           </div>
         ) : (
-          <div className="shodow-md flex flex-col items-center p-4 shadow-lg dark:shadow-foreground-50/60 md:p-10">
+          <div className="shodow-md dark:shadow-foreground-50/60 flex flex-col items-center p-4 shadow-lg md:p-10">
             <h3>{quizData.questions[currentQuestion]?.question}</h3>
             <ul className="my-4 flex w-full flex-col justify-between space-y-2">
               {quizData.questions[currentQuestion]?.choices.map(

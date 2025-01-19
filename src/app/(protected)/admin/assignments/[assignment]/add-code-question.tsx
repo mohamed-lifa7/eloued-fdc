@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/form";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
-import hljs from 'highlight.js';
+import hljs from "highlight.js";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
 
@@ -57,7 +57,7 @@ export default function CodeQuestionForm({
             setError(data.error);
             toast.error(data.error);
           }
-        
+
           if (data.success) {
             setSuccess(data.success);
             toast.success(data.success);
@@ -78,11 +78,11 @@ export default function CodeQuestionForm({
               Create a new coding challenge for assignments
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4 flex flex-col justify-between">
+          <CardContent className="flex flex-col justify-between space-y-4">
             <FormField
               control={form.control}
               name="description"
-              render={({ }) => (
+              render={({}) => (
                 <FormItem>
                   <FormLabel>Description</FormLabel>
                   <FormControl>
@@ -98,7 +98,13 @@ export default function CodeQuestionForm({
                             syntax: { hljs },
                             toolbar: [
                               [{ header: [1, 2, false] }],
-                              ["bold", "italic", "underline", "strike", "blockquote"],
+                              [
+                                "bold",
+                                "italic",
+                                "underline",
+                                "strike",
+                                "blockquote",
+                              ],
                               [{ list: "ordered" }, { list: "bullet" }],
                               ["link", "code-block", "code"],
                               ["clean"],
@@ -127,4 +133,3 @@ export default function CodeQuestionForm({
     </Card>
   );
 }
-

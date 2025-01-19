@@ -19,7 +19,7 @@ interface GalleryPageProps {
 
 const ITEMS_PER_PAGE = 12;
 const GalleryPage = async ({ searchParams }: GalleryPageProps) => {
-  const page = (await searchParams).page
+  const page = (await searchParams).page;
   const currentPage = Number(page) || 1;
   let data;
   let error;

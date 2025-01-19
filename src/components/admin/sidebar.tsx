@@ -1,4 +1,11 @@
-import { CalendarClock, Home, Image, ListTodo, PhoneCall, Users } from "lucide-react";
+import {
+  CalendarClock,
+  Home,
+  Image,
+  ListTodo,
+  PhoneCall,
+  Users,
+} from "lucide-react";
 
 import {
   Sidebar,

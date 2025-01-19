@@ -10,7 +10,7 @@ import { type z } from "zod";
  * @returns An object with either a success message or an error message.
  */
 export const sendContactForm = async (
-  values: z.infer<typeof ContactFormSchema>
+  values: z.infer<typeof ContactFormSchema>,
 ) => {
   try {
     // Validate input fields using the ContactFormSchema
@@ -36,7 +36,8 @@ export const sendContactForm = async (
     return { success: "Message sent successfully!" };
   } catch (error) {
     console.error("Error sending message", error);
-    return { error: "There was an error sending your message. Please try again." };
+    return {
+      error: "There was an error sending your message. Please try again.",
+    };
   }
 };
-

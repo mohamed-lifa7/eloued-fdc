@@ -32,7 +32,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const sortedTags = sortTagsByCount(tags);
 
   return (
-    <main className="container max-w-4xl my-20">
+    <main className="container my-20 max-w-4xl">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
           <h1 className="inline-block text-4xl font-black lg:text-5xl">
