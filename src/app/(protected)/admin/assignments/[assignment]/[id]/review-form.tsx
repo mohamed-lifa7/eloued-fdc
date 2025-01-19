@@ -15,7 +15,7 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import Controlled from "@uiw/react-codemirror";
-import { python } from "@codemirror/lang-python";
+import { cpp, cppLanguage } from "@codemirror/lang-cpp";
 import { useTheme } from "next-themes";
 import { CodeSubmissionSchema } from "@/schemas";
 import { useTransition } from "react";
@@ -120,7 +120,7 @@ export default function ReviewSubmission({
                     <Controlled
                       {...field}
                       theme={theme === "dark" ? "dark" : "light"}
-                      extensions={[python()]}
+                      extensions={[cpp(), cppLanguage]}
                       className="mt-2 rounded-md border"
                       height="300px"
                       readOnly

@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { UserRole } from "@prisma/client";
+import { Difficulty, UserRole } from "@prisma/client";
 
 export const SettingsSchema = z
   .object({
@@ -105,6 +105,19 @@ export const UpdateAssignmentSchema = z.object({
   description: z.string(),
 });
 
+export const questionSchema = z.object({
+  content: z.string().min(1, "Question content is required"),
+  options: z.array(z.string()).min(2, "At least two options are required"),
+  correctOption: z.string().min(1, "Correct option is required"),
+});
+
+export const quizSchema = z.object({
+  assignmentId: z.string().min(1, "Assignment ID is required"),
+  questions: z
+    .array(questionSchema)
+    .min(1, "At least one question is required"),
+});
+
 export const AnswerSchema = z.object({
   userId: z.optional(z.string()),
   quizId: z.optional(z.string()),
@@ -122,6 +135,12 @@ export const QuestionSchema = z.object({
 });
 
 export const CodeQuestionSchema = z.object({
+  title: z.string().min(1, "Question Title is required").max(40),
+  maxScore: z.coerce
+    .number()
+    .gte(5, "Max score should be at least 5 points")
+    .lte(50, "Max score should be at most 50 points"),
+  difficulty: z.enum([Difficulty.EASY, Difficulty.MEDIUM, Difficulty.HARD]),
   description: z.string(),
   assignmentId: z.string(),
 });

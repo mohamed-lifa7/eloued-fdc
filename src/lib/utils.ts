@@ -138,3 +138,27 @@ export function formatToURL(input: string): string {
     .replace(/[^a-z0-9\s-]/g, "") // Remove special characters
     .replace(/\s+/g, "-"); // Replace spaces with hyphens
 }
+
+/**
+ * Determines the rank of a user based on their experience points (exp).
+ *
+ * Rank Categories:
+ * - Beginner: Less than 50 points
+ * - Intermediate: 50 to 199 points
+ * - Advanced: 200 to 499 points
+ * - Expert: 500 or more points
+ *
+ * @param exp - The experience points of the user.
+ * @returns The rank of the user as a string.
+ */
+export const getRank = (exp: number): string => {
+  if (exp < 50) {
+    return "Beginner";
+  } else if (exp < 200) {
+    return "Intermediate";
+  } else if (exp < 500) {
+    return "Advanced";
+  } else {
+    return "Expert";
+  }
+};

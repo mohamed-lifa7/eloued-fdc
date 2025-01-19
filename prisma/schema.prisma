@@ -20,14 +20,6 @@ enum UserRole {
     USER
 }
 
-enum UserRank {
-    BEGINNER
-    INTERMEDIATE
-    ADVANCED
-    EXPERT
-    MASTER
-}
-
 enum Difficulties {
     Easy
     Medium
@@ -48,7 +40,6 @@ model User {
     bio                   String?                @default("")
     birthday              DateTime?
     reputation            Int                    @default(0)
-    rank                  UserRank               @default(BEGINNER)
     createdAt             DateTime               @default(now())
     faculty               String?                @default("SE")
     isMember              Boolean                @default(false)

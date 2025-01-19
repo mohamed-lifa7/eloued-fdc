@@ -29,6 +29,15 @@ import { FormSuccess } from "@/components/form-success";
 import hljs from "highlight.js";
 import dynamic from "next/dynamic";
 import "react-quill-new/dist/quill.snow.css";
+import { Difficulty } from "@prisma/client";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const QuillEditor = dynamic(() => import("react-quill-new"), { ssr: false });
 
@@ -45,7 +54,8 @@ export default function CodeQuestionForm({
     resolver: zodResolver(CodeQuestionSchema),
     defaultValues: {
       assignmentId,
-      description: "",
+      maxScore: 25,
+      difficulty: Difficulty.EASY,
     },
   });
 
@@ -79,6 +89,61 @@ export default function CodeQuestionForm({
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-col justify-between space-y-4">
+            <FormField
+              control={form.control}
+              name="title"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Title</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Code Question Title" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="maxScore"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Max Score</FormLabel>
+                  <FormControl>
+                    <Input type="number" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="difficulty"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Difficulty</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select difficulty level" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value={Difficulty.EASY}>Easy</SelectItem>
+                        <SelectItem value={Difficulty.MEDIUM}>
+                          Medium
+                        </SelectItem>
+                        <SelectItem value={Difficulty.HARD}>Hard</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="description"

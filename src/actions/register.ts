@@ -9,6 +9,18 @@ import { getUserByEmail } from "@/data/user";
 import { sendVerificationEmail } from "@/lib/mail";
 import { generateVerificationToken } from "@/lib/tokens";
 
+type SpamCheckResponse = {
+  success: number; // Indicates the success of the request (1 for success, 0 for failure).
+  email: {
+    lastseen?: string; // Timestamp when the email was last seen in the database (optional).
+    frequency?: number; // Number of times the email was reported or seen.
+    appears?: number; // Indicates if the email appears in the spam database (1 for yes, 0 for no).
+    confidence?: number; // Confidence level (percentage) of the email being spam.
+    blacklisted?: number; // Indicates if the email is blacklisted (1 for yes, 0 for no).
+    value?: string; // The email address value being checked.
+  };
+};
+
 /**
  * Registers a new user with the provided values.
  *
@@ -31,6 +43,16 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
     if (existingUser) {
       return { error: "Email already in use!" };
+    }
+
+    const response = await fetch(
+      `https://stopforumspam.com/api?email=${email}&json`,
+    );
+
+    const data = (await response.json()) as SpamCheckResponse;
+
+    if (data.success == 1 && data.email.blacklisted == 1) {
+      return { error: "Please don't play this games with us" };
     }
 
     // Hash the password

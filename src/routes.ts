@@ -10,6 +10,7 @@ export const publicRoutes: string[] = [
   "/about",
   "/events",
   "/blogs",
+  "/leaderboard",
 ];
 
 /**

@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { getUserById } from "@/data/user";
 import { notFound } from "next/navigation";
 import { faculties } from "@/config/univ-config";
+import { getRank } from "@/lib/utils";
 
 async function page({ params }: { params: Promise<{ id: string }> }) {
   const user = await getUserById((await params).id);
@@ -15,7 +16,7 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
         <TelegramHeader
           avatar={user.image!}
           name={user.name!}
-          rank={user.rank}
+          rank={getRank(user.reputation)}
           exp={user.reputation}
         />
         <Separator />

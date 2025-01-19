@@ -8,7 +8,7 @@ import { Button } from "../ui/button";
 const images = [
   "/events/placeholder2.jpg",
   "/events/placeholder3.jpg",
-  "/events/placeholder1.jpg",
+  "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/b0b3fe89-19db-447a-8754-70bb146e8d07.jpg",
 ];
 
 const AboutSection = () => {
@@ -60,9 +60,7 @@ const AboutSection = () => {
                   width={index === 0 ? "600" : "300"}
                   height={index === 0 ? "400" : "300"}
                   className={`h-full w-full object-cover transition-transform duration-300 ${
-                    hoveredImage === index
-                      ? "scale-110 grayscale-0"
-                      : "grayscale"
+                    hoveredImage === index ? "scale-110" : ""
                   }`}
                 />
               </div>

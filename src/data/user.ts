@@ -73,3 +73,29 @@ export const getAllUsers = async () => {
   const users = await db.user.findMany();
   return users;
 };
+
+/**
+ * Retrieves leaderboard data for the top users.
+ * @returns A promise that resolves to an array of users.
+ */
+export async function getLeaderboardData() {
+  const users = await db.user.findMany({
+    orderBy: [{ reputation: "desc" }, { createdAt: "asc" }],
+    select: {
+      id: true,
+      name: true,
+      image: true,
+      faculty: true,
+      reputation: true,
+      createdAt: true,
+      _count: {
+        select: {
+          Answer: true,
+          CodeSubmission: true,
+        },
+      },
+    },
+    take: 5,
+  });
+  return users;
+}
