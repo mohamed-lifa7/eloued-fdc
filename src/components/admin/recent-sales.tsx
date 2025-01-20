@@ -19,7 +19,7 @@ export function RecentSales({
     <Card className="w-full">
       <CardHeader>
         <CardTitle>Recent users registration</CardTitle>
-        <CardDescription>Thera are total {totalUsers}.</CardDescription>
+        <CardDescription>Thera are total {totalUsers} users.</CardDescription>
       </CardHeader>
       <CardContent>
         <div className="space-y-8">
@@ -28,7 +28,7 @@ export function RecentSales({
               <Avatar className="h-9 w-9">
                 <AvatarImage src={user.image!} alt="Avatar" />
                 <AvatarFallback>
-                  {user.name?.slice(0, 3).toLowerCase()}
+                  {user.name?.slice(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
               <div className="ml-4 space-y-1">

@@ -39,9 +39,7 @@ export default async function AdminPage() {
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="analytics" disabled>
-              Analytics
-            </TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -108,6 +106,8 @@ export default async function AdminPage() {
                 totalUsers={data.allUsersCount}
               />
             </div>
+          </TabsContent>
+          <TabsContent value="analytics" className="space-y-4">
             <div className="space-y-6 p-6">
               <h1 className="text-center text-2xl font-bold md:text-left md:text-3xl">
                 Analytics Dashboard

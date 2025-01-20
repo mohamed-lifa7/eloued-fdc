@@ -57,7 +57,7 @@ export const getAllUsers = async () => {
 export const getRecentUsers = async () => {
   const users = await db.user.findMany({
     take: 5,
-    orderBy: [{ createdAt: "asc" }],
+    orderBy: [{ createdAt: "desc" }],
   });
   return users;
 };
