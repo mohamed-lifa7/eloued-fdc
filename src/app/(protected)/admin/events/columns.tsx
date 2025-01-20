@@ -2,18 +2,10 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { MoreHorizontal } from "lucide-react";
-import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { type Event } from "@prisma/client";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { CellAction } from "./cell-action";
 
 export const columns: ColumnDef<Event>[] = [
   {
@@ -84,33 +76,6 @@ export const columns: ColumnDef<Event>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const user = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open Menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="center">
-            <DropdownMenuItem
-              key="copy"
-              onClick={() => navigator.clipboard.writeText(user.id)}
-            >
-              Copy Event Id
-            </DropdownMenuItem>
-            <DropdownMenuItem key="view">
-              <Link href={`/admin/events/${user.id}`}>View Event Details</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem key="delete" className="text-danger">
-              Delete Event
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <CellAction event={row.original} />,
   },
 ];

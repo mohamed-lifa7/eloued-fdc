@@ -2,18 +2,11 @@
 
 import type { ColumnDef } from "@tanstack/react-table";
 
-import { MoreHorizontal } from "lucide-react";
-import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { UserRole, type User } from "@prisma/client";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { CellAction } from "./cell-action";
+import Image from "next/image";
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -37,6 +30,23 @@ export const columns: ColumnDef<User>[] = [
     ),
     enableSorting: false,
     enableHiding: false,
+  },
+  {
+    accessorKey: "image",
+    header: "Image",
+    cell: ({ row }) => {
+      const name: string = row.getValue("name");
+      return (
+        <div className="relative aspect-square h-10">
+          <Image
+            src={row.getValue("image")}
+            alt={name.slice(0, 2).toUpperCase()}
+            fill
+            className="rounded-full"
+          />
+        </div>
+      );
+    },
   },
   {
     accessorKey: "name",
@@ -84,33 +94,6 @@ export const columns: ColumnDef<User>[] = [
   },
   {
     id: "actions",
-    cell: ({ row }) => {
-      const user = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open Menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="center">
-            <DropdownMenuItem
-              key="copy"
-              onClick={() => navigator.clipboard.writeText(user.id)}
-            >
-              Copy User Id
-            </DropdownMenuItem>
-            <DropdownMenuItem key="view">
-              <Link href={`/admin/users/${user.id}`}>View User Details</Link>
-            </DropdownMenuItem>
-            <DropdownMenuItem key="delete" className="text-danger">
-              Delete User
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
-    },
+    cell: ({ row }) => <CellAction user={row.original} />,
   },
 ];

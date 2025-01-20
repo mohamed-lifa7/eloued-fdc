@@ -108,7 +108,7 @@ export const deleteAssignment = async (id: string) => {
     }
 
     if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
-      return { error: "You do not have permission to update events!" };
+      return { error: "You do not have permission to delete events!" };
     }
 
     await db.assignment.delete({
