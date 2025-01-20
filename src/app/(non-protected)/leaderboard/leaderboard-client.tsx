@@ -7,6 +7,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Trophy, Medal, Award, Star, Code, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { faculties } from "@/config/univ-config";
+import { getRank } from "@/lib/utils";
 
 interface User {
   id: string;
@@ -24,15 +27,6 @@ interface User {
 interface LeaderboardProps {
   users: User[];
 }
-
-// Define dynamic rank thresholds based on reputation points
-const getUserRank = (reputation: number) => {
-  if (reputation <= 50) return { rank: "Beginner", color: "bg-gray-500" };
-  if (reputation <= 150) return { rank: "Intermediate", color: "bg-green-500" };
-  if (reputation <= 300) return { rank: "Advanced", color: "bg-blue-500" };
-  if (reputation <= 500) return { rank: "Expert", color: "bg-purple-500" };
-  return { rank: "Master", color: "bg-yellow-500" };
-};
 
 const getRankIcon = (rank: number) => {
   switch (rank) {
@@ -86,7 +80,7 @@ export function Leaderboard({ users }: LeaderboardProps) {
         </div>
         <div className="space-y-4">
           {sortedUsers.map((user, index) => {
-            const { rank, color } = getUserRank(user.reputation);
+            const rank = getRank(user.reputation);
 
             return (
               <motion.div
@@ -97,31 +91,44 @@ export function Leaderboard({ users }: LeaderboardProps) {
               >
                 <Card>
                   <CardContent className="flex items-center space-x-4 p-4">
-                    <div className="w-12 flex-shrink-0 text-center">
-                      {getRankIcon(index + 1)}
-                      <span className="text-sm font-semibold">
+                    <div className="flex items-center space-x-2 text-center">
+                      <span className="text-lg font-semibold">
                         #{index + 1}
                       </span>
+                      {getRankIcon(index + 1)}
                     </div>
                     <Avatar className="h-12 w-12">
                       <AvatarImage
-                        src={user.image ?? "/placeholder.svg"}
-                        alt={user.name ?? "User"}
+                        src={user.image!}
+                        alt={user.name?.slice(0, 2).toUpperCase()}
                       />
-                      <AvatarFallback>{user.name?.[0] ?? "U"}</AvatarFallback>
+                      <AvatarFallback>
+                        {user.name?.slice(0, 2).toUpperCase()}
+                      </AvatarFallback>
                     </Avatar>
                     <div className="flex-grow">
                       <div className="font-semibold">
-                        {user.name ?? "Anonymous"}
+                        <Link
+                          href={`https://www.futuredev.club/profile/${user.id}`}
+                        >
+                          {user.name ?? "Anonymous"}
+                        </Link>
                       </div>
                       <div className="text-sm text-gray-500">
-                        {user.faculty ?? "N/A"}
+                        {faculties[user.faculty as keyof typeof faculties]}
                       </div>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Badge
-                        variant="secondary"
-                        className={`${color} text-white`}
+                        variant={
+                          rank == "Beginner"
+                            ? "secondary"
+                            : rank == "Intermediate"
+                              ? "success"
+                              : rank == "Advanced"
+                                ? "outline"
+                                : "destructive"
+                        }
                       >
                         {rank}
                       </Badge>
