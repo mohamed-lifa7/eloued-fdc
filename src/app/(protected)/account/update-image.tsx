@@ -49,6 +49,9 @@ export function UpdateImage() {
           "mx-auto",
           file ? "h-[128px] w-[128px]" : "h-[128px] w-full max-w-[256px]",
         )}
+        dropzoneOptions={{
+          maxSize: 1048571,
+        }}
         value={file}
         onChange={setFile}
         disabled={isPending}

@@ -31,6 +31,20 @@ export const getAnswersCount = async () => {
 };
 
 /**
+ * Retrieves the count of answers from the database.
+ * @returns The count of answers as a number.
+ */
+export const getCodeQuestionsSubmissionsCount = async () => {
+  try {
+    const count = await db.codeSubmission.count();
+    return count;
+  } catch (error) {
+    console.error("Error retrieving code questions submissions count:", error);
+    return 0;
+  }
+};
+
+/**
  * Retrieves all answers from the database.
  * @returns A promise that resolves to an array of answers, or an empty array if an error occurs.
  */

@@ -82,6 +82,9 @@ export function ImageUploadDialog() {
               file ? "h-[128px] w-[128px]" : "h-[128px] w-full max-w-[256px]",
             )}
             value={file}
+            dropzoneOptions={{
+              maxSize: 1048576,
+            }}
             onChange={(file) => {
               setFile(file);
               setProgress(0);

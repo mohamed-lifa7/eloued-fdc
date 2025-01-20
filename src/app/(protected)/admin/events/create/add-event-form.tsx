@@ -269,6 +269,9 @@ export default function AddEventForm() {
           <SingleImageDropzone
             className={cn(`${file ? "h-[128px] w-[128px]" : "h-0 w-0"}`)}
             value={file}
+            dropzoneOptions={{
+              maxSize: 1048576,
+            }}
             onChange={(file) => {
               setFile(file);
             }}

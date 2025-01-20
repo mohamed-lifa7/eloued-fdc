@@ -14,8 +14,8 @@ const leaders = [
     name: "MOUSSAOUI Aboubaker",
     year: "3rd Year Bachelor's Degree",
     role: "Founder of the FDC",
-    bio: "Passionate about technology and innovation, dedicated to creating a collaborative environment where ideas and skills flourish in the field of computer science and engineering. Committed to continuous learning and striving to leave a meaningful impact and legacy behind.",
-    src: "/leaders/boubakr.jpg",
+    bio: "A young man trying to get better everyday. Founder of the club, interested in networking and cybersecurity.",
+    src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/5964a2b7-c3b4-43ea-9ec1-d21a205e982c.png",
   },
   {
     id: "a7ffs0us7f9sa98f7v323daddf98d",
@@ -94,7 +94,7 @@ const leaders = [
     name: "LIFA Mohammed Seddik",
     year: "1st Year Master's Degree",
     bio: "Just a tech.",
-    src: "/leaders/lifa.jpg",
+    src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/a3c6a747-8ceb-41bc-8a11-6fb02fe9720c.jpg",
   },
 ];
 
@@ -118,7 +118,7 @@ const page = () => {
       </section>
       <section>
         <h2 className="inline-block text-4xl font-black lg:text-5xl">
-          Our learders
+          Our Learders
         </h2>
         <div>
           <LeardersSection leaders={leaders} />

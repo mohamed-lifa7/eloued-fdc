@@ -3,8 +3,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { getUsersCount } from "@/data/user";
+import { getRecentUsers, getUserRepuation, getUsersCount } from "@/data/user";
 import { getContactFormsCount } from "@/data/contact";
+import {
+  getAssignmentOverviewData,
+  getAssignmentsCount,
+  getCodeQuestionDifficultyData,
+  getQuizPerformanceData,
+  getUserSubmissionTrendsData,
+} from "@/data/assignments";
+import {
+  getAnswersCount,
+  getCodeQuestionsSubmissionsCount,
+} from "@/data/answers";
+import UserReputationSubmissionsChart from "@/components/admin/user-reputation-submissions-chart";
+import { RecentSales } from "@/components/admin/recent-sales";
+import { Suspense } from "react";
+import { AssignmentOverviewChart } from "@/components/admin/assignment-overview-chart";
+import { QuizPerformanceChart } from "@/components/admin/quiz-performance-chart";
+import { UserSubmissionTrendsChart } from "@/components/admin/user-submission-trends-chart";
 
 export default async function AdminPage() {
   const data = await getData();
@@ -35,7 +52,9 @@ export default async function AdminPage() {
                   <Users />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{data.allUsersCount}</div>
+                  <div className="text-2xl font-bold">
+                    {data.allUsersCount} users
+                  </div>
                 </CardContent>
               </Card>
 
@@ -47,38 +66,71 @@ export default async function AdminPage() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    {data.ContactFormsCount}
+                    {data.contactFormsCount} contact forms
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Completed Projects */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h2 className="text-sm font-medium">Completed Projects</h2>
+                  <h2 className="text-sm font-medium">Total Assignments</h2>
                   <CheckCircle />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    {data.completedProjectsCount}
+                    {data.assignmentsCount} assignments
                   </div>
                 </CardContent>
               </Card>
 
-              {/* Average Event Duration */}
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <h2 className="text-sm font-medium">
-                    Average Event Duration
-                  </h2>
+                  <h2 className="text-sm font-medium">Total answers</h2>
                   <Clock />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
-                    {data.avgEventDuration} hours
+                    {data.answersCount + data.codeQuestionCount} answers
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {data.answersCount} quizzes answers.
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {data.codeQuestionCount} code question answers
                   </div>
                 </CardContent>
               </Card>
+            </div>
+            <div className="flex flex-col space-x-4 md:flex-row">
+              <UserReputationSubmissionsChart userData={data.userData} />
+              <RecentSales
+                users={data.recentUsers}
+                totalUsers={data.allUsersCount}
+              />
+            </div>
+            <div className="space-y-6 p-6">
+              <h1 className="text-center text-2xl font-bold md:text-left md:text-3xl">
+                Analytics Dashboard
+              </h1>
+              <div className="space-y-6">
+                <Suspense fallback={<div>Loading Assignment Overview...</div>}>
+                  <div>
+                    <AssignmentOverviewChart data={data.assignmentData} />
+                  </div>
+                </Suspense>
+                <Suspense fallback={<div>Loading Quiz Performance...</div>}>
+                  <div>
+                    <QuizPerformanceChart data={data.quizData} />
+                  </div>
+                </Suspense>
+                <Suspense
+                  fallback={<div>Loading User Submission Trends...</div>}
+                >
+                  <div>
+                    <UserSubmissionTrendsChart data={data.submissionData} />
+                  </div>
+                </Suspense>
+              </div>
             </div>
           </TabsContent>
         </Tabs>
@@ -87,15 +139,53 @@ export default async function AdminPage() {
   );
 }
 
+/**
+ * Retrieves various data points, including user counts, assignments, and performance metrics.
+ * @returns An object containing aggregated data for users, assignments, quizzes, submissions, and more.
+ */
 async function getData() {
-  const allUsersCount = await getUsersCount();
-  const completedProjectsCount = 600;
-  const ContactFormsCount = await getContactFormsCount();
-  const avgEventDuration = 15.2;
-  return {
-    allUsersCount,
-    completedProjectsCount,
-    avgEventDuration,
-    ContactFormsCount,
-  };
+  try {
+    const [
+      allUsersCount,
+      recentUsers,
+      assignmentsCount,
+      contactFormsCount,
+      answersCount,
+      codeQuestionCount,
+      userData,
+      assignmentData,
+      quizData,
+      difficultyData,
+      submissionData,
+    ] = await Promise.all([
+      getUsersCount(),
+      getRecentUsers(),
+      getAssignmentsCount(),
+      getContactFormsCount(),
+      getAnswersCount(),
+      getCodeQuestionsSubmissionsCount(),
+      getUserRepuation(),
+      getAssignmentOverviewData(),
+      getQuizPerformanceData(),
+      getCodeQuestionDifficultyData(),
+      getUserSubmissionTrendsData(),
+    ]);
+
+    return {
+      allUsersCount,
+      recentUsers,
+      assignmentsCount,
+      answersCount,
+      contactFormsCount,
+      codeQuestionCount,
+      userData,
+      assignmentData,
+      quizData,
+      difficultyData,
+      submissionData,
+    };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw new Error("Failed to fetch data. Please try again later.");
+  }
 }

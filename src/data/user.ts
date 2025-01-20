@@ -33,30 +33,6 @@ export const getUserById = async (id: string) => {
 };
 
 /**
- * Retrieves total points of a user.
- * @param id - The ID of the user to retrieve.
- * @returns The user object with total points, or null if not found.
- */
-export const getUserRepuation = async (id: string) => {
-  try {
-    // Calculate the total score from all answers
-    const totalPoints = await db.answer.aggregate({
-      where: { userId: id },
-      _sum: {
-        score: true,
-      },
-    });
-
-    return {
-      totalPoints: totalPoints,
-    };
-  } catch (error) {
-    console.error("Error retrieving user with points:", error);
-    return null;
-  }
-};
-
-/**
  * Retrieves the count of users from the database.
  * @returns {Promise<number>} The count of users.
  */
@@ -71,6 +47,18 @@ export const getUsersCount = async () => {
  */
 export const getAllUsers = async () => {
   const users = await db.user.findMany();
+  return users;
+};
+
+/**
+ * Retrieves recent users from the database.
+ * @returns A promise that resolves to an array of users.
+ */
+export const getRecentUsers = async () => {
+  const users = await db.user.findMany({
+    take: 5,
+    orderBy: [{ createdAt: "asc" }],
+  });
   return users;
 };
 
@@ -98,4 +86,27 @@ export async function getLeaderboardData() {
     take: 5,
   });
   return users;
+}
+
+/**
+ * Retrieves total reputation and number of submissions of all users.
+ */
+export async function getUserRepuation() {
+  const users = await db.user.findMany({
+    select: {
+      name: true,
+      reputation: true,
+      CodeSubmission: true,
+      Answer: true,
+    },
+  });
+
+  // Format data to match the desired structure
+  const userData = users.map((user) => ({
+    name: user.name!,
+    reputation: user.reputation,
+    submissions: user.CodeSubmission.length + user.Answer.length,
+  }));
+
+  return userData;
 }
