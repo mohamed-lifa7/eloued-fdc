@@ -57,7 +57,7 @@ export function Leaderboard({ users }: LeaderboardProps) {
       <CardContent className="p-6">
         <div className="mb-6 flex items-center justify-between">
           <h2 className="text-3xl font-bold">User Leaderboard</h2>
-          <div className="space-x-2">
+          <div className="grid grid-cols-1 gap-2 md:grid-cols-3">
             <Button
               variant={sortBy === "reputation" ? "default" : "outline"}
               onClick={() => setSortBy("reputation")}
@@ -97,15 +97,19 @@ export function Leaderboard({ users }: LeaderboardProps) {
                       </span>
                       {getRankIcon(index + 1)}
                     </div>
-                    <Avatar className="h-12 w-12">
-                      <AvatarImage
-                        src={user.image!}
-                        alt={user.name?.slice(0, 2).toUpperCase()}
-                      />
-                      <AvatarFallback>
-                        {user.name?.slice(0, 2).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
+                    <Link
+                      href={`https://www.futuredev.club/profile/${user.id}`}
+                    >
+                      <Avatar className="h-12 w-12">
+                        <AvatarImage
+                          src={user.image!}
+                          alt={user.name?.slice(0, 2).toUpperCase()}
+                        />
+                        <AvatarFallback>
+                          {user.name?.slice(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                    </Link>
                     <div className="flex-grow">
                       <div className="font-semibold">
                         <Link
@@ -118,7 +122,7 @@ export function Leaderboard({ users }: LeaderboardProps) {
                         {faculties[user.faculty as keyof typeof faculties]}
                       </div>
                     </div>
-                    <div className="flex items-center space-x-2">
+                    <div className="hidden items-center space-x-2 md:flex">
                       <Badge
                         variant={
                           rank == "Beginner"
