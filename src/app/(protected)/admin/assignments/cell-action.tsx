@@ -10,10 +10,10 @@ import {
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { AlertModal } from "./alert-modal";
 import type { Assignment } from "@prisma/client";
 import { toast } from "sonner";
 import { deleteAssignment } from "@/actions/assignments";
+import { AlertModal } from "@/components/alert-modal";
 
 interface CellActionProps {
   assignment: Assignment;

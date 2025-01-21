@@ -18,6 +18,7 @@ import { type z } from "zod";
 import { createQuiz } from "@/actions/quizzes";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { Plus } from "lucide-react";
 
 export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
   const [questions, setQuestions] = useState<z.infer<typeof QuestionSchema>[]>(
@@ -196,8 +197,14 @@ export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
               ))}
             </RadioGroup>
           </div>
-          <Button type="button" variant="outline" onClick={addQuestion}>
-            Add Question
+          <Button
+            type="button"
+            size="lg"
+            variant="primary2"
+            onClick={addQuestion}
+            className="space-x-4"
+          >
+            <span>Add</span> <Plus />
           </Button>
         </CardContent>
         <CardFooter>

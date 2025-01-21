@@ -162,7 +162,7 @@ export default function CodeQuestionForm({
                           modules={{
                             syntax: { hljs },
                             toolbar: [
-                              [{ header: [1, 2, false] }],
+                              [{ header: [2, 3, 4, false] }],
                               [
                                 "bold",
                                 "italic",
@@ -171,7 +171,7 @@ export default function CodeQuestionForm({
                                 "blockquote",
                               ],
                               [{ list: "ordered" }, { list: "bullet" }],
-                              ["link", "code-block", "code"],
+                              ["link", "code", "code-block"],
                               ["clean"],
                             ],
                           }}

@@ -49,6 +49,7 @@ export default async function Hero() {
                 href={links.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
+                prefetch={false}
               >
                 Join us
               </Link>

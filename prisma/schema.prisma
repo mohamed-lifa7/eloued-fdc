@@ -131,7 +131,7 @@ model Assignment {
     id            String         @id @default(cuid())
     title         String
     description   String
-    event         Event?         @relation(fields: [eventId], references: [id])
+    event         Event?         @relation(fields: [eventId], references: [id], onDelete: Cascade)
     eventId       String?
     quizzes       Quiz[]
     codeQuestions CodeQuestion[]
@@ -141,7 +141,7 @@ model Assignment {
 
 model Quiz {
     id           String     @id @default(cuid())
-    assignment   Assignment @relation(fields: [assignmentId], references: [id])
+    assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
     assignmentId String
     questions    Question[]
     answers      Answer[]
@@ -154,7 +154,7 @@ model Question {
     content       String
     options       String[]
     correctOption String
-    quiz          Quiz?    @relation(fields: [quizId], references: [id])
+    quiz          Quiz?    @relation(fields: [quizId], references: [id], onDelete: Cascade)
     quizId        String?
 }
 
@@ -170,7 +170,7 @@ model CodeQuestion {
     difficulty   Difficulty       @default(EASY)
     description  String
     maxScore     Int              @default(25)
-    assignment   Assignment       @relation(fields: [assignmentId], references: [id])
+    assignment   Assignment       @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
     submissions  CodeSubmission[]
     assignmentId String
     createdAt    DateTime         @default(now())
@@ -179,9 +179,9 @@ model CodeQuestion {
 
 model Answer {
     id     String @id @default(cuid())
-    user   User   @relation(fields: [userId], references: [id])
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String
-    quiz   Quiz   @relation(fields: [quizId], references: [id])
+    quiz   Quiz   @relation(fields: [quizId], references: [id], onDelete: Cascade)
     quizId String
 
     score     Int
@@ -192,9 +192,9 @@ model Answer {
 
 model CodeSubmission {
     id             String       @id @default(cuid())
-    user           User         @relation(fields: [userId], references: [id])
+    user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId         String
-    codeQuestion   CodeQuestion @relation(fields: [codeQuestionId], references: [id])
+    codeQuestion   CodeQuestion @relation(fields: [codeQuestionId], references: [id], onDelete: Cascade)
     codeQuestionId String
     code           String
     result         String

@@ -25,6 +25,7 @@ export default function ModeToggle() {
       className="h-10 w-10 rounded-full"
     >
       {svg}
+      <span className="sr-only">Toggle Mode</span>
     </Button>
   );
 }

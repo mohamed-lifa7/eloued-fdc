@@ -1,4 +1,4 @@
-import { Calendar, CheckCircle, Clock, Users } from "lucide-react";
+import { Calendar, CheckCircle, Clock, ListTodo, Users } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -72,7 +72,7 @@ export default async function AdminPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <h2 className="text-sm font-medium">Total Assignments</h2>
-                  <CheckCircle />
+                  <ListTodo />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">
@@ -84,7 +84,7 @@ export default async function AdminPage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                   <h2 className="text-sm font-medium">Total answers</h2>
-                  <Clock />
+                  <CheckCircle />
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">

@@ -21,6 +21,8 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Difficulty } from "@prisma/client";
 import { Calendar, Trophy } from "lucide-react";
+import { DeleteCodeQuestion } from "./delete-code-question";
+import { DeleteQuiz } from "./delete-quiz";
 
 const breadcrumbItems: BreadcrumbType[] = [
   { title: "Dashboard", href: "/admin", disabled: false, type: "link" },
@@ -76,7 +78,7 @@ export default async function Page(props: {
                     {q.difficulty}
                   </Badge>
                 </div>
-                <CardDescription className="flex items-center space-x-2 text-sm text-gray-500">
+                <CardDescription className="flex items-center space-x-2 text-sm text-muted-foreground">
                   <Calendar className="h-4 w-4" />
                   <span>
                     {new Intl.DateTimeFormat("en-US", {
@@ -94,16 +96,67 @@ export default async function Page(props: {
                   <div className="flex items-center space-x-1">
                     <Trophy className="h-5 w-5 text-yellow-500" />
                     <span className="font-semibold">{q.maxScore}</span>
-                    <span className="text-sm text-gray-500">Max score</span>
+                    <span className="text-sm text-muted-foreground">
+                      Max score
+                    </span>
                   </div>
                 </div>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="justify-between">
                 <Button variant="primary2" asChild>
                   <Link href={`/admin/assignments/${q.assignmentId}/${q.id}`}>
                     view submitions
                   </Link>
                 </Button>
+                <DeleteCodeQuestion id={q.id} />
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+        <Separator />
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+          {assignment.quizzes.map((q) => (
+            <Card
+              className="w-full max-w-sm transition-all duration-300 hover:shadow-lg"
+              key={q.id}
+            >
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="text-lg font-bold">
+                    Quiz ID: {q.id}
+                  </CardTitle>
+                </div>
+                <CardDescription className="flex items-center space-x-2 text-sm text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  <span>
+                    {new Intl.DateTimeFormat("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    }).format(q.createdAt)}
+                  </span>
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div>
+                  <p className="font-bold text-primary">Questions:</p>
+                  {q.questions.map((question, index) => (
+                    <p
+                      key={question.id}
+                      className="ml-4 list-disc text-sm text-muted-foreground"
+                    >
+                      <span className="font-bold text-foreground">
+                        {index + 1}.
+                      </span>{" "}
+                      {question.content}
+                    </p>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter className="justify-between">
+                <DeleteQuiz id={q.id} />
               </CardFooter>
             </Card>
           ))}

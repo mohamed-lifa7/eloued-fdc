@@ -10,7 +10,7 @@ import {
 import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
-import { AlertModal } from "./alert-modal";
+import { AlertModal } from "@/components/alert-modal";
 import type { Event } from "@prisma/client";
 import { toast } from "sonner";
 import { deleteEvent } from "@/actions/events";

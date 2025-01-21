@@ -3,7 +3,7 @@
 import { CodeQuestionSchema, quizSchema } from "@/schemas";
 import { currentUser } from "@/server/auth";
 import { db } from "@/server/db";
-import type { Question } from "@prisma/client";
+import { UserRole, type Question } from "@prisma/client";
 import type { z } from "zod";
 
 export async function createQuiz(formData: FormData) {
@@ -41,6 +41,35 @@ export async function createQuiz(formData: FormData) {
     return { error: "Failed to create quiz" };
   }
 }
+
+/**
+ * Delete a quiz.
+ *
+ * @param id - The ID of the quiz to delete.
+ * @returns An object with either a success message or an error message.
+ */
+export const deleteQuiz = async (id: string) => {
+  try {
+    const crntUser = await currentUser();
+
+    if (!crntUser) {
+      return { error: "You are not signed in. Please sign in and try again" };
+    }
+
+    if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
+      return { error: "You do not have permission to delete quizzes!" };
+    }
+
+    await db.quiz.delete({
+      where: { id },
+    });
+
+    return { success: "Quiz deleted successfully!" };
+  } catch (error) {
+    console.error("Error deleting quiz", error);
+    return { error: "Failed to delete quiz." };
+  }
+};
 
 /**
  * create new code question.
@@ -83,3 +112,32 @@ export async function createCodeQuestion(
     return { error: "Failed to create code question." };
   }
 }
+
+/**
+ * Delete a code question.
+ *
+ * @param id - The ID of the code question to delete.
+ * @returns An object with either a success message or an error message.
+ */
+export const deleteCodeQuestion = async (id: string) => {
+  try {
+    const crntUser = await currentUser();
+
+    if (!crntUser) {
+      return { error: "You are not signed in. Please sign in and try again" };
+    }
+
+    if (crntUser.role !== UserRole.ADMIN && crntUser.role !== UserRole.OWNER) {
+      return { error: "You do not have permission to delete code questions!" };
+    }
+
+    await db.codeQuestion.delete({
+      where: { id },
+    });
+
+    return { success: "Code question deleted successfully!" };
+  } catch (error) {
+    console.error("Error deleting code question", error);
+    return { error: "Failed to delete code question." };
+  }
+};

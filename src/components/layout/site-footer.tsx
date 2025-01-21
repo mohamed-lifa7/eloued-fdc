@@ -1,4 +1,6 @@
+import { links } from "@/config/site-config";
 import { Icons } from "../icons";
+import Link from "next/link";
 
 const SiteFooter = () => {
   return (
@@ -9,18 +11,38 @@ const SiteFooter = () => {
           <p className="text-lg font-bold">Future Developers Club</p>
         </div>
         <div className="flex space-x-4">
-          <a href="#">
+          <Link
+            href={links.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            prefetch={false}
+          >
             <Icons.linkedin className="h-6 w-6" />
-          </a>
-          <a href="#">
+          </Link>
+          <Link
+            href={links.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            prefetch={false}
+          >
             <Icons.github className="h-6 w-6" />
-          </a>
-          <a href="#">
+          </Link>
+          <Link
+            href={links.instagram}
+            target="_blank"
+            rel="noopener noreferrer"
+            prefetch={false}
+          >
             <Icons.instagram className="h-6 w-6" />
-          </a>
-          <a href="#">
+          </Link>
+          <Link
+            href={links.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            prefetch={false}
+          >
             <Icons.telegram className="h-6 w-6" />
-          </a>
+          </Link>
         </div>
         <p className="text-sm text-muted-foreground">
           The perfect place to share ideas and inspiration, because the future

@@ -65,4 +65,6 @@ export const links = {
   portfolio: "https://mohamed-lifa7.vercel.app",
   instagram: "https://www.instagram.com/fdevclub",
   telegram: "https://t.me/+e2kKkyiEqCw4ZTlk",
+  linkedin:
+    "https://www.linkedin.com/company/future-developers-club?trk=public_post_feed-actor-name",
 };
