@@ -14,7 +14,7 @@ const leaders = [
     name: "MOUSSAOUI Aboubaker",
     year: "3rd Year Bachelor's Degree",
     role: "Founder of the FDC",
-    bio: "A young man trying to get better everyday. Founder of the club, interested in networking and cybersecurity.",
+    bio: "A young man trying to get better every day. Founder of the club, interested in networking and cybersecurity.",
     src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/5964a2b7-c3b4-43ea-9ec1-d21a205e982c.png",
   },
   {
@@ -22,7 +22,7 @@ const leaders = [
     name: "HALA Mohammed Islam",
     year: "3rd Year Bachelor's Degree",
     role: "Leader",
-    bio: "Specialized in backend development using Node.js and Express.js.\n now focused on integrating AI and machine learning into software solutions.",
+    bio: "Specialized in backend development using Node.js and Express.js. Now focused on integrating AI and machine learning into software solutions.",
     src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/2b7d39ce-76fb-4131-9204-c9542cd8d073.jpg",
   },
   {
@@ -44,9 +44,9 @@ const leaders = [
   {
     id: "a7ffprak7f9sa98u6ks3dadfajdc",
     name: "NID Djoumana",
-    year: "3rd year Bachelor's Degree",
+    year: "3rd Year Bachelor's Degree",
     role: "Manager",
-    bio: "Frontend developer, intrested in application development, Shaping the future with FDC.",
+    bio: "Frontend developer, interested in application development, shaping the future with FDC.",
     src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
   },
   {
@@ -76,7 +76,7 @@ const leaders = [
   {
     id: "a7ffprak7f9sa98f7v323dadfajdc",
     name: "MOSTEFAOUI Malak",
-    year: "3rd year Bachelor's Degree",
+    year: "3rd Year Bachelor's Degree",
     role: "Manager",
     bio: "Backend developer specializing in Laravel and trying to get better, active leader of FDC.",
     src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
@@ -86,7 +86,7 @@ const leaders = [
     name: "KHIR Imadeddin",
     year: "3rd Year Bachelor's Degree",
     role: "Manager",
-    bio: "Web developer specialized in React and Express js, Ensures timely project completion and effective collaboration within the team.",
+    bio: "Web developer specialized in React and Express.js, ensures timely project completion and effective collaboration within the team.",
     src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/3d4c665d-bda2-4f50-8926-60f58d5afed9.jpg",
   },
   {
@@ -99,10 +99,10 @@ const leaders = [
   },
   {
     id: "a7ffs0us7f9sa98f7v323dadfajda",
-    name: "AYA MAOUCH",
+    name: "MAOUCH Aya",
     year: "3rd Year Bachelor's Degree",
     role: "Leader Logistics",
-    bio: "Front-End Developer Has some experience in front-end development and enjoys working on lightweight projects.",
+    bio: "Front-End Developer with some experience in front-end development who enjoys working on lightweight projects.",
     src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/fb897d7f-ebc9-4263-8de8-2e1a4b4ad94a.png",
   },
   {
@@ -116,27 +116,20 @@ const leaders = [
 
 const page = () => {
   return (
-    <main className="container my-20 min-h-screen max-w-4xl space-y-8">
-      <h1 className="inline-block text-4xl font-black lg:text-5xl">About Us</h1>
+    <main className="container my-20 min-h-screen max-w-4xl space-y-8 text-center">
+      <h1 className="text-4xl font-semibold lg:text-5xl">About Us</h1>
       <section>
-        <div className="space-y-4">
-          <p>
-            Welcome to the Future Developers Club (FDC)! We empower students
-            with modern development skills, bridging the gap between academics
-            and industry.
-          </p>
-          <p>
-            FDC advocates for free and open-source software (FOSS) and has no
-            ties to proprietary platforms like Microsoft or Google, aligning
-            with our principles of transparency and open collaboration.
-          </p>
-        </div>
+        <p>
+          Welcome to the Future Developers Club (FDC)! We empower students with
+          modern development skills, bridging the gap between academics and
+          industry. FDC advocates for free and open-source software (FOSS) and
+          has no ties to proprietary platforms like Microsoft or Google,
+          aligning with our principles of transparency and open collaboration.
+        </p>
       </section>
       <section>
-        <h2 className="inline-block text-4xl font-black lg:text-5xl">
-          Our Learders
-        </h2>
-        <div>
+        <h2 className="text-4xl font-semibold lg:text-5xl">Our Learders</h2>
+        <div className="text-left">
           <LeardersSection leaders={leaders} />
         </div>
       </section>

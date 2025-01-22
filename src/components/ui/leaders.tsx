@@ -143,11 +143,10 @@ export const LeardersSection = ({
               ))}
             </motion.p>
           </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <div className="flex justify-center gap-4 pt-12 md:pt-0">
             <Button
               onClick={handlePrev}
               className="group/button flex items-center justify-center rounded-full"
-              variant="secondary"
               size="icon"
             >
               <ArrowLeft className="h-5 w-5 transition-transform duration-300 group-hover/button:rotate-12" />
@@ -155,7 +154,6 @@ export const LeardersSection = ({
             <Button
               onClick={handleNext}
               className="group/button flex items-center justify-center rounded-full"
-              variant="secondary"
               size="icon"
             >
               <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover/button:-rotate-12" />

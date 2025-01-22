@@ -85,7 +85,7 @@ export const ContactFormSchema = z.object({
 });
 
 export const EventSchema = z.object({
-  title: z.string().min(2).max(50),
+  title: z.string().min(2).max(100),
   description: z.string().min(5).max(500),
   imageUrl: z.string().url(),
   status: z.string().min(2).max(20),

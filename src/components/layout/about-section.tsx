@@ -15,7 +15,7 @@ const AboutSection = () => {
   const [hoveredImage, setHoveredImage] = useState<number | null>(null);
 
   return (
-    <section className="container space-y-6 py-16">
+    <section className="container space-y-12 py-16">
       <h2 className="text-center text-3xl font-bold">
         About the Future Developers Club (FDC)
       </h2>
@@ -57,7 +57,7 @@ const AboutSection = () => {
                 <Image
                   src={src}
                   alt={`FDC Activity ${index + 1}`}
-                  width={index === 0 ? "600" : "300"}
+                  width={index === 0 ? "500" : "300"}
                   height={index === 0 ? "400" : "300"}
                   className={`h-full w-full object-cover transition-transform duration-300 ${
                     hoveredImage === index ? "scale-110" : ""
