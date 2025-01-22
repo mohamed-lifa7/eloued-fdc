@@ -31,13 +31,13 @@ interface LeaderboardProps {
 const getRankIcon = (rank: number) => {
   switch (rank) {
     case 1:
-      return <Trophy className="h-8 w-8 text-yellow-400" />;
+      return <Trophy className="h-8 w-8 text-yellow-400 max-sm:hidden" />;
     case 2:
-      return <Medal className="h-8 w-8 text-gray-400" />;
+      return <Medal className="h-8 w-8 text-gray-400 max-sm:hidden" />;
     case 3:
-      return <Award className="h-8 w-8 text-amber-600" />;
+      return <Award className="h-8 w-8 text-amber-600 max-sm:hidden" />;
     default:
-      return <Star className="h-6 w-6 text-blue-400" />;
+      return <Star className="h-6 w-6 text-blue-400 max-sm:hidden" />;
   }
 };
 
@@ -118,8 +118,11 @@ export function Leaderboard({ users }: LeaderboardProps) {
                           {user.name ?? "Anonymous"}
                         </Link>
                       </div>
-                      <div className="text-sm text-gray-500">
-                        {faculties[user.faculty as keyof typeof faculties]}
+                      <div className="text-sm text-muted-foreground">
+                        {faculties[user.faculty as keyof typeof faculties]}{" "}
+                        <span className="text-foreground md:hidden">
+                          | {user.reputation} Rep
+                        </span>
                       </div>
                     </div>
                     <div className="hidden items-center space-x-2 md:flex">
@@ -140,7 +143,7 @@ export function Leaderboard({ users }: LeaderboardProps) {
                         <div className="font-semibold">
                           {user.reputation} Rep
                         </div>
-                        <div className="flex items-center text-sm text-gray-500">
+                        <div className="flex items-center text-sm text-muted-foreground">
                           <MessageCircle className="mr-1 h-4 w-4" />{" "}
                           {user._count.Answer}
                           <Code className="ml-2 mr-1 h-4 w-4" />{" "}

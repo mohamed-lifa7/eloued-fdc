@@ -33,14 +33,14 @@ async function page({ params }: { params: Promise<{ id: string }> }) {
             <div className="flex items-center justify-between">
               <p className="font-semibold">Birthday</p>
               <p className="text-muted-foreground">
-                {user.birthday?.toLocaleDateString()}
+                {user.birthday?.toDateString()}
               </p>
             </div>
           )}
           <div className="flex items-center justify-between">
             <p className="font-semibold">Joined at</p>
             <p className="text-muted-foreground">
-              {user.createdAt.toLocaleDateString()}
+              {user.createdAt.toDateString()}
             </p>
           </div>
         </CardContent>
