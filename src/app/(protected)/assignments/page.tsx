@@ -38,14 +38,14 @@ export default async function Page() {
             <CardContent>
               <div className="mb-4 flex items-center text-sm text-muted-foreground">
                 <Calendar size={16} className="mr-2" />
-                <span>{assignment.event?.status}</span>
+                <span>Event: {assignment.event?.title}</span>
               </div>
               <div className="mb-4 flex items-center text-sm text-muted-foreground">
                 <Clock size={16} className="mr-2" />
                 <span>
                   Due:{" "}
                   <time dateTime={assignment.event?.endDate.toISOString()}>
-                    {assignment.event?.endDate.toLocaleDateString()}
+                    {assignment.event?.endDate.toISOString().split("T")[0]}
                   </time>
                 </span>
               </div>
@@ -53,9 +53,9 @@ export default async function Page() {
             <CardFooter className="flex items-center justify-between">
               <Badge
                 variant={
-                  assignment.event?.status === "Completed"
+                  assignment.event?.status === "active"
                     ? "success"
-                    : assignment.event?.status === "In Progress"
+                    : assignment.event?.status === "upcoming"
                       ? "secondary"
                       : "outline"
                 }

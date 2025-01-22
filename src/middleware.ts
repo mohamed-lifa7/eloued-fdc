@@ -24,6 +24,7 @@ export default auth((req): void | Response | Promise<void | Response> => {
   const isPublicRoute =
     publicRoutes.includes(nextUrl.pathname) ||
     nextUrl.pathname.startsWith("/blogs") ||
+    nextUrl.pathname.startsWith("/tags") ||
     nextUrl.pathname.startsWith("/profile");
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
   const isAdminRoute = nextUrl.pathname.startsWith(adminPrefix);

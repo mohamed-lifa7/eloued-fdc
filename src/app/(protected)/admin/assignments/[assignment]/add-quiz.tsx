@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,11 +19,14 @@ import { createQuiz } from "@/actions/quizzes";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
   const [questions, setQuestions] = useState<z.infer<typeof QuestionSchema>[]>(
     [],
   );
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
   const [currentQuestion, setCurrentQuestion] = useState<
     z.infer<typeof QuestionSchema>
   >({
@@ -86,13 +89,17 @@ export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
     formData.append("assignmentId", assignmentId);
     formData.append("questions", JSON.stringify(questions));
 
-    const result = await createQuiz(formData);
-
-    if (result.success) {
-      toast.success(result.success);
-    } else {
-      toast.success(result.error);
-    }
+    startTransition(async () => {
+      await createQuiz(formData).then((data) => {
+        if (data.success) {
+          toast.success(data.success);
+          router.refresh();
+        }
+        if (data.error) {
+          toast.success(data.error);
+        }
+      });
+    });
   };
 
   return (
@@ -164,6 +171,7 @@ export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
               <Button
                 type="button"
                 variant="outline"
+                disabled={isPending}
                 onClick={() => removeOption(index)}
               >
                 Remove
@@ -171,7 +179,12 @@ export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
             </div>
           ))}
 
-          <Button type="button" variant="outline" onClick={addOption}>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={addOption}
+            disabled={isPending}
+          >
             Add Option
           </Button>
 
@@ -203,6 +216,7 @@ export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
             variant="primary2"
             onClick={addQuestion}
             className="space-x-4"
+            disabled={isPending}
           >
             <span>Add</span> <Plus />
           </Button>
@@ -210,10 +224,10 @@ export function CreateQuizForm({ assignmentId }: { assignmentId: string }) {
         <CardFooter>
           <Button
             type="submit"
-            disabled={questions.length === 0}
+            disabled={questions.length === 0 || isPending}
             className="w-full"
           >
-            Create Quiz
+            {isPending ? "Creating..." : "Create Quiz"}
           </Button>
         </CardFooter>
       </Card>
