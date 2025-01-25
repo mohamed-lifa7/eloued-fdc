@@ -27,6 +27,19 @@
     "slugAsParams": "mastering-git-github"
   },
   {
+    "slug": "blogs/open-day",
+    "title": "Future Developer Club's Open Day",
+    "description": "Celebrating student creativity through innovative website projects.",
+    "date": "2024-11-30T23:00:00.000Z",
+    "published": true,
+    "tags": [
+      "fdc",
+      "open-day"
+    ],
+    "body": "const{Fragment:e,jsx:n,jsxs:o}=arguments[0];function _createMdxContent(r){const t={a:\"a\",h2:\"h2\",h3:\"h3\",li:\"li\",p:\"p\",strong:\"strong\",ul:\"ul\",...r.components};return o(e,{children:[n(t.h2,{id:\"future-developer-clubs-open-day\",children:n(t.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#future-developer-clubs-open-day\",children:\"Future Developer Club's Open Day\"})}),\"\\n\",n(t.p,{children:\"The Future Developer Club recently hosted an Open Day, spotlighting students' exceptional website projects. From e-commerce platforms to creative portfolios, the event showcased innovation, technical skill, and collaboration.\"}),\"\\n\",n(\"img\",{className:\"rounded-md border\",alt:\"session one of our workshop\",src:\"https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/96b9e504-3a19-47a5-98cf-2fc8a08aa174.jpg\"}),\"\\n\",n(t.h3,{id:\"highlights\",children:n(t.a,{className:\"subheading-anchor\",\"aria-label\":\"Link to section\",href:\"#highlights\",children:\"Highlights:\"})}),\"\\n\",o(t.ul,{children:[\"\\n\",o(t.li,{children:[n(t.strong,{children:\"Categories Displayed\"}),\": E-commerce, educational tools, community portals, and personal portfolios.\"]}),\"\\n\",o(t.li,{children:[n(t.strong,{children:\"Engagement\"}),\": Live demos, peer-to-peer discussions, and expert feedback.\"]}),\"\\n\",o(t.li,{children:[n(t.strong,{children:\"Networking\"}),\": A platform for collaboration and shared inspiration.\"]}),\"\\n\"]}),\"\\n\",n(\"img\",{className:\"rounded-md border\",alt:\"session one of our workshop\",src:\"https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/be956041-ee3b-44e0-9284-d492e4b7807b.jpg\"}),\"\\n\",n(t.p,{children:\"This successful event reflects the talent within our club and sets the stage for future showcases. Stay tuned for more!\"})]})}return{default:function(e={}){const{wrapper:o}=e.components||{};return o?n(o,{...e,children:n(_createMdxContent,{...e})}):_createMdxContent(e)}};",
+    "slugAsParams": "open-day"
+  },
+  {
     "slug": "blogs/problem-solving",
     "title": "The Art of Problem-Solving: From Foundations to Programming and Competitive Platforms",
     "description": "Exploring problem-solving techniques from foundational concepts to advanced competitive programming.",

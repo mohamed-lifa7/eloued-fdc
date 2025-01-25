@@ -43,8 +43,8 @@ export const LeardersSection = ({
   const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
 
   return (
-    <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
-      <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
+    <div className="relative mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
+      <div className="relative grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-20">
         <div>
           <div className="relative h-80 w-full">
             <AnimatePresence>
@@ -90,7 +90,7 @@ export const LeardersSection = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col-reverse justify-between space-y-4 py-4 md:flex-col">
+        <div className="flex flex-col-reverse justify-between space-y-4 md:flex-col">
           <motion.div
             key={active}
             initial={{
@@ -110,9 +110,7 @@ export const LeardersSection = ({
               ease: "easeInOut",
             }}
           >
-            <h3 className="text-2xl font-bold text-black dark:text-white">
-              {leaders[active]?.name}
-            </h3>
+            <h3 className="text-2xl font-bold">{leaders[active]?.name}</h3>
             <p className="text-sm text-muted-foreground">
               {leaders[active]?.year}{" "}
               {leaders[active]?.role && `| ${leaders[active]?.role}`}
@@ -143,7 +141,7 @@ export const LeardersSection = ({
               ))}
             </motion.p>
           </motion.div>
-          <div className="flex justify-center gap-4 pt-12 md:pt-0">
+          <div className="flex justify-center gap-4 md:pt-12">
             <Button
               onClick={handlePrev}
               className="group/button flex items-center justify-center rounded-full"

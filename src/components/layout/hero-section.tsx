@@ -28,7 +28,7 @@ export default async function Hero() {
               </span>
             </h1>
 
-            <p className="max-w-lg text-center text-sm leading-relaxed tracking-tight text-muted-foreground md:text-lg">
+            <p className="max-w-lg text-center text-sm leading-relaxed tracking-tight text-foreground/95 md:text-lg">
               We are a group of passionate students dedicated to making an
               impact in the tech world through learning, collaboration, and
               innovation—while having fun along the way.

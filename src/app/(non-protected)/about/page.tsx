@@ -117,7 +117,7 @@ const leaders = [
 const page = () => {
   return (
     <main className="container my-20 min-h-screen max-w-4xl space-y-8 text-center">
-      <h1 className="text-4xl font-semibold lg:text-5xl">About Us</h1>
+      <h2 className="text-4xl font-semibold lg:text-5xl">About Us</h2>
       <section>
         <p>
           Welcome to the Future Developers Club (FDC)! We empower students with
