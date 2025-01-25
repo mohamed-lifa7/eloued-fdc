@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import {
@@ -10,7 +6,6 @@ import {
   XAxis,
   YAxis,
   ZAxis,
-  Tooltip,
   ResponsiveContainer,
 } from "recharts";
 import {
@@ -20,7 +15,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ChartContainer, ChartTooltipContent } from "@/components/ui/chart";
+import { ChartContainer } from "@/components/ui/chart";
 
 interface QuizPerformanceData {
   quizTitle: string;
@@ -62,7 +57,6 @@ export function QuizPerformanceChart({ data }: QuizPerformanceChartProps) {
                 range={[50, 400]}
                 name="Submissions"
               />
-              <Tooltip content={<CustomTooltip />} />
               <Scatter name="Scores" data={data} fill="var(--color-score)" />
             </ScatterChart>
           </ResponsiveContainer>
@@ -70,22 +64,4 @@ export function QuizPerformanceChart({ data }: QuizPerformanceChartProps) {
       </CardContent>
     </Card>
   );
-}
-
-function CustomTooltip({ active, payload }: any) {
-  if (active && payload?.length) {
-    const data = payload[0].payload;
-    return (
-      <div>
-        <ChartTooltipContent>
-          <div className="font-semibold">{data.quizTitle}</div>
-          <div>Average Score: {data.averageScore.toFixed(2)}</div>
-          <div>Min Score: {data.minScore}</div>
-          <div>Max Score: {data.maxScore}</div>
-          <div>Submissions: {data.submissionCount}</div>
-        </ChartTooltipContent>
-      </div>
-    );
-  }
-  return null;
 }

@@ -69,9 +69,9 @@ export const CellAction: React.FC<CellActionProps> = ({ user }) => {
           <DropdownMenuItem
             className="cursor-pointer"
             disabled={isPending}
-            onClick={() => router.push(`/admin/users/${user.id}`)}
+            onClick={() => router.push(`/profile/${user.id}`)}
           >
-            <Edit className="mr-2 h-4 w-4" /> Update
+            <Edit className="mr-2 h-4 w-4" /> Profile
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => setOpen(true)}
