@@ -40,6 +40,12 @@ export async function generateMetadata({
       type: "article",
       url: post.slug,
     },
+    twitter: {
+      title: post.title,
+      creator: "@LifaSeddik",
+      card: "summary_large_image",
+      images: ["https://www.futuredev.club/og-image.png"],
+    },
   };
 }
 
