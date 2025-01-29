@@ -93,7 +93,7 @@ const leaders = [
     id: "12298vds7f9sa98f7vddddddf98d",
     name: "NECIB Amara",
     year: "1st Year Master's Degree",
-    role: "Backend Developer",
+    role: "HR Manager",
     bio: "Enjoys building scalable systems, passionate about DevOps, AI, and backend development.",
     src: "https://files.edgestore.dev/5iwpojmnomxbon5i/publicFiles/_public/a906e5cd-4ca7-4506-8c27-000e4c9b1b79.jpg",
   },
