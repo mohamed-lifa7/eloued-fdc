@@ -11,6 +11,10 @@ export async function POST(req: NextRequest) {
 
     const user = await db.user.findUnique({
       where: { id },
+      select :{
+        id:true,
+        name : true,
+      }
     });
 
     if (!user) {
